@@ -2,19 +2,19 @@
 
 namespace ClimaAvi.Models
 {
-    public class Planta
+    public class Plant
     {
         public Guid Id { get;}
         public int CodigoPlanta { get; set; }
         public string NomePlanta { get; set; }
         public string LocalPlanta { get; set; }
 
-        public Planta()
+        public Plant()
         {
             Id = Guid.NewGuid();
         }
 
-        public Planta(int codigoPlanta, string nomePlanta, string localPlanta)
+        public Plant(int codigoPlanta, string nomePlanta, string localPlanta)
         {
             CodigoPlanta = codigoPlanta;
             NomePlanta = nomePlanta;
