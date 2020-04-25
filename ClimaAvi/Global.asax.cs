@@ -23,7 +23,7 @@ namespace ClimaAvi
             {
                 Code = 1,
                 Name = "Evandro",
-                Email = "eeeeeeee@hotmail.com",
+                Email = "evandro@gmail.com",
                 Phone = "5498888888888",
                 Password = "1",
             };
@@ -32,7 +32,7 @@ namespace ClimaAvi
             {
                 Code = 1,
                 Name = "Ruan",
-                Email = "rrrrr@hotmail.com",
+                Email = "ruan@gmail.com",
                 Phone = "5498888888888",
                 Password = "2",
             };

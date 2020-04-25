@@ -7,9 +7,13 @@ using System.Web.Mvc;
 
 namespace ClimaAvi.Controllers
 {
+
     public class AutenticacaoController : Controller
     {
         // GET: Autenticacao
+
+        List<User> userTemp = new List<User>(); // declarando a lista temporaria para login
+
         public ActionResult Index()
         {
 
@@ -19,15 +23,11 @@ namespace ClimaAvi.Controllers
 
         public ActionResult Login()
         {
-            List<User> users; // declarando a lista
-            users = (List<User>)Session["users"]; // atribuindo a sessão com um casting forçado
-
-            ViewBag.users = users;
-
+            ViewBag.usertemporario = userTemp;
 
             return View();
         }
-      
+
         public ActionResult Register(User user)
         {
             List<User> users; // declarando a lista
@@ -44,27 +44,55 @@ namespace ClimaAvi.Controllers
             return View();
         }
 
-        public ActionResult Validation(User user)
+        public ActionResult Validation(User userTemp)
         {
             List<User> users; // declarando a lista
             users = (List<User>)Session["users"]; // atribuindo a sessão com um casting forçado
 
-           
-            foreach ( var name in users)
+
+            foreach (var valid in users)
             {
-                if ( name.Name == user.Name)
+                
+                if (String.Equals(valid.Email, userTemp.Email))  // Compare Email usando String.Equals 
                 {
-                    if ( name.Password == user.Password)
+                    Console.WriteLine("email e igual");
+
+                    if (String.Equals(valid.Password, userTemp.Password)) // Compare Senha usando String.Equals 
                     {
-                        return RedirectToAction("Index", "Home"); ;
+                        CookieSet("1");  // Chama a função Cookies para armazenar a usuario logado
+
+                        return RedirectToAction("Index", "Home");
                     }
+                    
+                    else
+                    {
+                         return RedirectToAction("Login");
+                    }
+
+                }
+                else
+                {
+                    return RedirectToAction("Login");
                 }
             }
-          return  RedirectToAction("Index"); ;
-            
-            
+
+            return RedirectToAction("Login");
         }
 
+        public ActionResult CookieSet(string id)
+        {
+            Response.Cookies.Add(new HttpCookie("Logged", "1"));
+           
+            return RedirectToAction("Validation");
 
+        }
+       
+        public ActionResult CookieGet()
+        {
+            HttpCookie cookie = Request.Cookies.Get("Logged");
+
+            return View();
+        }
+       
     }
 }
