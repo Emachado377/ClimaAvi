@@ -17,5 +17,9 @@ namespace ClimaAvi.Controllers
         {
             return View();
         }
+        public ActionResult Dados()
+        {
+            return View();
+        }
     }
 }
