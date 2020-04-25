@@ -2073,6 +2073,7 @@
     <Content Include="Views\Autenticacao\Login.cshtml" />
     <Content Include="Views\Autenticacao\Validation.cshtml" />
     <Content Include="Views\Home\Dados.cshtml" />
+    <Content Include="Views\Home\Criar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

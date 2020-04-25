@@ -21,5 +21,8 @@ namespace ClimaAvi.Controllers
         {
             return View();
         }
+        public ActionResult Criar() {
+            return View();
+        }
     }
 }
