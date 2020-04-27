@@ -11,17 +11,23 @@ namespace ClimaAvi.Controllers
         // GET: Home
         public ActionResult Index()
         {
+          HttpCookie cookie = Request.Cookies.Get("Logged");
+         
             return View();
         }
+
         public ActionResult Dashboard()
         {
             return View();
         }
+
         public ActionResult Dados()
-        {
+        {      
             return View();
         }
-        public ActionResult Criar() {
+
+        public ActionResult Criar() 
+        {
             return View();
         }
     }

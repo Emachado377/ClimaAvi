@@ -2067,10 +2067,10 @@
     <Content Include="Scripts\jquery-3.0.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.0.0.min.map" />
     <Content Include="Views\Autenticacao\Index.cshtml" />
-    <Content Include="Views\Autenticacao\Register.cshtml" />
-    <Content Include="Views\Autenticacao\ForgotPassord.cshtml" />
+    <Content Include="Views\Usuario\Register.cshtml" />
+    <Content Include="Views\Usuario\ForgotPassord.cshtml" />
     <Content Include="Views\Home\Dashboard.cshtml" />
-    <Content Include="Views\Autenticacao\Login.cshtml" />
+    <Content Include="Views\Usuario\Login.cshtml" />
     <Content Include="Views\Autenticacao\Validation.cshtml" />
     <Content Include="Views\Home\Dados.cshtml" />
     <Content Include="Views\Home\Criar.cshtml" />
