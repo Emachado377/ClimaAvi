@@ -2075,6 +2075,7 @@
     <Content Include="Views\Home\Dados.cshtml" />
     <Content Include="Views\Home\Criar.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Shared\_Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
