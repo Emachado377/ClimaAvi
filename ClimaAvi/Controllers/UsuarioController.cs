@@ -21,22 +21,14 @@ namespace ClimaAvi.Controllers
 
         public ActionResult Login()
         {
-            ViewBag.usertemporario = userTemp;
-
-            return View();
+           return View();
         }
 
-        public ActionResult Register(User user)
+        public ActionResult Register()
         {
-            List<User> users; // declarando a lista
-            users = (List<User>)Session["users"]; // atribuindo a sessão com um casting forçado
-
-            users.Add(user); // Adicionamos os dados informados do novo usuario na lista users
-
-            Session["users"] = users;  // atribuimos a lista atualizada de usuários para a sessão, Global.asax
-
-            return View();
+           return View();
         }
+
         public ActionResult ForgotPassord()
         {
             return View();

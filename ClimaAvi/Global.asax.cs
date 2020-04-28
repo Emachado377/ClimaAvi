@@ -21,7 +21,7 @@ namespace ClimaAvi
                 Code = 1,
                 Name = "Evandro",
                 Email = "evandro@gmail.com",
-                Phone = "5498888888888",
+                LastName = "Machado",
                 Password = "1",
             };
 
@@ -30,7 +30,7 @@ namespace ClimaAvi
                 Code = 1,
                 Name = "Ruan",
                 Email = "ruan@gmail.com",
-                Phone = "5498888888888",
+                LastName = "Ferreira",
                 Password = "2",
             };
 
