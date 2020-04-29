@@ -32,7 +32,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="https://localhost:44310/Home/Dashboard">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/Home/Dashboard">
                 <div class="sidebar-brand-text mx-3">ClimaAvi</div>
             </a>
 
@@ -41,7 +41,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="https://localhost:44310/Home/Dashboard">
+                <a class="nav-link" href="/Home/Dashboard">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
@@ -59,20 +59,20 @@
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Plants</span>
+                    <span>Plantas</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="https://localhost:44310/Home/index">Selection a Plant</a>
-                        <a class="collapse-item" href="https://localhost:44310/Home/Criar">Create a Plant</a>
+                        <h6 class="collapse-header">Opções:</h6>
+                        <a class="collapse-item" href="/Home/index">Selecione uma Planta</a>
+                        <a class="collapse-item" href="/Home/Criar">Criar uma Planta</a>
                     </div>
                 </div>
             </li>
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="https://localhost:44310/Home/Dados">
+                <a class="nav-link" href="/Home/Dados">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Dados</span>
                 </a>
@@ -247,7 +247,7 @@
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Usuario Logado</span>
                                 <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
                             </a>
                             <!-- Dropdown - User Information -->
@@ -299,15 +299,15 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Pronto para sair?</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Selecione "Logout" se você deseja sair ou "cancela" para permanecer na página</div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="https://localhost:44310/Usuario">Logout</a>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancela</button>
+                    <a class="btn btn-primary" href="/Usuario">Logout</a>
                 </div>
             </div>
         </div>
