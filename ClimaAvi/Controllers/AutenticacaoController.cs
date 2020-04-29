@@ -55,10 +55,7 @@ namespace ClimaAvi.Controllers
                     }
 
                 }
-                else
-                {
-                    return RedirectToAction("Login", "Usuario");
-                }
+              
             }
 
             return RedirectToAction("Login", "Usuario");
