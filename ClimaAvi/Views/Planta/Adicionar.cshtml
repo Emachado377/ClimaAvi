@@ -1,29 +1,45 @@
-﻿
+﻿@model ClimaAvi.Models.Planta
+
 @{
     ViewBag.Title = "Adicionar";
 }
-
-<h2>Adicionar</h2>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
 
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Criar uma planta</h1>
 </div>
 
-<form>
-    <div class="form-row">
-        <div class="form-group col-md-8">
-            <label for="inputEmail4">Nome da planta</label>
-            <input type="text" class="form-control" placeholder="Nome">
-        </div>
-        <div class="form-group col-md-4">
-            <label for="inputPassword4">Código da planta</label>
-            <input type="text" class="form-control" placeholder="Código">
+@using (Html.BeginForm("Gravar", "Planta", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+<div class="form-horizontal">
+
+    <div class="form-group">
+        <label for="inputEmail4">Nome da planta</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => Model.NomePlanta)
+            @Html.ValidationMessageFor(model => Model.NomePlanta)
         </div>
     </div>
     <div class="form-group">
-        <label for="inputAddress">Local</label>
-        <input type="text" class="form-control" placeholder="ex: Caxias do sul">
+        <label for="inputEmail4">Codigo da planta</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => Model.CodigoPlanta)
+            @Html.ValidationMessageFor(model => Model.CodigoPlanta)
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary float-right">Cadastrar</button>
-</form>
+    <div class="form-group">
+        <label for="inputEmail4">Local da planta</label>
+        <div class="col-md-10">
+            @Html.TextBoxFor(model => Model.LocalPlanta)
+            @Html.ValidationMessageFor(model => Model.LocalPlanta)
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary float-left">Cadastrar</button>
+</div>
+}

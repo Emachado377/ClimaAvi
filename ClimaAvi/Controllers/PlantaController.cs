@@ -20,10 +20,25 @@ namespace ClimaAvi.Controllers
         }
         public ActionResult Adicionar()
         {
-            List<Planta> listPlanta;
+            Planta planta = new Planta();
 
+            return View(planta);
+        }
 
-            return View();
+        [HttpPost]
+        public ActionResult Gravar(Planta planta)
+        {
+            if (ModelState.IsValid == false)
+            {
+                return View("Adicionar", planta );
+
+            }
+            List<Planta> listPlanta = new List<Planta>();
+            listPlanta = (List<Planta>) Session["planta"];
+
+            listPlanta.Add(planta);
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
