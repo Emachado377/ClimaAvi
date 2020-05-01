@@ -20,9 +20,7 @@ namespace ClimaAvi.Models
             Temperatura = temperatura;
             PressaoAtmosferica = pressaoAtmosferica;
             UmidadeAr = umidadeAr;
-            LeituraBarometro = leituraBarometro;
-
-            
+            LeituraBarometro = leituraBarometro;            
         }
        
     }

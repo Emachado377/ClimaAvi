@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<h2>Plantas Cadastradas</h2>
+
+<a href="/Planta/Adicionar">Adicionar Planta</a>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>NomePlanta</th>
+            <th>LocalPlanta</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody id="gridconteudo">
+        @foreach (var lista in ViewBag.listPlanta)
+        {
+            <tr>
+                <td>@lista.CodigoPlanta</td>
+                <td>@lista.NomePlanta</td>
+                <td>@lista.LocalPlanta</td>
+                <td>@Html.ActionLink("Editar", "editar", new { id = lista.Id }) |<a href="/produto/excluir/@lista.Id">Excluir</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@*<script type="text/javascript" src="~/Scripts/jquery-3.5.0.js"></script>
+<script type="text/javascript">
+    function Pesquisar(termo) {
+        var termopesquisa = termo.value;
+        var url = "@Url.Action("Pesquisar", "Produto")";
+        var parametros = { filtro: termopesquisa };
+        $.post(url, parametros, RetornoPesquisa);
+    }
+
+    function RetornoPesquisa(retorno) {
+        var tableBody = $("#gridconteudo");
+
+        $('#listagem tbody').empty(); // Limpa todo conteudo descrito da tabela "Listagem - tbody"
+        $.each(retorno, function (i, item)
+        { //foreach jquery
+            var linha = "<tr><td>" + item.Codigo + "</td><td>" + item.Descricao +
+                "</td ><td> " + item.Valor + "</td><td>" +
+                "<a href='/produto/editar/'" + item.Id + ">Editar</a>|<a href='/produto/excluir/'" + item.Id + ">Excluir</a></td></tr>";
+            tableBody.append(linha);
+        });
+    }
+</script>*@
+
+

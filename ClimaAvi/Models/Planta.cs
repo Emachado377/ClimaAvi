@@ -4,7 +4,7 @@ namespace ClimaAvi.Models
 {
     public class Planta
     {
-        public Guid Id { get;}
+        public Guid Id { get; }
         public int CodigoPlanta { get; set; }
         public string NomePlanta { get; set; }
         public string LocalPlanta { get; set; }
@@ -20,6 +20,7 @@ namespace ClimaAvi.Models
             CodigoPlanta = codigoPlanta;
             NomePlanta = nomePlanta;
             LocalPlanta = localPlanta;
-         
+
         }
     }
+}

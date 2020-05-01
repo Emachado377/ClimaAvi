@@ -10,6 +10,10 @@ namespace ClimaAvi.Models
         public float Fumaca { get; set; }
         public DateTime LeituraGas  { get; set; }
 
+        public SensorGas()
+        {
+        }
+
         public SensorGas(float metano, float propeno, float hidrogenio, float fumaca, DateTime leituraGas)
         {
             Metano = metano;
@@ -18,5 +22,7 @@ namespace ClimaAvi.Models
             Fumaca = fumaca;
             LeituraGas = leituraGas;
         }
+
+       
     }
 }
