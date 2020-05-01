@@ -2075,7 +2075,6 @@
     <Content Include="Views\Usuario\Login.cshtml" />
     <Content Include="Views\Autenticacao\Validation.cshtml" />
     <Content Include="Views\Home\Dados.cshtml" />
-    <Content Include="Views\Home\Criar.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Planta\Adicionar.cshtml" />
     <Content Include="Views\Planta\Index.cshtml" />

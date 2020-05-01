@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+using ClimaAvi.Models;
+
 namespace ClimaAvi.Controllers
 {
     public class HomeController : Controller
@@ -11,8 +13,12 @@ namespace ClimaAvi.Controllers
         // GET: Home
         public ActionResult Index()
         {
-          HttpCookie cookie = Request.Cookies.Get("Logged");
-         
+            List<Planta> listPlanta;
+            listPlanta = (List<Planta>)Session["planta"];
+            ViewBag.listPlanta = listPlanta;
+
+            return View();
+
             return View();
         }
 
