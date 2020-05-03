@@ -1,0 +1,45 @@
+﻿@model ClimaAvi.Models.Planta
+
+@{
+    ViewBag.Title = "Adicionar";
+}
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Criar uma planta</h1>
+</div>
+
+@using (Html.BeginForm("Gravar", "Planta", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+<div class="form-horizontal">
+
+    <div class="form-group">
+        <label for="inputNomePlanta">Nome da planta</label>
+        <div class="col-auto">
+            @Html.TextBoxFor(model => Model.NomePlanta)
+            @Html.ValidationMessageFor(model => Model.NomePlanta)
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputCodigoPlanta">Codigo da planta</label>
+        <div class="col-auto">
+            @Html.TextBoxFor(model => Model.CodigoPlanta)
+            @Html.ValidationMessageFor(model => Model.CodigoPlanta)
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="inputLocalPlanta">Local da planta</label>
+        <div class="col-auto">
+            @Html.TextBoxFor(model => Model.LocalPlanta)
+            @Html.ValidationMessageFor(model => Model.LocalPlanta)
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-user btn-block">Cadastrar</button>
+</div>
+}

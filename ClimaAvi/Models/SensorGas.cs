@@ -4,23 +4,25 @@ namespace ClimaAvi.Models
 {
     public class SensorGas
     {
-        public float Methane { get; set; }
-        public float Propane { get; set; }
-        public float Hydrogen { get; set; }
-        public float Smoke { get; set; }
-        public DateTime Reading  { get; set; }
+        public float Metano { get; set; }
+        public float Propeno { get; set; }
+        public float Hidrogenio { get; set; }
+        public float Fumaca { get; set; }
+        public DateTime LeituraGas { get; set; }
 
         public SensorGas()
         {
         }
 
-        public SensorGas(float methane, float propane, float hydrogen, float smoke, DateTime reading)
+        public SensorGas(float metano, float propeno, float hidrogenio, float fumaca, DateTime leituraGas)
         {
-            Methane = methane;
-            Propane = propane;
-            Hydrogen = hydrogen;
-            Smoke = smoke;
-            Reading = reading;
+            Metano = metano;
+            Propeno = propeno;
+            Hidrogenio = hidrogenio;
+            Fumaca = fumaca;
+            LeituraGas = leituraGas;
         }
+
+
     }
 }

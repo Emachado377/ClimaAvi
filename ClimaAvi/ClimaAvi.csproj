@@ -2074,14 +2074,20 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AutenticacaoController.cs" />
+    <Compile Include="Controllers\ColetaDadosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+<<<<<<< HEAD
     <Compile Include="Controllers\TestesController.cs" />
+=======
+    <Compile Include="Controllers\PlantaController.cs" />
+>>>>>>> 326a7a0e8cb13f73c7054fd64cb2c269ed0f4aef
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Barometro.cs" />
-    <Compile Include="Models\Plant.cs" />
+    <Compile Include="Models\Mensagem.cs" />
+    <Compile Include="Models\Planta.cs" />
     <Compile Include="Models\SensorGas.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -2091,15 +2097,16 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.0.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.0.0.min.map" />
-    <Content Include="Views\Autenticacao\Index.cshtml" />
     <Content Include="Views\Usuario\Register.cshtml" />
     <Content Include="Views\Usuario\ForgotPassord.cshtml" />
     <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\Usuario\Login.cshtml" />
     <Content Include="Views\Autenticacao\Validation.cshtml" />
     <Content Include="Views\Home\Dados.cshtml" />
-    <Content Include="Views\Home\Criar.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\Planta\Adicionar.cshtml" />
+    <Content Include="Views\Planta\Index.cshtml" />
+    <Content Include="Views\Autenticacao\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2110,7 +2117,11 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="obj\Debug\TempPE\" />
+<<<<<<< HEAD
     <Folder Include="Views\Testes\" />
+=======
+    <Folder Include="Views\ColetaDados\" />
+>>>>>>> 326a7a0e8cb13f73c7054fd64cb2c269ed0f4aef
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />

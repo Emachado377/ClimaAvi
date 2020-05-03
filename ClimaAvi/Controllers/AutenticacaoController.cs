@@ -11,6 +11,7 @@ namespace ClimaAvi.Controllers
     {
         // GET: Autenticacao
 
+<<<<<<< HEAD
         List<User> userTemp = new List<User>(); // declarando a lista temporaria para login
 
         public ActionResult Index(string id)
@@ -63,5 +64,20 @@ namespace ClimaAvi.Controllers
 
             return RedirectToAction("Login", "Usuario");
         }
+=======
+       public ActionResult Index(string id)
+        {
+           //Response.Cookies.Add(new HttpCookie("Logged", "1"));
+
+            return RedirectToAction("Validation");
+        }
+
+        public ActionResult CookieGet()      // Como usar ?
+        {
+            //HttpCookie cookie = Request.Cookies.Get("Logged");
+
+            return RedirectToAction("/Home/Index");
+        }      
+>>>>>>> 326a7a0e8cb13f73c7054fd64cb2c269ed0f4aef
     }
 }

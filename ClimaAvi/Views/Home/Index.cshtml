@@ -1,7 +1,10 @@
-﻿<!-- Page Heading -->
+﻿@model ClimaAvi.Models.Planta
+
+
+<!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Select a plant</h1>
-    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+    <h1 class="h3 mb-0 text-gray-800">Selecione uma Planta</h1>
+    <a href="/planta/adicionar" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Criar uma nova Planta</a>
 </div>
 
 <!-- Content Row-------------------------------------------------------------------------------------------------------- -->
@@ -9,25 +12,35 @@
 
     <!-- Cards init -->
     <div class="col-6">
-        <div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">Código da planta: #233232</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Nome da planta: Plymouth Rock Branca Passo Fundo</h6>
-                <p class="card-text">Local: Passo Fundo</p>
-                <a href="#" class="btn btn-primary btn-icon-split">
-                    <span class="icon text-white-50">
-                        <i class="fas fa-flag"></i>
-                    </span>
-                    <span class="text">Alterar</span>
-                </a>
-                <a href="#" class="btn btn-danger btn-icon-split">
-                    <span class="icon text-white-50">
-                        <i class="fas fa-trash"></i>
-                    </span>
-                    <span class="text">Excluir</span>
-                </a>
+        @foreach (var lista in ViewBag.listPlanta)
+        {
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">@Html.LabelFor(model => Model.CodigoPlanta) : @lista.CodigoPlanta </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">@Html.LabelFor(model => Model.NomePlanta) : @lista.NomePlanta</h6>
+                    <p class="card-text">@Html.LabelFor(model => Model.LocalPlanta): @lista.LocalPlanta</p>
+
+                    <a href="#" class="btn btn-primary btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-flag"></i>
+                        </span>
+                        <span class="text">Abrir</span>
+                    </a>
+                    <a href="#" class="btn btn-primary btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-flag"></i>
+                        </span>
+                        <span class="text">Alterar</span>
+                    </a>
+                    <a href="#" class="btn btn-danger btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-trash"></i>
+                        </span>
+                        <span class="text">Excluir</span>
+                    </a>
+                </div>
             </div>
-        </div>
+        }
     </div>
     <!-- Cards End -->
 
