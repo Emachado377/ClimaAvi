@@ -11,60 +11,57 @@ namespace ClimaAvi.Controllers
     {
         // GET: Autenticacao
 
-    List<User> userTemp = new List<User>(); // declarando a lista temporaria para login
+        List<User> userTemp = new List<User>(); // declarando a lista temporaria para login
 
-    public ActionResult Index (string id)
-    {
+        public ActionResult Index(string id)
+        {
             Response.Cookies.Add(new HttpCookie("Logged", "1"));
 
             return RedirectToAction("Validation");
-    }
+        }
 
-    public ActionResult CookieGet()
-    {
-        HttpCookie cookie = Request.Cookies.Get("Logged");
-
-        return RedirectToAction("/Home/Index");
-    }
-
-
-    public ActionResult Validation(User userTemp)
-    {
-        List<User> users; // declarando a lista
-
-        users = (List<User>)Session["users"]; // atribuindo a sessão com um casting forçado
-
-
-        foreach (var valid in users)
+        public ActionResult CookieGet()
         {
+            HttpCookie cookie = Request.Cookies.Get("Logged");
 
-            if (String.Equals(valid.Email, userTemp.Email))  // Compare Email usando String.Equals 
+            return RedirectToAction("/Home/Index");
+        }
+
+
+        public ActionResult Validation(User userTemp)
+        {
+            List<User> users; // declarando a lista
+
+            users = (List<User>)Session["users"]; // atribuindo a sessão com um casting forçado
+
+
+            foreach (var valid in users)
             {
-                Console.WriteLine("email e igual");
 
-                if (String.Equals(valid.Password, userTemp.Password)) // Compare Senha usando String.Equals 
+                if (String.Equals(valid.Email, userTemp.Email))  // Compare Email usando String.Equals 
                 {
-                    Index("1");  // Chama a função Cookies para armazenar a usuario logado
+                    Console.WriteLine("email e igual");
 
-                    return RedirectToAction("Index", "Home");
+                    if (String.Equals(valid.Password, userTemp.Password)) // Compare Senha usando String.Equals 
+                    {
+                        Index("1");  // Chama a função Cookies para armazenar a usuario logado
+
+                        return RedirectToAction("Index", "Home");
+                    }
+
+                    else
+                    {
+                        return RedirectToAction("Login", "Usuario");
+                    }
+
                 }
-
                 else
                 {
                     return RedirectToAction("Login", "Usuario");
                 }
+            }
 
-            }
-            else
-            {
-                return RedirectToAction("Login", "Usuario");
-            }
+            return RedirectToAction("Login", "Usuario");
         }
-
-        return RedirectToAction("Login", "Usuario");
     }
-
-
-
-}
 }

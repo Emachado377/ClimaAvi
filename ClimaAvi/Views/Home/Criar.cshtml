@@ -2,21 +2,62 @@
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Create a plant</h1>
 </div>
-
-<form>
+<div id="alertaSuccess" class="alert alert-success d-none" role="alert">
+    <span id="textAlert"></span>
+</div>
+<div id="alertaWarn" class="alert alert-danger d-none" role="alert">
+    <span id="textAlertD"></span>
+</div>
     <div class="form-row">
         <div class="form-group col-md-8">
-            <label for="inputEmail4">Nome da planta</label>
-            <input type="text" class="form-control" placeholder="Nome">
+            <label for="nomePlanta">Nome da planta</label>
+            <input type="text" id="nomePlanta" class="form-control" placeholder="Nome">
         </div>
         <div class="form-group col-md-4">
-            <label for="inputPassword4">Código da planta</label>
-            <input type="text" class="form-control" placeholder="Código">
+            <label for="codPlanta">Código da planta</label>
+            <input type="text" id="codPlanta" class="form-control" placeholder="Código">
         </div>
     </div>
     <div class="form-group">
-        <label for="inputAddress">Local</label>
-        <input type="text" class="form-control" placeholder="ex: Caxias do sul">
+        <label for="localPlanta">Local</label>
+        <input type="text" id="localPlanta" class="form-control" placeholder="ex: Caxias do sul">
     </div>
-    <button type="submit" class="btn btn-primary float-right">Cadastrar</button>
-</form>
+    <button id="btnEnviar" class="btn btn-primary float-right" onclick="handleSubmit()">Cadastrar</button>
+
+<script>
+
+    async function handleSubmit() {
+        $('#btnEnviar').prop('disabled', true);
+
+        let NomePlanta = $("#nomePlanta").val();
+        let CodigoPlanta = $("#codPlanta").val();
+        let LocalPlanta = $("#localPlanta").val();
+
+        let Planta = {
+            CodigoPlanta,
+            NomePlanta,
+            LocalPlanta
+        }
+
+        var resposta = await criarPlanta(Planta);   
+
+        if (resposta.status) {
+            $('#textAlert').html(resposta.mensagem);
+            $("#alertaSuccess").toggleClass("d-none");
+            setTimeout(function () {
+                $("#alertaSuccess").toggleClass("d-none");
+            }, 3000);
+             $("#nomePlanta").val('');
+             $("#codPlanta").val('');
+             $("#localPlanta").val('');
+
+        } else {
+            $('#textAlertD').html(resposta.mensagem);
+            $("#alertaWarn").toggleClass("d-none");
+            setTimeout(function () {
+                $("#alertaWarn").toggleClass("d-none");
+            }, 3000);
+        }
+        $('#btnEnviar').prop('disabled', false);
+    }
+</script>
