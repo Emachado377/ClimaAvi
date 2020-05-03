@@ -30,15 +30,26 @@ namespace ClimaAvi.Controllers
         {
             if (ModelState.IsValid == false)
             {
-                return View("Adicionar", planta );
+                return View("Adicionar", planta);
 
             }
-            List<Planta> listPlanta = new List<Planta>();
-            listPlanta = (List<Planta>) Session["planta"];
+            else
+            {
+                List<Planta> listaPlanta = new List<Planta>();
+                listaPlanta = (List<Planta>)Session["planta"];
+                foreach (var busca in listaPlanta)
+                {
+                    if ((String.Equals(busca.CodigoPlanta, planta.CodigoPlanta) || (String.Equals(busca.NomePlanta, planta.NomePlanta))))
+                    {  
+                        // ADICIONAR AQUI UMA CHAMADA PARA APRESENTAR NA TELA A INDICAÇÃO DO ERRO - " NOME OU CODIGO JÁ EXISTE" 
+                       return View("Adicionar", planta);
+                    }
+                }
+                listaPlanta.Add(planta);
+                Session["planta"] = listaPlanta;
 
-            listPlanta.Add(planta);
-
-            return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");
+            }        
         }
     }
 }

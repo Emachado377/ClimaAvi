@@ -18,9 +18,7 @@ namespace ClimaAvi.Controllers
             ViewBag.listPlanta = listPlanta;
 
             return View();
-
-            return View();
-        }
+         }
 
         public ActionResult Dashboard()
         {

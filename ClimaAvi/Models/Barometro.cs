@@ -2,7 +2,7 @@
 
 namespace ClimaAvi.Models
 {
-    public class Barometro : Planta
+    public class Barometro 
     {
         public float Altitude { get; set; }
         public float Temperatura { get; set; }

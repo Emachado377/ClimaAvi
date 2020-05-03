@@ -25,7 +25,7 @@ namespace ClimaAvi
                 Name = "Evandro",
                 Email = "evandro@gmail.com",
                 LastName = "Machado",
-                Password = "1",
+                Password = "1111",
             };
 
             User user2 = new User()
@@ -34,7 +34,7 @@ namespace ClimaAvi
                 Name = "Ruan",
                 Email = "ruan@gmail.com",
                 LastName = "Ferreira",
-                Password = "2",
+                Password = "2222",
             };
 
             List<User> listUser = new List<User>();
@@ -53,30 +53,35 @@ namespace ClimaAvi
                 LocalPlanta = "Fazenda Souza",
             };
 
+            List<Planta> listPlanta = new List<Planta>();           
+            listPlanta.Add(planta2);
+            Session["planta"] = listPlanta;
 
-            Barometro barometro2 = new Barometro()
+            // Inicia a lista dos dados do Barometro //////////////////////////////////////////////////////////////
+
+            Barometro barometro = new Barometro()
             {
                 Altitude = 200,
                 Temperatura = 23,
                 PressaoAtmosferica = 1020,
                 UmidadeAr = 20,
-
             };
-            
-            SensorGas sensorGas2 = new SensorGas()
+            List<Barometro> listaBarometro = new List<Barometro>();
+            listaBarometro.Add(barometro);
+            Session["barometro"] = listaBarometro;
+
+            // Inicia a lista dos dados do Sensor Gas //////////////////////////////////////////////////////////////
+
+            SensorGas sensorGas = new SensorGas()
             {
                 Metano = 3,
                 Propeno = 4,
                 Hidrogenio = 78,
                 Fumaca = 1,
             };
-
-            List<Planta> listPlanta = new List<Planta>();
-            listPlanta.Add(barometro2);
-            listPlanta.Add(sensorGas2);
-            listPlanta.Add(planta2);
-
-            Session["planta"] = listPlanta;
+            List<SensorGas> listaSensorGas = new List<SensorGas>();            
+            listaSensorGas.Add(sensorGas);
+            Session["sensorGas"] = listaSensorGas;
 
         }
 

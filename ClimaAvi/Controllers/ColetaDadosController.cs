@@ -19,13 +19,11 @@ namespace ClimaAvi.Controllers
                 Temperatura = 23,
                 PressaoAtmosferica = 1020,
                 UmidadeAr = 20,
-
             };
-            List<Planta> planta1 = new List<Planta>();
-
-            planta1 = (List<Planta>)Session["planta"];
-            planta1.Add(barometro1);
-            Session["planta"] = planta1;                
+            List<Barometro> listaBarometro = new List<Barometro>();
+            listaBarometro = (List<Barometro>)Session["barometro"];
+            listaBarometro.Add(barometro1);
+            Session["barometro"] = listaBarometro;                
                 
             return View("DadosGas");
         }
@@ -40,11 +38,10 @@ namespace ClimaAvi.Controllers
                 Hidrogenio = 78,
                 Fumaca = 1,
             };
-            List<Planta> planta1 = new List<Planta>();
-
-            planta1 = (List<Planta>)Session["planta"];
-            planta1.Add(sensorGas1);
-            Session["planta"] = planta1;   
+            List<SensorGas> sensorGas = new List<SensorGas>();
+            sensorGas = (List<SensorGas>)Session["sensorGas"];
+            sensorGas.Add(sensorGas1);
+            Session["sensorGas"] = sensorGas;   
             
             return View();
         }

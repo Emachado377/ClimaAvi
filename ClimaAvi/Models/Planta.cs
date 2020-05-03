@@ -8,7 +8,7 @@ namespace ClimaAvi.Models
         public Guid Id { get; }
 
         [Display(Name = "Codigo")]
-        [Range(minimum: 1, maximum: 50, ErrorMessage = "Codigo do Aluno deve ser entre 1 e 50")]
+        [Range(minimum: 1, maximum: 50, ErrorMessage = "Codigo deve ser entre 1 e 50")]
         public int CodigoPlanta { get; set; }
 
         [Display(Name = "Nome")]

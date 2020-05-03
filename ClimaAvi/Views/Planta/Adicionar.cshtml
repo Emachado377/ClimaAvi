@@ -19,27 +19,27 @@
 <div class="form-horizontal">
 
     <div class="form-group">
-        <label for="inputEmail4">Nome da planta</label>
-        <div class="col-md-10">
+        <label for="inputNomePlanta">Nome da planta</label>
+        <div class="col-auto">
             @Html.TextBoxFor(model => Model.NomePlanta)
             @Html.ValidationMessageFor(model => Model.NomePlanta)
         </div>
     </div>
     <div class="form-group">
-        <label for="inputEmail4">Codigo da planta</label>
-        <div class="col-md-10">
+        <label for="inputCodigoPlanta">Codigo da planta</label>
+        <div class="col-auto">
             @Html.TextBoxFor(model => Model.CodigoPlanta)
             @Html.ValidationMessageFor(model => Model.CodigoPlanta)
         </div>
     </div>
     <div class="form-group">
-        <label for="inputEmail4">Local da planta</label>
-        <div class="col-md-10">
+        <label for="inputLocalPlanta">Local da planta</label>
+        <div class="col-auto">
             @Html.TextBoxFor(model => Model.LocalPlanta)
             @Html.ValidationMessageFor(model => Model.LocalPlanta)
         </div>
     </div>
 
-    <button type="submit" class="btn btn-primary float-left">Cadastrar</button>
+    <button type="submit" class="btn btn-primary btn-user btn-block">Cadastrar</button>
 </div>
 }

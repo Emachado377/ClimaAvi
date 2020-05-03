@@ -2,13 +2,13 @@
 
 namespace ClimaAvi.Models
 {
-    public class SensorGas : Barometro
+    public class SensorGas
     {
         public float Metano { get; set; }
         public float Propeno { get; set; }
         public float Hidrogenio { get; set; }
         public float Fumaca { get; set; }
-        public DateTime LeituraGas  { get; set; }
+        public DateTime LeituraGas { get; set; }
 
         public SensorGas()
         {
@@ -23,6 +23,6 @@ namespace ClimaAvi.Models
             LeituraGas = leituraGas;
         }
 
-       
+
     }
 }
