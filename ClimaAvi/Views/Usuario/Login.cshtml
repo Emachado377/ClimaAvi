@@ -110,7 +110,10 @@
             {
                 if (retorno.MensagemErro) {
                     $("#msg_erro").html(retorno.MensagemTexto);
-                }             
+                }
+                else {
+                    $(location).Attr('href','~/Home/Index');
+                }
             }
         });
     </script>

@@ -44,7 +44,11 @@ namespace ClimaAvi.Controllers
            {
              if (String.Equals(valid.Email, userTemp.Email) && (String.Equals(valid.Password, userTemp.Password)))
                 {
-                    return RedirectToAction("~/Home/Index");
+                    return Json(new Mensagem()
+                    {
+                        MensagemErro = false,
+                        MensagemTexto = "@@"
+                    });
                 }
             }              
             return Json(new Mensagem()
