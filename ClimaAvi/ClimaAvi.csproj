@@ -2058,6 +2058,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Barometro.cs" />
+    <Compile Include="Models\Mensagem.cs" />
     <Compile Include="Models\Planta.cs" />
     <Compile Include="Models\SensorGas.cs" />
     <Compile Include="Models\User.cs" />

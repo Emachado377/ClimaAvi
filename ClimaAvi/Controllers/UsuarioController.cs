@@ -36,23 +36,24 @@ namespace ClimaAvi.Controllers
         [HttpPost]
         public ActionResult Validation_Login(User userTemp)
         {
+            
             List<User> users;
             users = (List<User>)Session["users"]; // atribuindo a sessão com um casting forçado
-
-            foreach (var valid in users)
+                            
+          foreach (var valid in users)
+           {
+             if (String.Equals(valid.Email, userTemp.Email) && (String.Equals(valid.Password, userTemp.Password)))
+                {
+                    return RedirectToAction("~/Home/Index");
+                }
+            }              
+            return Json(new Mensagem()
             {
-
-                if (String.Equals(valid.Email, userTemp.Email) && (String.Equals(valid.Password, userTemp.Password))) 
-                {                  
-                  return RedirectToAction("Index", "Home");
-                }                                            
-            }
-
-            // ACRESCENTAR AQUI UMA CHAMADA PARA MSG DE ERRO APRESENTAR NA TELA - " E-MAIL OU SENHA INVALIDO"
-
-            return RedirectToAction("Login", "Usuario");
+                MensagemErro = true,
+                MensagemTexto = "Senha ou Email Invalido!"
+            });
         }
-
+        
         [HttpPost]
         public ActionResult Validation_Create_User(User userTemp)
         {
@@ -70,9 +71,8 @@ namespace ClimaAvi.Controllers
                 {
                     if (String.Equals(busca.Email, userTemp.Email))
                     {
-                        // ACRESCENTAR AQUI UMA CHAMADA PARA MSG DE ERRO APRESENTAR NA TELA - " E-MAIL JÁ EXISTE"
-
-                        return View("Register", userTemp);
+                       ModelState.AddModelError("userTemp.CadastroErrado", "E-mail já Existe !");
+                       return View("Register", userTemp);
                     }
 
                 }
