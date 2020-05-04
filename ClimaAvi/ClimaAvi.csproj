@@ -2076,6 +2076,7 @@
     <Compile Include="Controllers\AutenticacaoController.cs" />
     <Compile Include="Controllers\ColetaDadosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MensagemErroController.cs" />
     <Compile Include="Controllers\TestesController.cs" />
     <Compile Include="Controllers\PlantaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -2104,6 +2105,7 @@
     <Content Include="Views\Planta\Adicionar.cshtml" />
     <Content Include="Views\Planta\Index.cshtml" />
     <Content Include="Views\Autenticacao\Index.cshtml" />
+    <Content Include="Views\MensagemErro\ErroMsg.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2114,8 +2116,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="obj\Debug\TempPE\" />
-    <Folder Include="Views\Testes\" />
     <Folder Include="Views\ColetaDados\" />
+    <Folder Include="Views\Testes\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />

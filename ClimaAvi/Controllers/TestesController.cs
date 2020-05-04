@@ -15,17 +15,17 @@ namespace ClimaAvi.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult CriarPlanta(Plant planta)
-        {
-            if (planta.CodigoPlanta != null && planta.LocalPlanta != null && planta.NomePlanta != null)
-            {
-                return Json(new { status = true, mensagem = "Planta cadastrada" });
-            }
-            else {
-                return Json(new { status = false, mensagem = "Não foi possível cadastradar! Por favor verifique os dados" });
-            }
+        //[HttpPost]
+        //public ActionResult CriarPlanta(Planta planta)
+        //{
+        //    if (planta.CodigoPlanta != null && planta.LocalPlanta != null && planta.NomePlanta != null)
+        //    {
+        //        return Json(new { status = true, mensagem = "Planta cadastrada" });
+        //    }
+        //    else {
+        //        return Json(new { status = false, mensagem = "Não foi possível cadastradar! Por favor verifique os dados" });
+        //    }
             
-        }
+        //}
     }
 }
