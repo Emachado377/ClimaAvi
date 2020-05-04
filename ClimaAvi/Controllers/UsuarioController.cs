@@ -46,8 +46,7 @@ namespace ClimaAvi.Controllers
                 {
                     return Json(new Mensagem()
                     {
-                        MensagemErro = false,
-                        MensagemTexto = "@@"
+                        MensagemErro = false,                       
                     });
                 }
             }              

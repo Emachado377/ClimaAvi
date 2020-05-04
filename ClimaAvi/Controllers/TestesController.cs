@@ -26,6 +26,6 @@ namespace ClimaAvi.Controllers
                 return Json(new { status = false, mensagem = "Não foi possível cadastradar! Por favor verifique os dados" });
             }
             
-        }
+        //}
     }
 }
