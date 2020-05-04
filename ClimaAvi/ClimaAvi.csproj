@@ -2073,6 +2073,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup1.cs" />
     <Compile Include="Controllers\AutenticacaoController.cs" />
     <Compile Include="Controllers\ColetaDadosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -2114,8 +2115,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="obj\Debug\TempPE\" />
-    <Folder Include="Views\Testes\" />
     <Folder Include="Views\ColetaDados\" />
+    <Folder Include="Views\Testes\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />

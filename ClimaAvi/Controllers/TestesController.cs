@@ -16,7 +16,7 @@ namespace ClimaAvi.Controllers
         }
 
         [HttpPost]
-        public ActionResult CriarPlanta(Plant planta)
+        public ActionResult CriarPlanta(Planta planta)
         {
             if (planta.CodigoPlanta != null && planta.LocalPlanta != null && planta.NomePlanta != null)
             {
