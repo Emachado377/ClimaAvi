@@ -2076,11 +2076,8 @@
     <Compile Include="Controllers\AutenticacaoController.cs" />
     <Compile Include="Controllers\ColetaDadosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-<<<<<<< HEAD
     <Compile Include="Controllers\TestesController.cs" />
-=======
     <Compile Include="Controllers\PlantaController.cs" />
->>>>>>> 326a7a0e8cb13f73c7054fd64cb2c269ed0f4aef
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -2117,11 +2114,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="obj\Debug\TempPE\" />
-<<<<<<< HEAD
     <Folder Include="Views\Testes\" />
-=======
     <Folder Include="Views\ColetaDados\" />
->>>>>>> 326a7a0e8cb13f73c7054fd64cb2c269ed0f4aef
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
