@@ -26,7 +26,7 @@ namespace ClimaAvi.Models
         {
             Id = Guid.NewGuid();
         }
-
+        
         public Planta(int codigoPlanta, string nomePlanta, string localPlanta)
         {
             CodigoPlanta = codigoPlanta;

@@ -2106,6 +2106,7 @@
     <Content Include="Views\Planta\Index.cshtml" />
     <Content Include="Views\Autenticacao\Index.cshtml" />
     <Content Include="Views\MensagemErro\ErroMsg.cshtml" />
+    <Content Include="Views\Planta\Alterar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

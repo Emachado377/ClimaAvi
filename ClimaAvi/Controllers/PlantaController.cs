@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Web;
 using System.Web.Mvc;
 
@@ -12,11 +13,10 @@ namespace ClimaAvi.Controllers
         // GET: Planta
         public ActionResult Index()
         {
-            List<Planta> listPlanta;
-            listPlanta = (List<Planta>) Session["planta"]; 
+            List<Planta> listPlanta = new List<Planta>();
+            listPlanta = (List<Planta>)Session["planta"];
             ViewBag.listPlanta = listPlanta;
-
-            return View();
+            return View(listPlanta);
         }
         public ActionResult Adicionar()
         {
@@ -40,16 +40,41 @@ namespace ClimaAvi.Controllers
                 foreach (var busca in listaPlanta)
                 {
                     if ((String.Equals(busca.CodigoPlanta, planta.CodigoPlanta) || (String.Equals(busca.NomePlanta, planta.NomePlanta))))
-                    {  
-                        // ADICIONAR AQUI UMA CHAMADA PARA APRESENTAR NA TELA A INDICAÇÃO DO ERRO - " NOME OU CODIGO JÁ EXISTE" 
-                       return View("Adicionar", planta);
+                    {
+                        ModelState.AddModelError("planta.ok", "NOME OU CODIGO JÁ EXISTE!");
+                       
+                        return View("Adicionar", planta);
                     }
                 }
                 listaPlanta.Add(planta);
                 Session["planta"] = listaPlanta;
 
                 return RedirectToAction("Index", "Home");
-            }        
+            }
+        }
+        public ActionResult Alterar(Guid Id)
+        {
+            Planta planta = null;
+            if (Session["planta"] != null)
+            {
+                var itens = (List<Models.Planta>)Session["planta"];
+                planta = itens.Where(c => c.Id == Id).FirstOrDefault();
+                itens.Remove(planta);
+            }
+            return View("Adicionar", planta);
+        }  
+        
+        public ActionResult Excluir(Guid Id)
+        {
+            Planta planta = null;
+            if (Session["planta"] != null)
+            {
+                var itens = (List<Models.Planta>)Session["planta"];
+                planta = itens.Where(c => c.Id == Id).FirstOrDefault();
+                itens.Remove(planta);
+            }
+            return RedirectToAction("Index", "Home");
+
         }
     }
 }
