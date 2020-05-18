@@ -1,11 +1,15 @@
-﻿        <!-- Page Heading -->
+﻿@model ClimaAvi.Models.Planta
+    
+
+
+    <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+    <h1 class="h3 mb-0 text-gray-800">Dashboard : @Model.NomePlanta</h1>
     <button class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
             data-toggle="modal"
             data-target="#modalPlantas">
-        <i class="fas fa-exchange-alt fa-sm text-white-50"></i> Alternar
-        planta
+        <a href="/Home/Index" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Alternar Planta</a>
+       
     </button>
 </div>
 

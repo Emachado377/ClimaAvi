@@ -2097,7 +2097,7 @@
     <Content Include="Scripts\jquery-3.0.0.min.map" />
     <Content Include="Views\Usuario\Register.cshtml" />
     <Content Include="Views\Usuario\ForgotPassord.cshtml" />
-    <Content Include="Views\Home\Dashboard.cshtml" />
+    <Content Include="Views\Planta\Dashboard.cshtml" />
     <Content Include="Views\Usuario\Login.cshtml" />
     <Content Include="Views\Autenticacao\Validation.cshtml" />
     <Content Include="Views\Home\Dados.cshtml" />

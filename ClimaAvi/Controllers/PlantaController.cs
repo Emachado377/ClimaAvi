@@ -76,5 +76,15 @@ namespace ClimaAvi.Controllers
             return RedirectToAction("Index", "Home");
 
         }
+        public ActionResult Abrir(Guid Id)
+        {
+            Planta planta = null;
+            if (Session["planta"] != null)
+            {
+                var itens = (List<Models.Planta>)Session["planta"];
+                planta = itens.Where(c => c.Id == Id).FirstOrDefault();
+             }
+            return View("DashBoard", planta);
+        }
     }
 }
