@@ -116,3 +116,37 @@ var myLineChart = new Chart(ctx, {
         }
     }
 });
+
+var momento = 0;
+function InserirDados() {
+    momento = 0;
+    setInterval(IniciarAtualizacao, 1000);
+    //addData(myLineChart, "xx", 10);
+    //removeData(myLineChart);
+}
+
+
+function IniciarAtualizacao() {
+    //Chama rotina  ajax na controller, nesse ponto
+    var url = "/ColetaDados/Barometro";
+    var barometro;    
+    $.post(url, barometro, addData);
+    addData(myLineChart, momento, baromero);
+    momento++;
+}
+
+function removeData(chart) {
+    chart.data.labels.pop();
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.pop();
+    });
+    chart.update();
+}
+
+function addData(chart, label, data) {
+    chart.data.labels.push(label);
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.push(data);
+    });
+    chart.update();
+}
