@@ -12,10 +12,20 @@ namespace ClimaAvi.Controllers
         // GET: ColetaDados
         public ActionResult DadosBarometro()
         {
+            // Essa função buscará na API essas informações
+            Barometro barometro1 = new Barometro()
+            {
+                Altitude = 200,
+                Temperatura = 23,
+                PressaoAtmosferica = 1020,
+                UmidadeAr = 20,
+            };
             List<Barometro> listaBarometro = new List<Barometro>();
             listaBarometro = (List<Barometro>)Session["barometro"];
-            var barometro = listaBarometro.OrderByDescending(c => c.LeituraBarometro).Take(1);
-            return Json(barometro);
+            listaBarometro.Add(barometro1);
+            Session["barometro"] = listaBarometro;                
+                
+            return View("DadosGas");
         }
 
         public ActionResult DadosGas()
