@@ -1,4 +1,4 @@
-﻿using ClimaAvi.Models;
+﻿using ClimaAviAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,43 +8,53 @@ using System.Web.Http;
 
 namespace ClimaAviAPI.Controllers
 {
-    public class PlantaController : ApiController
-    {
-        public static List<Planta> plantas = new List<Planta>();
+    public class SensorGasController : ApiController
+    { 
+         public static List<SensorGas> listaGas = new List<SensorGas>();
 
-        public PlantaController()
+        public SensorGasController()
         {
+            var Altit = 200;
+            var Temp = 23;
+            var Pressao = 1020;
+            var Umid = 20;
+            var Soma = 1;
 
-            Planta planta2 = new Planta()
+            for (var i = 0; i < 5; i++)
             {
-                CodigoPlanta = 10,
-                NomePlanta = "Aviario 1",
-                LocalPlanta = "Fazenda Souza",
-            };
-
-            List<Planta> listPlanta = new List<Planta>();
-            plantas.Add(planta2);
+                SensorGas sensorGas_i = new SensorGas()
+                {
+                    Id = Guid.NewGuid(),
+                    Metano = Altit + Soma,
+                    Propeno = Temp + Soma,
+                    Hidrogenio = Pressao + Soma,
+                    Fumaca = Umid + Soma,
+                    LeituraGas = DateTime.Now,
+                };
+                listaGas.Add(sensorGas_i);
+                Soma = Soma + 1;
+            }
 
         }
 
-        // GET api/user
+        // GET api/barometro
         public HttpResponseMessage Get()
         {
-            return Request.CreateResponse(HttpStatusCode.OK, plantas);
+            return Request.CreateResponse(HttpStatusCode.OK, listaGas);
         }
 
-        // GET api/user/5
+        // GET api/barometro
         public HttpResponseMessage Get(String id)
         {
             Guid aux;
             aux = Guid.Parse(id);
             try
             {
-                foreach (var planta in plantas)
+                foreach (var busca in listaGas)
                 {
-                    if (planta.Id == aux)
+                    if (busca.Id == aux)
                     {
-                        return Request.CreateResponse(HttpStatusCode.OK, planta);
+                        return Request.CreateResponse(HttpStatusCode.OK, busca);
                     }
                 }
                 return Request.CreateResponse(HttpStatusCode.NotFound);
@@ -56,18 +66,19 @@ namespace ClimaAviAPI.Controllers
             }
         }
 
-        // POST api/user
-        public HttpResponseMessage Post([FromBody]Planta planta)
+        // POST api/barometro
+        public HttpResponseMessage Post([FromBody]SensorGas sensorGas)
         {
             try
             {
-                if (planta.CodigoPlanta == null || planta.NomePlanta == string.Empty)
+                if (sensorGas.LeituraGas == null)
                 {
-                    throw new ApplicationException("Por favor preencha os campos corretamente");
+                    throw new ApplicationException("");
                 }
 
-                plantas.Add(planta);
-                return Request.CreateResponse(HttpStatusCode.OK, planta.Id);
+                listaGas.Add(sensorGas);
+
+                return Request.CreateResponse(HttpStatusCode.OK, sensorGas.Id);
             }
             catch (ApplicationException e)
             {
@@ -80,28 +91,31 @@ namespace ClimaAviAPI.Controllers
 
         }
 
-        // PUT api/user/5
-        public HttpResponseMessage Put(String id, [FromBody]Planta plantaBody)
+        // PUT api/barometro
+        public HttpResponseMessage Put(String id, [FromBody]SensorGas sensorGasBody)
         {
             Guid guidId;
             guidId = Guid.Parse(id);
             var found = false;
-            var aux = plantas;
+            var aux = listaGas;
             try
             {
-                foreach (var planta in aux)
+                foreach (var busca in aux)
                 {
-                    if (planta.Id == guidId)
+                    if (busca.Id == guidId)
                     {
-                        planta.CodigoPlanta = plantaBody.CodigoPlanta;
-                        planta.NomePlanta = plantaBody.NomePlanta;
-                        planta.LocalPlanta = plantaBody.LocalPlanta;
+                        busca.Metano = sensorGasBody.Metano;
+                        busca.Propeno = sensorGasBody.Propeno;
+                        busca.Hidrogenio = sensorGasBody.Hidrogenio;
+                        busca.Fumaca = sensorGasBody.Fumaca;
+                        busca.LeituraGas = sensorGasBody.LeituraGas;
+                        busca.MacHost = sensorGasBody.MacHost;
                         found = true;
                     }
                 }
                 if (found)
                 {
-                    plantas = aux;
+                    listaGas = aux;
                     return Request.CreateResponse(HttpStatusCode.OK, guidId);
                 }
                 else
@@ -121,21 +135,21 @@ namespace ClimaAviAPI.Controllers
             Guid guidId;
             guidId = Guid.Parse(id);
             var found = false;
-            var aux = plantas;
+            var aux = listaGas;
             try
             {
-                foreach (var planta in aux)
+                foreach (var busca in aux)
                 {
-                    if (planta.Id == guidId)
+                    if (busca.Id == guidId)
                     {
-                        aux.Remove(planta);
+                        aux.Remove(busca);
                         found = true;
                         break;
                     }
                 }
                 if (found)
                 {
-                    plantas = aux;
+                    listaGas = aux;
                     return Request.CreateResponse(HttpStatusCode.OK, guidId);
                 }
                 else

@@ -1,4 +1,6 @@
 ﻿using ClimaAvi.Models;
+using ClimaAviAPI.Models;
+using Microsoft.Ajax.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,45 +8,56 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
+
 namespace ClimaAviAPI.Controllers
 {
-    public class PlantaController : ApiController
+    public class BarometroController : ApiController
     {
-        public static List<Planta> plantas = new List<Planta>();
+        public static List<Barometro> listaBarometro = new List<Barometro>();
 
-        public PlantaController()
-        {
+        public BarometroController()
+        {           
+            var Altit = 200;
+            var Temp = 23;
+            var Pressao = 1020;
+            var Umid = 20;
+            var Soma = 1;
 
-            Planta planta2 = new Planta()
-            {
-                CodigoPlanta = 10,
-                NomePlanta = "Aviario 1",
-                LocalPlanta = "Fazenda Souza",
-            };
-
-            List<Planta> listPlanta = new List<Planta>();
-            plantas.Add(planta2);
+            for (var i = 0; i < 5; i++)
+            {               
+                Barometro barometro_i = new Barometro()
+                {
+                    Id = Guid.NewGuid(),
+                    Altitude = Altit + Soma,
+                    Temperatura = Temp + Soma,
+                    PressaoAtmosferica = Pressao + Soma,
+                    UmidadeAr = Umid + Soma,
+                    LeituraGas = DateTime.Now,
+                };
+                listaBarometro.Add(barometro_i);
+                Soma = Soma + 1;
+            }
 
         }
 
-        // GET api/user
+        // GET api/barometro
         public HttpResponseMessage Get()
         {
-            return Request.CreateResponse(HttpStatusCode.OK, plantas);
+            return Request.CreateResponse(HttpStatusCode.OK, listaBarometro);
         }
 
-        // GET api/user/5
+        // GET api/barometro
         public HttpResponseMessage Get(String id)
         {
             Guid aux;
             aux = Guid.Parse(id);
             try
             {
-                foreach (var planta in plantas)
+                foreach (var busca in listaBarometro)
                 {
-                    if (planta.Id == aux)
+                    if (busca.Id == aux)
                     {
-                        return Request.CreateResponse(HttpStatusCode.OK, planta);
+                        return Request.CreateResponse(HttpStatusCode.OK, busca);
                     }
                 }
                 return Request.CreateResponse(HttpStatusCode.NotFound);
@@ -56,18 +69,18 @@ namespace ClimaAviAPI.Controllers
             }
         }
 
-        // POST api/user
-        public HttpResponseMessage Post([FromBody]Planta planta)
+        // POST api/barometro
+        public HttpResponseMessage Post([FromBody]Barometro barometro)
         {
             try
             {
-                if (planta.CodigoPlanta == null || planta.NomePlanta == string.Empty)
+                if (barometro.LeituraGas == null)
                 {
-                    throw new ApplicationException("Por favor preencha os campos corretamente");
+                    throw new ApplicationException("");
                 }
 
-                plantas.Add(planta);
-                return Request.CreateResponse(HttpStatusCode.OK, planta.Id);
+                listaBarometro.Add(barometro);
+                return Request.CreateResponse(HttpStatusCode.OK, barometro.Id);
             }
             catch (ApplicationException e)
             {
@@ -80,28 +93,31 @@ namespace ClimaAviAPI.Controllers
 
         }
 
-        // PUT api/user/5
-        public HttpResponseMessage Put(String id, [FromBody]Planta plantaBody)
+        // PUT api/barometro
+        public HttpResponseMessage Put(String id, [FromBody]Barometro barometroBody)
         {
             Guid guidId;
             guidId = Guid.Parse(id);
             var found = false;
-            var aux = plantas;
+            var aux = listaBarometro;
             try
             {
-                foreach (var planta in aux)
+                foreach (var busca in aux)
                 {
-                    if (planta.Id == guidId)
+                    if (busca.Id == guidId)
                     {
-                        planta.CodigoPlanta = plantaBody.CodigoPlanta;
-                        planta.NomePlanta = plantaBody.NomePlanta;
-                        planta.LocalPlanta = plantaBody.LocalPlanta;
+                        busca.Altitude = barometroBody.Altitude;
+                        busca.Temperatura = barometroBody.Temperatura;
+                        busca.PressaoAtmosferica = barometroBody.PressaoAtmosferica;
+                        busca.UmidadeAr = barometroBody.UmidadeAr;
+                        busca.LeituraGas = barometroBody.LeituraGas;
+                        busca.MacHost = barometroBody.MacHost;
                         found = true;
                     }
                 }
                 if (found)
                 {
-                    plantas = aux;
+                    listaBarometro = aux;
                     return Request.CreateResponse(HttpStatusCode.OK, guidId);
                 }
                 else
@@ -121,21 +137,21 @@ namespace ClimaAviAPI.Controllers
             Guid guidId;
             guidId = Guid.Parse(id);
             var found = false;
-            var aux = plantas;
+            var aux = listaBarometro;
             try
             {
-                foreach (var planta in aux)
+                foreach (var busca in aux)
                 {
-                    if (planta.Id == guidId)
+                    if (busca.Id == guidId)
                     {
-                        aux.Remove(planta);
+                        aux.Remove(busca);
                         found = true;
                         break;
                     }
                 }
                 if (found)
                 {
-                    plantas = aux;
+                    listaBarometro = aux;
                     return Request.CreateResponse(HttpStatusCode.OK, guidId);
                 }
                 else
