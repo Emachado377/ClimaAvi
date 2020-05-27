@@ -48,10 +48,11 @@ namespace ClimaAvi
 
            Planta planta2 = new Planta()
             {
-                CodigoPlanta = 100,
+                CodigoPlanta = 10,
                 NomePlanta = "Aviario 1",
                 LocalPlanta = "Fazenda Souza",
-            };
+                MacHost = "2CC",
+           };
 
             List<Planta> listPlanta = new List<Planta>();           
             listPlanta.Add(planta2);
@@ -65,7 +66,8 @@ namespace ClimaAvi
                 Temperatura = 23,
                 PressaoAtmosferica = 1020,
                 UmidadeAr = 20,
-            };
+                MacHostBarometro = "2CC",
+        };
             List<Barometro> listaBarometro = new List<Barometro>();
             listaBarometro.Add(barometro);
             Session["barometro"] = listaBarometro;
@@ -78,7 +80,8 @@ namespace ClimaAvi
                 Propeno = 4,
                 Hidrogenio = 78,
                 Fumaca = 1,
-            };
+                MacHostGas = "2CC",
+        };
             List<SensorGas> listaSensorGas = new List<SensorGas>();            
             listaSensorGas.Add(sensorGas);
             Session["sensorGas"] = listaSensorGas;

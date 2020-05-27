@@ -1,4 +1,5 @@
-﻿using ClimaAviAPI.Models;
+﻿using ClimaAvi.Models;
+using ClimaAviAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +13,14 @@ namespace ClimaAviAPI.Controllers
     { 
          public static List<SensorGas> listaGas = new List<SensorGas>();
 
+        public object Session { get; private set; }
+
         public SensorGasController()
         {
-            var Altit = 200;
-            var Temp = 23;
-            var Pressao = 1020;
-            var Umid = 20;
+            var Met = 3;
+            var Prop = 4;
+            var Hid = 78;
+            var Fum = 1;                
             var Soma = 1;
 
             for (var i = 0; i < 5; i++)
@@ -25,11 +28,12 @@ namespace ClimaAviAPI.Controllers
                 SensorGas sensorGas_i = new SensorGas()
                 {
                     Id = Guid.NewGuid(),
-                    Metano = Altit + Soma,
-                    Propeno = Temp + Soma,
-                    Hidrogenio = Pressao + Soma,
-                    Fumaca = Umid + Soma,
+                    Metano = Met + Soma,
+                    Propeno = Prop + Soma,
+                    Hidrogenio = Hid + Soma,
+                    Fumaca = Fum + Soma,
                     LeituraGas = DateTime.Now,
+                    MacHost = "2CC",
                 };
                 listaGas.Add(sensorGas_i);
                 Soma = Soma + 1;
@@ -69,17 +73,30 @@ namespace ClimaAviAPI.Controllers
         // POST api/barometro
         public HttpResponseMessage Post([FromBody]SensorGas sensorGas)
         {
+            //List<Planta> plantas = new List<Planta>();
+            //plantas = (List<Planta>)Session["planta"]; 
+
+            // Como chamar uma lista de outra controller ou da global.asax ?
+
             try
             {
-                if (sensorGas.LeituraGas == null)
+                if (sensorGas.LeituraGas == null || sensorGas.MacHost == null)
                 {
-                    throw new ApplicationException("");
+                    throw new ApplicationException("Horario não informado ou Mac Invalido");
                 }
-
-                listaGas.Add(sensorGas);
-
-                return Request.CreateResponse(HttpStatusCode.OK, sensorGas.Id);
-            }
+                else
+                {
+                    foreach (var busca in plantas)// falta definir a forma para chamar a lista de Plantas
+                    {
+                        if (busca.MacHost == sensorGas.MacHost)
+                        {
+                            listaGas.Add(sensorGas);
+                            return Request.CreateResponse(HttpStatusCode.OK, sensorGas.Id);
+                        }
+                    }
+                    return Request.CreateResponse(HttpStatusCode.NotFound);
+                }
+             }
             catch (ApplicationException e)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, e.Message);

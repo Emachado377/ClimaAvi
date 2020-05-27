@@ -9,19 +9,19 @@ namespace ClimaAvi.Models
         public int CodigoPlanta { get; set; }
         public string NomePlanta { get; set; }
         public string LocalPlanta { get; set; }
-
+        public string MacHost { get; set; }
 
         public Planta()
         {
             Id = Guid.NewGuid();
         }
-        
-        public Planta(int codigoPlanta, string nomePlanta, string localPlanta)
+
+        public Planta(int codigoPlanta, string nomePlanta, string localPlanta, string macHost)
         {
             CodigoPlanta = codigoPlanta;
             NomePlanta = nomePlanta;
             LocalPlanta = localPlanta;
-
+            MacHost = macHost;
         }
     }
 }

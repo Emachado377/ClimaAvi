@@ -9,11 +9,13 @@ using System.Net.Http;
 using System.Web.Http;
 
 
+
 namespace ClimaAviAPI.Controllers
 {
     public class BarometroController : ApiController
     {
         public static List<Barometro> listaBarometro = new List<Barometro>();
+        //private IEnumerable<Planta> plantas;
 
         public BarometroController()
         {           
@@ -32,7 +34,8 @@ namespace ClimaAviAPI.Controllers
                     Temperatura = Temp + Soma,
                     PressaoAtmosferica = Pressao + Soma,
                     UmidadeAr = Umid + Soma,
-                    LeituraGas = DateTime.Now,
+                    LeituraBarometro = DateTime.Now,
+                    MacHost = "2CC",
                 };
                 listaBarometro.Add(barometro_i);
                 Soma = Soma + 1;
@@ -72,15 +75,29 @@ namespace ClimaAviAPI.Controllers
         // POST api/barometro
         public HttpResponseMessage Post([FromBody]Barometro barometro)
         {
+            //List<Planta> plantas = new List<Planta>();
+            //plantas = (List<Planta>)Session["planta"]; 
+
+            // Como chamar uma lista de outra controller ou da global.asax ?
             try
             {
-                if (barometro.LeituraGas == null)
+                if (barometro.LeituraBarometro == null || barometro.MacHost == null)
                 {
-                    throw new ApplicationException("");
+                    throw new ApplicationException("Horario não informado ou Mac Invalido");
                 }
+                else
+                {
+                    foreach (var busca in plantas)// falta definir a forma para chamar a lista de Plantas
+                    {
+                        if (busca.MacHost == barometro.MacHost)
+                        {
+                            listaBarometro.Add(barometro);
+                            return Request.CreateResponse(HttpStatusCode.OK, barometro.Id);
+                        }                       
+                    }
+                    return Request.CreateResponse(HttpStatusCode.NotFound);
+                }        
 
-                listaBarometro.Add(barometro);
-                return Request.CreateResponse(HttpStatusCode.OK, barometro.Id);
             }
             catch (ApplicationException e)
             {
@@ -110,7 +127,7 @@ namespace ClimaAviAPI.Controllers
                         busca.Temperatura = barometroBody.Temperatura;
                         busca.PressaoAtmosferica = barometroBody.PressaoAtmosferica;
                         busca.UmidadeAr = barometroBody.UmidadeAr;
-                        busca.LeituraGas = barometroBody.LeituraGas;
+                        busca.LeituraBarometro = barometroBody.LeituraBarometro;
                         busca.MacHost = barometroBody.MacHost;
                         found = true;
                     }

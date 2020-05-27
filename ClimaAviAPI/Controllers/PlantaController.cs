@@ -20,9 +20,9 @@ namespace ClimaAviAPI.Controllers
                 CodigoPlanta = 10,
                 NomePlanta = "Aviario 1",
                 LocalPlanta = "Fazenda Souza",
+                MacHost = "2C",
             };
-
-            List<Planta> listPlanta = new List<Planta>();
+                        
             plantas.Add(planta2);
 
         }
@@ -96,6 +96,7 @@ namespace ClimaAviAPI.Controllers
                         planta.CodigoPlanta = plantaBody.CodigoPlanta;
                         planta.NomePlanta = plantaBody.NomePlanta;
                         planta.LocalPlanta = plantaBody.LocalPlanta;
+                        planta.MacHost = plantaBody.MacHost;
                         found = true;
                     }
                 }

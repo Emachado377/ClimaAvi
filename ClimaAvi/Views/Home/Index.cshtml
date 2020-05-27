@@ -17,29 +17,30 @@
         {
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-            <h5 class="card-title">@Html.LabelFor(model => Model.CodigoPlanta):@lista.CodigoPlanta </h5>
-            <h6 class="card-subtitle mb-2 text-muted">@Html.LabelFor(model => Model.NomePlanta):@lista.NomePlanta</h6>
-            <h6 class="card-text">@Html.LabelFor(model => Model.LocalPlanta):@lista.LocalPlanta</h6>
+                <h5 class="card-title">@Html.LabelFor(model => Model.CodigoPlanta):@lista.CodigoPlanta </h5>
+                <h6 class="card-subtitle mb-2 text-muted">@Html.LabelFor(model => Model.NomePlanta):@lista.NomePlanta</h6>
+                <h6 class="card-text">@Html.LabelFor(model => Model.LocalPlanta):@lista.LocalPlanta</h6>
+                <h6 class="card-text">@Html.LabelFor(model => Model.MacHost):@lista.MacHost</h6>
 
-            <a href="/planta/Abrir/@lista.Id" class="btn btn-primary btn-icon-split">
-                <span class="icon text-white-50">
-                    <i class="fas fa-flag"></i>
-                </span>
-                <span class="text">Abrir</span>
-            </a>
-            <a href="/planta/Alterar/@lista.Id" class="btn btn-primary btn-icon-split">
-                <span class="icon text-white-50">
-                    <i class="fas fa-flag"></i>
-                </span>
-                <span class="text">Alterar</span>
-            </a>
-            <a href="/planta/Excluir/@lista.Id" class="btn btn-danger btn-icon-split">
-                <span class="icon text-white-50">
-                    <i class="fas fa-trash"></i>
-                </span>
-                <span class="text">Excluir</span>
-            </a>
-        </div>
+                <a href="/planta/Abrir/@lista.Id" class="btn btn-primary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-flag"></i>
+                    </span>
+                    <span class="text">Abrir</span>
+                </a>
+                <a href="/planta/Alterar/@lista.Id" class="btn btn-primary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-flag"></i>
+                    </span>
+                    <span class="text">Alterar</span>
+                </a>
+                <a href="/planta/Excluir/@lista.Id" class="btn btn-danger btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-trash"></i>
+                    </span>
+                    <span class="text">Excluir</span>
+                </a>
+            </div>
         </div>
         }
     </div>

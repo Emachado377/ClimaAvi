@@ -21,18 +21,22 @@ namespace ClimaAvi.Models
         [StringLength(50, MinimumLength = 4, ErrorMessage = "Nome deve ter entre 4 e 50 caracteres!")]
         public string LocalPlanta { get; set; }
 
+        [Display(Name = "Endereço Mac")]
+        [Required(ErrorMessage = "Campo Nome deve ser preenchido")]
+        [StringLength(50, MinimumLength = 4, ErrorMessage = "Nome deve ter entre 2 e 50 caracteres!")]
+        public string MacHost { get; set; }
 
         public Planta()
         {
             Id = Guid.NewGuid();
         }
-        
-        public Planta(int codigoPlanta, string nomePlanta, string localPlanta)
+
+        public Planta(int codigoPlanta, string nomePlanta, string localPlanta, string macPlanta)
         {
             CodigoPlanta = codigoPlanta;
             NomePlanta = nomePlanta;
             LocalPlanta = localPlanta;
-
+            MacHost = macPlanta;
         }
     }
 }

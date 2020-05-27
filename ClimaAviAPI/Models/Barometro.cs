@@ -12,7 +12,7 @@ namespace ClimaAviAPI.Models
         public float Temperatura { get; set; }
         public float PressaoAtmosferica { get; set; }
         public float UmidadeAr { get; set; }
-        public DateTime LeituraGas { get; set; }
+        public DateTime LeituraBarometro { get; set; }
         public string MacHost { get; set; }
 
 
