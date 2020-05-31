@@ -252,6 +252,20 @@
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ClimaAvi.Aplicacao\ClimaAvi.Aplicacao.csproj">
+      <Project>{c2068c1a-687b-4006-aa54-cf7faab669db}</Project>
+      <Name>ClimaAvi.Aplicacao</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ClimaAvi.Dominio\ClimaAvi.Dominio.csproj">
+      <Project>{a9cb6286-88c5-4360-b89a-8793d10c95b1}</Project>
+      <Name>ClimaAvi.Dominio</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ClimaAvi.Persistencia\ClimaAvi.Persistencia.csproj">
+      <Project>{6efcb9f8-ebff-4b3c-a387-9f3c3d318ac2}</Project>
+      <Name>ClimaAvi.Persistencia</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

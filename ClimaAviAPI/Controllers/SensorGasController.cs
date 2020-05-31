@@ -73,7 +73,7 @@ namespace ClimaAviAPI.Controllers
         // POST api/barometro
         public HttpResponseMessage Post([FromBody]SensorGas sensorGas)
         {
-            //List<Planta> plantas = new List<Planta>();
+            List<Planta> plantas = new List<Planta>();
             //plantas = (List<Planta>)Session["planta"]; 
 
             // Como chamar uma lista de outra controller ou da global.asax ?

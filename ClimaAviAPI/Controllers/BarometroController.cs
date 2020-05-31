@@ -15,7 +15,7 @@ namespace ClimaAviAPI.Controllers
     public class BarometroController : ApiController
     {
         public static List<Barometro> listaBarometro = new List<Barometro>();
-        //private IEnumerable<Planta> plantas;
+        private IEnumerable<Planta> plantas;
 
         public BarometroController()
         {           
