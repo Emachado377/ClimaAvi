@@ -14,7 +14,11 @@ namespace ClimaAvi.Controllers
         public ActionResult Index()
         {
             List<Planta> listPlanta;
-            listPlanta = (List<Planta>)Session["planta"];
+            // listPlanta = (List<Planta>)Session["planta"];
+
+            APIHttpClient client = new APIHttpClient("https://localhost:44313/api/");
+            listPlanta = client.Get<List<Planta>>("planta");
+
             ViewBag.listPlanta = listPlanta;
 
             return View();

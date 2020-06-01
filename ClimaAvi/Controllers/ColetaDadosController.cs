@@ -13,37 +13,45 @@ namespace ClimaAvi.Controllers
         public ActionResult DadosBarometro()
         {
             // Essa função buscará na API essas informações
-            Barometro barometro1 = new Barometro()
-            {
-                Altitude = 200,
-                Temperatura = 23,
-                PressaoAtmosferica = 1020,
-                UmidadeAr = 20,
-            };
+            //Barometro barometro1 = new Barometro()
+            //{
+            //    Altitude = 200,
+            //    Temperatura = 23,
+            //    PressaoAtmosferica = 1020,
+            //    UmidadeAr = 20,
+            //};
+
             List<Barometro> listaBarometro = new List<Barometro>();
-            listaBarometro = (List<Barometro>)Session["barometro"];
-            listaBarometro.Add(barometro1);
-            Session["barometro"] = listaBarometro;                
-                
-            return View("DadosGas");
+
+            //listaBarometro = (List<Barometro>)Session["barometro"];
+            //listaBarometro.Add(barometro1);
+            //Session["barometro"] = listaBarometro; 
+
+            APIHttpClient client = new APIHttpClient("https://localhost:44313/api/");
+            listaBarometro = client.Get<List<Barometro>>("Barometro");
+
+            return View("listaBarometro");
         }
 
         public ActionResult DadosGas()
         {
             // Essa função buscará na API essas informações
-            SensorGas sensorGas1 = new SensorGas()
-            {
-                Metano = 3,
-                Propeno = 4,
-                Hidrogenio = 78,
-                Fumaca = 1,
-            };
+            //SensorGas sensorGas1 = new SensorGas()
+            //{
+            //    Metano = 3,
+            //    Propeno = 4,
+            //    Hidrogenio = 78,
+            //    Fumaca = 1,
+            //};
             List<SensorGas> sensorGas = new List<SensorGas>();
-            sensorGas = (List<SensorGas>)Session["sensorGas"];
-            sensorGas.Add(sensorGas1);
-            Session["sensorGas"] = sensorGas;   
-            
-            return View();
+            //sensorGas = (List<SensorGas>)Session["sensorGas"];
+            //sensorGas.Add(sensorGas1);
+            //Session["sensorGas"] = sensorGas;   
+
+            APIHttpClient client = new APIHttpClient("https://localhost:44313/api/");
+            sensorGas = client.Get<List<SensorGas>>("SensorGas");
+
+            return View("sensorGas");
         }
 
     }

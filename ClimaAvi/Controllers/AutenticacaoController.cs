@@ -32,7 +32,11 @@ namespace ClimaAvi.Controllers
         {
             List<User> users; // declarando a lista
 
-            users = (List<User>)Session["users"]; // atribuindo a sessão com um casting forçado
+            //users = (List<User>)Session["users"]; // atribuindo a sessão com um casting forçado
+
+            APIHttpClient client = new APIHttpClient("https://localhost:44313/api/");
+            users = client.Get<List<User>>("User");
+
 
 
             foreach (var valid in users)

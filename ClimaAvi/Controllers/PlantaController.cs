@@ -14,7 +14,11 @@ namespace ClimaAvi.Controllers
         public ActionResult Index()
         {
             List<Planta> listPlanta = new List<Planta>();
-            listPlanta = (List<Planta>)Session["planta"];
+            //listPlanta = (List<Planta>)Session["planta"];
+
+            APIHttpClient client = new APIHttpClient("https://localhost:44313/api/");
+            listPlanta = client.Get<List<Planta>>("planta");
+
             ViewBag.listPlanta = listPlanta;
             return View(listPlanta);
         }
@@ -36,7 +40,11 @@ namespace ClimaAvi.Controllers
             else
             {
                 List<Planta> listaPlanta = new List<Planta>();
-                listaPlanta = (List<Planta>)Session["planta"];
+                //listaPlanta = (List<Planta>)Session["planta"];
+
+                APIHttpClient client = new APIHttpClient("https://localhost:44313/api/");
+                listaPlanta = client.Get<List<Planta>>("planta");
+
                 foreach (var busca in listaPlanta)
                 {
                     if ((String.Equals(busca.CodigoPlanta, planta.CodigoPlanta) || (String.Equals(busca.NomePlanta, planta.NomePlanta))))

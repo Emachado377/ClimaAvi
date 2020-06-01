@@ -81,6 +81,11 @@ namespace ClimaAvi
             }
         }
 
+        internal object Post<T>(string v, List<T> users)
+        {
+            throw new NotImplementedException();
+        }
+
         public T Delete<T>(string action, Guid id)
         {
             using (var client = new HttpClient())
