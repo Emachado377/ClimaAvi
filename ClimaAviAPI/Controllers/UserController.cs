@@ -1,4 +1,6 @@
-﻿using ClimaAvi.Models;
+﻿
+using ClimaAvi.Dominio.Entidades;
+using ClimaAviAPI.Contexts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,35 +12,11 @@ namespace ClimaAviAPI.Controllers
 {
     public class UserController : ApiController
     {
-        public static List<User> users = new List<User>();
-        
-        public UserController() {
-            User user1 = new User()
-            {
-                Code = 1,
-                Name = "Evandro",
-                Email = "evandro@gmail.com",
-                LastName = "Machado",
-                Password = "1111",
-            };
-
-            User user2 = new User()
-            {
-                Code = 2,
-                Name = "Ruan",
-                Email = "ruan@gmail.com",
-                LastName = "Ferreira",
-                Password = "2222",
-            };
-
-            users.Add(user1);
-            users.Add(user2);
-        }
-
         // GET api/user
         public HttpResponseMessage Get()
         {
-            return Request.CreateResponse(HttpStatusCode.OK, users);
+            UserContext userContext = new UserContext();
+            return Request.CreateResponse(HttpStatusCode.OK, userContext.Users.ToList());
         }
 
         // GET api/user/5
@@ -46,17 +24,17 @@ namespace ClimaAviAPI.Controllers
         {
             Guid aux;
             aux = Guid.Parse(id);
+            UserContext userContext = new UserContext();
             try
             {
-                foreach (var user in users)
+                User userFind = userContext.Users.Find(aux);
+                if (!(userFind == null))
                 {
-                    if (user.Id == aux)
-                    {
-                        return Request.CreateResponse(HttpStatusCode.OK, user);
-                    }
+                    return Request.CreateResponse(HttpStatusCode.OK, userFind);
                 }
-                return Request.CreateResponse(HttpStatusCode.NotFound);
-
+                else {
+                    return Request.CreateResponse(HttpStatusCode.NotFound);
+                }
             }
             catch (Exception e)
             {
@@ -74,16 +52,14 @@ namespace ClimaAviAPI.Controllers
                     throw new ApplicationException("Por favor preencha os campos corretamente");
                 }
 
-                users.Add(user);
+                UserContext userContext = new UserContext();
+                userContext.Users.Add(user);
+                userContext.SaveChanges();
                 return Request.CreateResponse(HttpStatusCode.OK, user.Id);
             }
             catch (ApplicationException e)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, e.Message);
-            }
-            catch (Exception e)
-            {
-                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e.Message);
             }
 
         }
@@ -94,31 +70,28 @@ namespace ClimaAviAPI.Controllers
         {
             Guid guidId;
             guidId = Guid.Parse(id);
-            var found = false;
-            var aux = users;
+            UserContext userContext = new UserContext();
+
             try
             {
-                foreach (var user in aux)
+                User userFind = userContext.Users.Find(guidId);
+                if (!(userFind == null))
                 {
-                    if (user.Id == guidId)
-                    {
-                        user.Code = userBody.Code;
-                        user.Name = userBody.Name;
-                        user.LastName = userBody.LastName;
-                        user.Email = userBody.Email;
-                        user.Password = userBody.Password;
-                        found = true;
-                    }
-                }
-                if (found)
-                {
-                    users = aux;
+                    userFind.Code = userBody.Code == 0 ? userFind.Code : userBody.Code;
+                    userFind.Name = userBody.Name== null ? userFind.Name : userBody.Name;
+                    userFind.LastName = userBody.LastName == null ? userFind.LastName : userBody.LastName;
+                    userFind.Email = userBody.Email == null ? userFind.Email : userBody.Email;
+                    userFind.Password = userBody.Password == null ? userFind.Password : userBody.Password;
+                    userContext.SaveChanges();
+
+
                     return Request.CreateResponse(HttpStatusCode.OK, guidId);
                 }
                 else
                 {
                     return Request.CreateResponse(HttpStatusCode.NotFound);
                 }
+                
             }
             catch (Exception e)
             {
@@ -131,22 +104,16 @@ namespace ClimaAviAPI.Controllers
         {
             Guid guidId;
             guidId = Guid.Parse(id);
-            var found = false;
-            var aux = users;
+
+            UserContext userContext = new UserContext();
+        
             try
             {
-                foreach (var user in aux)
+                User userFind = userContext.Users.Find(guidId);
+                if (!(userFind == null))
                 {
-                    if (user.Id == guidId)
-                    {
-                        aux.Remove(user);
-                        found = true;
-                        break;
-                    }
-                }
-                if (found)
-                {
-                    users = aux;
+                    userContext.Users.Remove(userFind);
+                    userContext.SaveChanges();
                     return Request.CreateResponse(HttpStatusCode.OK, guidId);
                 }
                 else

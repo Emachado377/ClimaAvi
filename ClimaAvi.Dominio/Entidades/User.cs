@@ -1,10 +1,14 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ClimaAvi.Dominio.Entidades
 {
+    [Table("User")]
     public class User
     {
-        public Guid Id { get; }
+        [Key]
+        public Guid Id { get; set; }
         public int Code { get; set; }
 
         public string Name { get; set; }

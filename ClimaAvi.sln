@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClimaAvi.Dominio", "ClimaAv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClimaAvi.Persistencia", "ClimaAvi.Persistencia\ClimaAvi.Persistencia.csproj", "{6EFCB9F8-EBFF-4B3C-A387-9F3C3D318AC2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClimaAviContext", "ClimaAviContext\ClimaAviContext.csproj", "{2DC488F9-ED51-450B-96D7-8086B1C49EF2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{6EFCB9F8-EBFF-4B3C-A387-9F3C3D318AC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EFCB9F8-EBFF-4B3C-A387-9F3C3D318AC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EFCB9F8-EBFF-4B3C-A387-9F3C3D318AC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DC488F9-ED51-450B-96D7-8086B1C49EF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DC488F9-ED51-450B-96D7-8086B1C49EF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DC488F9-ED51-450B-96D7-8086B1C49EF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DC488F9-ED51-450B-96D7-8086B1C49EF2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +65,7 @@ Global
 		{C2068C1A-687B-4006-AA54-CF7FAAB669DB} = {CF518342-46D6-43C7-A765-7049D2FCC940}
 		{A9CB6286-88C5-4360-B89A-8793D10C95B1} = {5B9EA54A-93CB-4D45-B53A-6E3A7AB8CE26}
 		{6EFCB9F8-EBFF-4B3C-A387-9F3C3D318AC2} = {EAC705E5-1EFD-4335-8ADD-901C95F7A7E1}
+		{2DC488F9-ED51-450B-96D7-8086B1C49EF2} = {EAC705E5-1EFD-4335-8ADD-901C95F7A7E1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E2C64908-EDA1-422F-A837-6A50A5D11D9D}
