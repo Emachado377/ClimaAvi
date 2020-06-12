@@ -1,6 +1,6 @@
 ﻿
 using ClimaAvi.Dominio.Entidades;
-using ClimaAviAPI.Contexts;
+using ClimaAvi.Persistencia;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +15,8 @@ namespace ClimaAviAPI.Controllers
         // GET api/user
         public HttpResponseMessage Get()
         {
-            UserContext userContext = new UserContext();
-            return Request.CreateResponse(HttpStatusCode.OK, userContext.Users.ToList());
+            Contexto userContext = new Contexto();
+            return Request.CreateResponse(HttpStatusCode.OK, userContext.Users);
         }
 
         // GET api/user/5
@@ -24,7 +24,7 @@ namespace ClimaAviAPI.Controllers
         {
             Guid aux;
             aux = Guid.Parse(id);
-            UserContext userContext = new UserContext();
+            Contexto userContext = new Contexto();
             try
             {
                 User userFind = userContext.Users.Find(aux);
@@ -52,7 +52,7 @@ namespace ClimaAviAPI.Controllers
                     throw new ApplicationException("Por favor preencha os campos corretamente");
                 }
 
-                UserContext userContext = new UserContext();
+                Contexto userContext = new Contexto();
                 userContext.Users.Add(user);
                 userContext.SaveChanges();
                 return Request.CreateResponse(HttpStatusCode.OK, user.Id);
@@ -70,7 +70,7 @@ namespace ClimaAviAPI.Controllers
         {
             Guid guidId;
             guidId = Guid.Parse(id);
-            UserContext userContext = new UserContext();
+            Contexto userContext = new Contexto();
 
             try
             {
@@ -105,8 +105,8 @@ namespace ClimaAviAPI.Controllers
             Guid guidId;
             guidId = Guid.Parse(id);
 
-            UserContext userContext = new UserContext();
-        
+            Contexto userContext = new Contexto();
+
             try
             {
                 User userFind = userContext.Users.Find(guidId);

@@ -9,15 +9,22 @@ namespace ClimaAvi.Dominio.Entidades
     {
         [Key]
         public Guid Id { get; set; }
+
+        [Display(Name = "Codigo")]
         public int Code { get; set; }
 
+        [Display(Name = "Nome")]
         public string Name { get; set; }
 
+        [Display(Name = "Sobrenome")]
         public string LastName { get; set; }
 
+        [Display(Name = "E-Mail")]
         public string Email { get; set; }
 
+        [Display(Name = "Senha")]
         public string Password { get; set; }
+
 
         public User()
         {

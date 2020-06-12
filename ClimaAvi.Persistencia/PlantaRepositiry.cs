@@ -2,13 +2,14 @@
 using ClimaAvi.Dominio.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace ClimaAvi.Persistencia
 {
-    public class PlantaRepositiry : IPlantaRepository
+    public class PlantaRepository : IPlantaRepository
     {
         public Guid Alterar(Planta planta)
         {
@@ -17,22 +18,49 @@ namespace ClimaAvi.Persistencia
 
         public void Excluir(Guid id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Contexto db = new Contexto();
+                Planta plt = db.Plantas.Find(id);
+                db.Plantas.Remove(plt);
+                db.SaveChanges();
+            }
+            catch (DataException)
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public Guid Inserir(Planta planta)
         {
-            throw new NotImplementedException();
+            try
+            {
+                Contexto db = new Contexto();
+                db.Plantas.Add(planta);
+                db.SaveChanges();
+            }
+            catch (DataException)
+            {
+                throw new NotImplementedException();
+
+            }
+            return planta.Id;
+
         }
 
         public Planta Selecionar(Guid id)
         {
-            throw new NotImplementedException();
+           Contexto db = new Contexto();
+           Planta plt =  db.Plantas.Find(id);
+           return plt;
         }
 
         public List<Planta> SelecionarTodos()
         {
-            throw new NotImplementedException();
+           Contexto db = new Contexto();
+           List<Planta> plts = db.Plantas.ToList();
+          // Precisa ser tratada essa Informação ???
+            return plts;
         }
     }
 }

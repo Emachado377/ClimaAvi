@@ -1,4 +1,6 @@
-﻿using ClimaAvi.Models;
+﻿using ClimaAvi.Aplicacao;
+using ClimaAvi.Models;
+using ClimaAvi.Persistencia;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,68 +8,68 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
+
 namespace ClimaAviAPI.Controllers
 {
     public class PlantaController : ApiController
     {
-        public static List<Planta> plantas = new List<Planta>();
 
-        public PlantaController()
-        {
-
-            Planta planta2 = new Planta()
-            {
-                CodigoPlanta = 10,
-                NomePlanta = "Aviario 1",
-                LocalPlanta = "Fazenda Souza",
-                MacHost = "2C",
-            };
-                        
-            plantas.Add(planta2);
-
-        }
-
-        // GET api/user
         public HttpResponseMessage Get()
         {
+            PlantaRepository plantaRepository = new PlantaRepository();
+            PlantaAplicacao plantaAplicacao = new PlantaAplicacao(plantaRepository);
+            List<Planta> plantas = new List<Planta>();
+
+            var plts = plantaAplicacao.SelecionarTodos();
+
+            foreach (var busca in plts)
+            {
+                plantas.Add(new Planta()
+                {
+                    Id = busca.Id,
+                    CodigoPlanta = busca.CodigoPlanta,
+                    NomePlanta = busca.NomePlanta,                    
+                    LocalPlanta = busca.LocalPlanta,
+                    MacHost = busca.MacHost
+                }); 
+            }
             return Request.CreateResponse(HttpStatusCode.OK, plantas);
         }
 
-        // GET api/user/5
-        public HttpResponseMessage Get(String id)
+        // GET api/values/5
+        public HttpResponseMessage Get(Guid id)
         {
-            Guid aux;
-            aux = Guid.Parse(id);
+            PlantaRepository plantaRepository = new PlantaRepository();
+            PlantaAplicacao plantaAplicacao = new PlantaAplicacao(plantaRepository);                            
+
             try
             {
-                foreach (var planta in plantas)
-                {
-                    if (planta.Id == aux)
-                    {
-                        return Request.CreateResponse(HttpStatusCode.OK, planta);
-                    }
-                }
-                return Request.CreateResponse(HttpStatusCode.NotFound);
+                var plt = plantaAplicacao.Selecionar(id);
 
+                if (plt.Id == id)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, plt);
+                }
+                else
+                {
+                    return Request.CreateResponse(HttpStatusCode.NotFound);
+                }
             }
             catch (Exception e)
             {
+                //falha é trata aqui
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e.Message);
             }
         }
 
-        // POST api/user
-        public HttpResponseMessage Post([FromBody]Planta planta)
-        {
+        // POST api/values
+        public HttpResponseMessage Post([FromBody] Planta planta)
+        {           
             try
             {
-                if (planta.CodigoPlanta == null || planta.NomePlanta == string.Empty)
-                {
-                    throw new ApplicationException("Por favor preencha os campos corretamente");
-                }
-
-                plantas.Add(planta);
-                return Request.CreateResponse(HttpStatusCode.OK, planta.Id);
+                Guid id = Inserir(planta);
+                               
+                return Request.CreateResponse(HttpStatusCode.OK, id);
             }
             catch (ApplicationException e)
             {
@@ -77,33 +79,39 @@ namespace ClimaAviAPI.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e.Message);
             }
+        }
+
+        private Guid Inserir(Planta planta)
+        {
+            PlantaRepository plantaRepository = new PlantaRepository();
+            PlantaAplicacao plantaAplicacao = new PlantaAplicacao(plantaRepository);
+
+            //Adapter
+            ClimaAvi.Dominio.Entidades.Planta plt_Dominio = new ClimaAvi.Dominio.Entidades.Planta()
+            {
+                Id = planta.Id,
+                CodigoPlanta = planta.CodigoPlanta,
+                NomePlanta = planta.NomePlanta,
+                LocalPlanta = planta.LocalPlanta,
+                MacHost = planta.MacHost
+            };
+
+            var id = plantaAplicacao.CadastrarPlanta(plt_Dominio);
+
+            return id;
 
         }
 
-        // PUT api/user/5
-        public HttpResponseMessage Put(String id, [FromBody]Planta plantaBody)
+        // PUT api/values/5
+        public HttpResponseMessage Put(Guid id, [FromBody] Planta planta)
         {
-            Guid guidId;
-            guidId = Guid.Parse(id);
-            var found = false;
-            var aux = plantas;
             try
             {
-                foreach (var planta in aux)
+                var plt = Procurar(id);
+                if (plt != null)
                 {
-                    if (planta.Id == guidId)
-                    {
-                        planta.CodigoPlanta = plantaBody.CodigoPlanta;
-                        planta.NomePlanta = plantaBody.NomePlanta;
-                        planta.LocalPlanta = plantaBody.LocalPlanta;
-                        planta.MacHost = plantaBody.MacHost;
-                        found = true;
-                    }
-                }
-                if (found)
-                {
-                    plantas = aux;
-                    return Request.CreateResponse(HttpStatusCode.OK, guidId);
+                    Guid id_planta = Alterar(planta);
+                    return Request.CreateResponse(HttpStatusCode.OK, id_planta);
                 }
                 else
                 {
@@ -116,38 +124,63 @@ namespace ClimaAviAPI.Controllers
             }
         }
 
-        // DELETE api/user/5
-        public HttpResponseMessage Delete(String id)
+        private Guid Alterar(Planta planta)
         {
-            Guid guidId;
-            guidId = Guid.Parse(id);
-            var found = false;
-            var aux = plantas;
+            PlantaRepository plantaRepository = new PlantaRepository();
+            PlantaAplicacao plantaAplicacao = new PlantaAplicacao(plantaRepository);
+
+            //Adapter
+            ClimaAvi.Dominio.Entidades.Planta plt_Dominio = new ClimaAvi.Dominio.Entidades.Planta()
+            {
+                Id = planta.Id,
+                CodigoPlanta = planta.CodigoPlanta,
+                NomePlanta = planta.NomePlanta,
+                LocalPlanta = planta.LocalPlanta,
+                MacHost = planta.MacHost
+            };
+
+            var id = plantaAplicacao.CadastrarPlanta(plt_Dominio);
+
+            return id;
+        }
+
+        private Planta Procurar(Guid id_Planta)
+        {
+            PlantaRepository plantaRepository = new PlantaRepository();
+            PlantaAplicacao plantaAplicacao = new PlantaAplicacao(plantaRepository);
+
+            var plt = plantaAplicacao.Selecionar(id_Planta);
+
+            return new Planta()
+            {
+                Id = plt.Id,
+                CodigoPlanta = plt.CodigoPlanta,
+                NomePlanta = plt.NomePlanta,
+                LocalPlanta = plt.LocalPlanta,
+                MacHost = plt.MacHost
+            };
+        }
+
+        // DELETE api/values/5
+        public HttpResponseMessage Delete(Guid id)
+        {
             try
             {
-                foreach (var planta in aux)
-                {
-                    if (planta.Id == guidId)
-                    {
-                        aux.Remove(planta);
-                        found = true;
-                        break;
-                    }
-                }
-                if (found)
-                {
-                    plantas = aux;
-                    return Request.CreateResponse(HttpStatusCode.OK, guidId);
-                }
-                else
-                {
-                    return Request.CreateResponse(HttpStatusCode.NotFound);
-                }
+                Excluir(id);
+                return Request.CreateResponse(HttpStatusCode.OK);
             }
             catch (Exception e)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e.Message);
             }
+        }
+
+        private void Excluir(Guid id_Planta)
+        {
+            PlantaRepository plantaRepository = new PlantaRepository();
+            PlantaAplicacao plantaAplicacao = new PlantaAplicacao(plantaRepository);
+            plantaAplicacao.Excluir(id_Planta);
         }
     }
 }
+

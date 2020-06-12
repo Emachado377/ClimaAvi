@@ -1,13 +1,19 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace ClimaAvi.Dominio.Entidades
 {
     public class SensorGas
     {
+        [Key]
+        public Guid Id { get; set; }
         public float Metano { get; set; }
         public float Propeno { get; set; }
         public float Hidrogenio { get; set; }
         public float Fumaca { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd hh:mm:ss}", ApplyFormatInEditMode = true)]
         public DateTime LeituraGas { get; set; }
         public string MacHostGas { get; set; }
 

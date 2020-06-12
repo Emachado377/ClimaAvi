@@ -17,12 +17,30 @@ namespace ClimaAvi.Persistencia
 
         public void Excluir(Guid id)
         {
+            using (var dbUser = new Contexto())
+            //dbUser.Users.Remove(id);
+            //dbUser.SaveChanges();
             throw new NotImplementedException();
         }
 
         public Guid Inserir(User user)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            using (var dbUser  = new Contexto())
+            {
+                try
+                {
+                    dbUser.Users.Add(user);
+                    dbUser.SaveChanges();
+                }
+                catch
+                {
+
+                }
+               
+            }
+            return user.Id;
+
         }
 
         public User Selecionar(Guid id)
