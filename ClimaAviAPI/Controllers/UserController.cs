@@ -1,4 +1,5 @@
 ﻿
+using ClimaAvi.Aplicacao;
 using ClimaAvi.Dominio.Entidades;
 using ClimaAvi.Persistencia;
 using System;
@@ -12,109 +13,111 @@ namespace ClimaAviAPI.Controllers
 {
     public class UserController : ApiController
     {
-        // GET api/user
         public HttpResponseMessage Get()
         {
-            Contexto userContext = new Contexto();
-            return Request.CreateResponse(HttpStatusCode.OK, userContext.Users);
+            UserRepository userRepository = new UserRepository();
+            UserAplicacao userAplicacao = new UserAplicacao(userRepository);
+            List<User> users = new List<User>();
+
+            var urs = userAplicacao.SelecionarTodos();
+
+            foreach (var busca in urs)
+            {
+                users.Add(new User()
+                {
+                    Id = busca.Id,
+                    Codigo = busca.Codigo,
+                    Name = busca.Name,
+                    LastName = busca.Name,
+                    Email = busca.Email,
+                    Password = busca.Password
+                });
+            }
+            return Request.CreateResponse(HttpStatusCode.OK, users);
         }
 
-        // GET api/user/5
-        public HttpResponseMessage Get(String id)
+        // GET api/values/5
+        public HttpResponseMessage Get(Guid id)
         {
-            Guid aux;
-            aux = Guid.Parse(id);
-            Contexto userContext = new Contexto();
             try
             {
-                User userFind = userContext.Users.Find(aux);
-                if (!(userFind == null))
+                User user = new User()
                 {
-                    return Request.CreateResponse(HttpStatusCode.OK, userFind);
+                    Id = Guid.NewGuid(),
+                    Codigo = 1,
+                    Name = "Nelson",
+                    LastName = "Machado",
+                    Email = "machado@gmail.com",
+                    Password = "11111"
+                };
+
+
+                if (user.Id == id)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, user);
                 }
-                else {
+                else
+                {
                     return Request.CreateResponse(HttpStatusCode.NotFound);
                 }
             }
             catch (Exception e)
             {
+                //falha é trata aqui
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e.Message);
             }
         }
 
-        // POST api/user
-        public HttpResponseMessage Post([FromBody]User user)
+        // POST api/values
+        public HttpResponseMessage Post([FromBody] User user)
         {
             try
             {
-                if (user.Email == string.Empty || user.Password == string.Empty)
-                {
-                    throw new ApplicationException("Por favor preencha os campos corretamente");
-                }
-
-                Contexto userContext = new Contexto();
-                userContext.Users.Add(user);
-                userContext.SaveChanges();
-                return Request.CreateResponse(HttpStatusCode.OK, user.Id);
+                Guid id = Inserir(user);
+                return Request.CreateResponse(HttpStatusCode.OK, id);
             }
             catch (ApplicationException e)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.BadRequest, e.Message);
             }
-
-        }
-
-        // PUT api/user/5
-        [HttpPut]
-        public HttpResponseMessage Put(String id, [FromBody]User userBody)
-        {
-            Guid guidId;
-            guidId = Guid.Parse(id);
-            Contexto userContext = new Contexto();
-
-            try
-            {
-                User userFind = userContext.Users.Find(guidId);
-                if (!(userFind == null))
-                {
-                    userFind.Code = userBody.Code == 0 ? userFind.Code : userBody.Code;
-                    userFind.Name = userBody.Name== null ? userFind.Name : userBody.Name;
-                    userFind.LastName = userBody.LastName == null ? userFind.LastName : userBody.LastName;
-                    userFind.Email = userBody.Email == null ? userFind.Email : userBody.Email;
-                    userFind.Password = userBody.Password == null ? userFind.Password : userBody.Password;
-                    userContext.SaveChanges();
-
-
-                    return Request.CreateResponse(HttpStatusCode.OK, guidId);
-                }
-                else
-                {
-                    return Request.CreateResponse(HttpStatusCode.NotFound);
-                }
-                
-            }
             catch (Exception e)
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e.Message);
             }
         }
 
-        // DELETE api/user/5
-        public HttpResponseMessage Delete(String id)
+        private Guid Inserir(User user)
         {
-            Guid guidId;
-            guidId = Guid.Parse(id);
+            UserRepository userRepository = new UserRepository();
+            UserAplicacao userAplicacao = new UserAplicacao(userRepository);
 
-            Contexto userContext = new Contexto();
+            //Adapter
+            ClimaAvi.Dominio.Entidades.User userDominio = new ClimaAvi.Dominio.Entidades.User()
+            {
+                Id = Guid.Empty,
+                Codigo = user.Codigo,
+                Name = user.Name,
+                LastName = user.LastName,
+                Email = user.Email,
+                Password = user.Password
+            };
 
+            var id = userAplicacao.CadastrarUser(userDominio);
+
+            return id;
+
+        }
+
+        // PUT api/values/5
+        public HttpResponseMessage Put(Guid id, [FromBody] User user)
+        {
             try
             {
-                User userFind = userContext.Users.Find(guidId);
-                if (!(userFind == null))
+                var busca = Procurar(id);
+                if (busca != null)
                 {
-                    userContext.Users.Remove(userFind);
-                    userContext.SaveChanges();
-                    return Request.CreateResponse(HttpStatusCode.OK, guidId);
+                    Guid id_user = Alterar(user);
+                    return Request.CreateResponse(HttpStatusCode.OK, id_user);
                 }
                 else
                 {
@@ -125,6 +128,66 @@ namespace ClimaAviAPI.Controllers
             {
                 return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e.Message);
             }
+        }
+
+        private Guid Alterar(User user)
+        {
+            UserRepository userRepository = new UserRepository();
+            UserAplicacao userAplicacao = new UserAplicacao(userRepository);
+
+            //Adapter
+            ClimaAvi.Dominio.Entidades.User userDominio = new ClimaAvi.Dominio.Entidades.User()
+            {
+                Id = Guid.Empty,
+                Codigo = user.Codigo,
+                Name = user.Name,
+                LastName = user.LastName,
+                Email = user.Email,
+                Password = user.Password,
+            };
+
+            var id = userAplicacao.CadastrarUser(userDominio);
+
+            return id;
+        }
+
+        private User Procurar(Guid id_user)
+        {
+            UserRepository userRepository = new UserRepository();
+            UserAplicacao userAplicacao = new UserAplicacao(userRepository);
+
+            var user = userAplicacao.Selecionar(id_user);
+             
+            return new User()
+            {
+                Id = Guid.Empty,
+                Codigo = user.Codigo,
+                Name = user.Name,
+                LastName = user.LastName,
+                Email = user.Email,
+                Password = user.Password,
+            };
+        }
+
+        // DELETE api/values/5
+        public HttpResponseMessage Delete(Guid id)
+        {
+            try
+            {
+                Excluir(id);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch (Exception e)
+            {
+                return Request.CreateErrorResponse(HttpStatusCode.InternalServerError, e.Message);
+            }
+        }
+
+        private void Excluir(Guid id_user)
+        {
+            UserRepository userRepository = new UserRepository();
+            UserAplicacao userAplicacao = new UserAplicacao(userRepository);
+            userAplicacao.Excluir(id_user);
         }
     }
 }

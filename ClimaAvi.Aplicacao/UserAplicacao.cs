@@ -17,7 +17,7 @@ namespace ClimaAvi.Aplicacao
             this.userRepository = userRepository;
         }
 
-        public Guid CadastrarProduto(User user)
+        public Guid CadastrarUser(User user)
         {
             if (string.IsNullOrEmpty(user.Email))
             {

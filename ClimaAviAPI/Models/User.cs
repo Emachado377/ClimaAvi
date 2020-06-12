@@ -5,8 +5,8 @@ namespace ClimaAvi.Models
 {
     public class User
     {
-        public Guid Id { get; }
-        public int Code { get; set; }
+        public Guid Id { get; set; }
+        public int Codigo { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
@@ -17,9 +17,9 @@ namespace ClimaAvi.Models
             Id = Guid.NewGuid();
         }
 
-        public User(int code, string name, string lastName, string email, string password)
+        public User(int codigo, string name, string lastName, string email, string password)
         {
-            Code = code;
+            Codigo = codigo;
             Name = name;
             LastName = lastName;
             Email = email;

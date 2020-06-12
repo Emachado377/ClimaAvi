@@ -11,7 +11,7 @@ namespace ClimaAvi.Dominio.Entidades
         public Guid Id { get; set; }
 
         [Display(Name = "Codigo")]
-        public int Code { get; set; }
+        public int Codigo { get; set; }
 
         [Display(Name = "Nome")]
         public string Name { get; set; }
@@ -24,16 +24,16 @@ namespace ClimaAvi.Dominio.Entidades
 
         [Display(Name = "Senha")]
         public string Password { get; set; }
-
+       
 
         public User()
         {
             Id = Guid.NewGuid();
         }
 
-        public User(int code, string name, string lastName, string email, string password)
+        public User(int codigo, string name, string lastName, string email, string password)
         {
-            Code = code;
+            Codigo = codigo;
             Name = name;
             LastName = lastName;
             Email = email;
