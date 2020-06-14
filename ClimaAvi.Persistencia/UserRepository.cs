@@ -16,7 +16,7 @@ namespace ClimaAvi.Persistencia
 
         public UserRepository()
         {
-            this.strConexao = "Server=localhost;Port=44313; Database=Db_ClimaAvi; User Id=postgres; Password=81544744";
+            this.strConexao = "Server=localhost;Port=5432;Database=ClimaAVI;User Id=Ruan;Password=root";
 
         }
 
@@ -33,7 +33,7 @@ namespace ClimaAvi.Persistencia
                         NpgsqlCommand comando = new NpgsqlCommand();
                         comando.Connection = con;
                         comando.Transaction = transacao;
-                        comando.CommandText = @"update Usuarios set codigo=@codigo, Name=@Nome, LastName=@Sobrenome, Email@Email, Password=@Senha where id=@id";
+                        comando.CommandText = @"update usuarios set Codigo=@Codigo, Name=@Nome, LastName=@Sobrenome, Email@Email, Password=@Senha where id=@id";
                         comando.Parameters.AddWithValue("Codigo", user.Codigo);
                         comando.Parameters.AddWithValue("Nome", user.Name);
                         comando.Parameters.AddWithValue("Sobrenome", user.LastName);
@@ -66,7 +66,7 @@ namespace ClimaAvi.Persistencia
                         NpgsqlCommand comando = new NpgsqlCommand();
                         comando.Connection = con;
                         comando.Transaction = transacao;
-                        comando.CommandText = @"delete from Usuarios where id=@id";
+                        comando.CommandText = @"delete from usuarios where id=@id";
                         comando.Parameters.AddWithValue("id", id);
                         comando.ExecuteNonQuery();
                         transacao.Commit();
@@ -93,7 +93,7 @@ namespace ClimaAvi.Persistencia
                         NpgsqlCommand comando = new NpgsqlCommand();
                         comando.Connection = con;
                         comando.Transaction = transacao;
-                        comando.CommandText = @"insert into Usuarios (id, codigo, Nome, Sobrenome, Email, Senha) values (@id, @codigo, @Name, @LastName, @Email, @Password)";
+                        comando.CommandText = @"insert into usuarios (id, codigo, Nome, Sobrenome, Email, Senha) values (@id, @codigo, @Name, @LastName, @Email, @Password)";
                         comando.Parameters.AddWithValue("Codigo", user.Codigo);
                         comando.Parameters.AddWithValue("Nome", user.Name);
                         comando.Parameters.AddWithValue("Sobrenome", user.LastName);
@@ -123,7 +123,7 @@ namespace ClimaAvi.Persistencia
                 con.Open();
                 NpgsqlCommand comando = new NpgsqlCommand();
                 comando.Connection = con;
-                comando.CommandText = "select * from Usuarios where id=@id";
+                comando.CommandText = "select * from usuarios where id=@id";
                 comando.Parameters.AddWithValue("id", id);
                 NpgsqlDataReader leitor = comando.ExecuteReader();
                 while (leitor.Read())
@@ -148,7 +148,7 @@ namespace ClimaAvi.Persistencia
                 con.Open();
                 NpgsqlCommand comando = new NpgsqlCommand();
                 comando.Connection = con;
-                comando.CommandText = "select * from Usuario";
+                comando.CommandText = "select * from usuarios";
                 NpgsqlDataReader leitor = comando.ExecuteReader();
                 while (leitor.Read())
                 {

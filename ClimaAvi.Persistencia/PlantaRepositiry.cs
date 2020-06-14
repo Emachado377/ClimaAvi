@@ -18,48 +18,26 @@ namespace ClimaAvi.Persistencia
 
         public void Excluir(Guid id)
         {
-            try
-            {
-                Contexto db = new Contexto();
-                Planta plt = db.Plantas.Find(id);
-                db.Plantas.Remove(plt);
-                db.SaveChanges();
-            }
-            catch (DataException)
-            {
-                throw new NotImplementedException();
-            }
+            
         }
 
         public Guid Inserir(Planta planta)
         {
-            try
-            {
-                Contexto db = new Contexto();
-                db.Plantas.Add(planta);
-                db.SaveChanges();
-            }
-            catch (DataException)
-            {
-                throw new NotImplementedException();
-
-            }
+           
             return planta.Id;
 
         }
 
         public Planta Selecionar(Guid id)
         {
-           Contexto db = new Contexto();
-           Planta plt =  db.Plantas.Find(id);
-           return plt;
+            Planta planta = new Planta();
+
+           return planta;
         }
 
         public List<Planta> SelecionarTodos()
         {
-           Contexto db = new Contexto();
-           List<Planta> plts = db.Plantas.ToList();
-          // Precisa ser tratada essa Informação ???
+            List<Planta> plts = null;
             return plts;
         }
     }

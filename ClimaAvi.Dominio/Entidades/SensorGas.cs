@@ -7,10 +7,10 @@ namespace ClimaAvi.Dominio.Entidades
     {
         [Key]
         public Guid Id { get; set; }
-        public float Metano { get; set; }
-        public float Propeno { get; set; }
-        public float Hidrogenio { get; set; }
-        public float Fumaca { get; set; }
+        public Decimal Metano { get; set; }
+        public Decimal Propeno { get; set; }
+        public Decimal Hidrogenio { get; set; }
+        public Decimal Fumaca { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd hh:mm:ss}", ApplyFormatInEditMode = true)]
@@ -21,7 +21,7 @@ namespace ClimaAvi.Dominio.Entidades
         {
         }
 
-        public SensorGas(float metano, float propeno, float hidrogenio, float fumaca, DateTime leituraGas, string macHostGas)
+        public SensorGas(Decimal metano, Decimal propeno, Decimal hidrogenio, Decimal fumaca, DateTime leituraGas, string macHostGas)
         {
             Metano = metano;
             Propeno = propeno;

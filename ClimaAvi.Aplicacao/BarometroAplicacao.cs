@@ -18,22 +18,12 @@ namespace ClimaAvi.Aplicacao
             this.barometroRepository = barometroRepository;
         }
 
-        public Guid Cadastrarbarometro(Barometro barometro)
+        public Guid CadastrarBarometro(Barometro barometro)
         {
-            if (true)
-            {
-                // Validar AQUI se o formato recebido da data e hora são validos e se a entrada não é null
-            }
 
-            if (this.barometroRepository.Selecionar(barometro.Id) == null)
-            {
-                barometro.Id = Guid.NewGuid();
-                return this.barometroRepository.Inserir(barometro);
-            }
-            else
-            {
-                return this.barometroRepository.Alterar(barometro);
-            }
+            barometro.Id = Guid.NewGuid();
+            return this.barometroRepository.Inserir(barometro);
+
         }
 
         public void Excluir(Guid id)

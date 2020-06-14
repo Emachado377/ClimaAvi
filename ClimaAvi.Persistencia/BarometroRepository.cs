@@ -1,5 +1,6 @@
 ﻿using ClimaAvi.Dominio.Entidades;
 using ClimaAvi.Dominio.Interfaces;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,13 @@ namespace ClimaAvi.Persistencia
 {
     public class BarometroRepository : IBarometroRepository
     {
+        private string strConexao;
+
+        public BarometroRepository()
+        {
+            this.strConexao = "Server=localhost;Port=5432;Database=ClimaAVI;User Id=Ruan;Password=root";
+
+        }
         public Guid Alterar(Barometro barometro)
         {
             throw new NotImplementedException();
@@ -17,12 +25,64 @@ namespace ClimaAvi.Persistencia
 
         public void Excluir(Guid id)
         {
-            throw new NotImplementedException();
+            using (NpgsqlConnection con = new NpgsqlConnection(this.strConexao))
+            {
+                con.Open();
+                using (var transacao = con.BeginTransaction())
+                {
+                    try
+                    {
+                        NpgsqlCommand comando = new NpgsqlCommand();
+                        comando.Connection = con;
+                        comando.Transaction = transacao;
+                        comando.CommandText = @"delete from barometro where machostbarometro = (select machostbarometro from barometro where id = @id)";
+                        comando.Parameters.AddWithValue("@id", id);
+                        comando.ExecuteNonQuery();
+                        transacao.Commit();
+                        con.Close();
+                    }
+                    catch (NpgsqlException e)
+                    {
+                        transacao.Rollback();
+                        throw e;
+                    }
+                }
+            }
         }
 
         public Guid Inserir(Barometro barometro)
         {
-            throw new NotImplementedException();
+            using (NpgsqlConnection con = new NpgsqlConnection(this.strConexao))
+            {
+                con.Open();
+                using (var transacao = con.BeginTransaction())
+                {
+                    try
+                    {
+                        NpgsqlCommand comando = new NpgsqlCommand();
+                        comando.Connection = con;
+                        comando.Transaction = transacao;
+                        comando.CommandText = @"insert into barometro (id, altitude, temperatura, pressaoatmosferica, umidadear, leiturabarometro,machostbarometro) values (@id, @altitude,@temperatura, @pressaoatmosferica, @umidadear, @leiturabarometro, @machostbarometro)";
+                        comando.Parameters.AddWithValue("@altitude", barometro.Altitude);
+                        comando.Parameters.AddWithValue("@temperatura", barometro.Temperatura);
+                        comando.Parameters.AddWithValue("@pressaoatmosferica", barometro.PressaoAtmosferica);
+                        comando.Parameters.AddWithValue("@umidadear", barometro.UmidadeAr);
+                        comando.Parameters.AddWithValue("@leiturabarometro", barometro.LeituraBarometro);
+                        comando.Parameters.AddWithValue("@machostbarometro", barometro.MacHostBarometro);
+                        comando.Parameters.AddWithValue("@id", barometro.Id);
+                        comando.ExecuteNonQuery();
+                        transacao.Commit();
+                        con.Close();
+
+                        return barometro.Id;
+                    }
+                    catch (NpgsqlException e)
+                    {
+                        transacao.Rollback();
+                        throw e;
+                    }
+                }
+            }
         }
 
         public Barometro Selecionar(Guid id)
@@ -32,7 +92,29 @@ namespace ClimaAvi.Persistencia
 
         public List<Barometro> SelecionarTodos()
         {
-            throw new NotImplementedException();
+            List<Barometro> dados = new List<Barometro>();
+            using (NpgsqlConnection con = new NpgsqlConnection(this.strConexao))
+            {
+                con.Open();
+                NpgsqlCommand comando = new NpgsqlCommand();
+                comando.Connection = con;
+                comando.CommandText = "select * from barometro";
+                NpgsqlDataReader leitor = comando.ExecuteReader();
+                while (leitor.Read())
+                {
+                    dados.Add(new Barometro()
+                    {
+                        Id = Guid.Parse(leitor["id"].ToString()),
+                        Altitude = Convert.ToDecimal(leitor["altitude"].ToString()),
+                        Temperatura = Convert.ToDecimal(leitor["temperatura"].ToString()),
+                        PressaoAtmosferica = Convert.ToDecimal(leitor["pressaoatmosferica"].ToString()),
+                        UmidadeAr = Convert.ToDecimal(leitor["umidadear"].ToString()),
+                        LeituraBarometro = Convert.ToDateTime(leitor["leiturabarometro"].ToString()),
+                        MacHostBarometro = leitor["machostbarometro"].ToString(),
+                    });
+                }
+            }
+            return dados;
         }
     }
 }

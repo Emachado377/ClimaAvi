@@ -7,13 +7,13 @@ namespace ClimaAvi.Dominio.Entidades
     {
         [Key]
         public Guid Id { get; set; }
-        public float Altitude { get; set; }
-        public float Temperatura { get; set; }
-        public float PressaoAtmosferica { get; set; }
-        public float UmidadeAr { get; set; }
+        public Decimal Altitude { get; set; }
+        public Decimal Temperatura { get; set; }
+        public Decimal PressaoAtmosferica { get; set; }
+        public Decimal UmidadeAr { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:MM:SS}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd hh:mm:ss}", ApplyFormatInEditMode = true)]
         public DateTime LeituraBarometro { get; set; }
         public string MacHostBarometro { get; set; }
 
@@ -21,7 +21,7 @@ namespace ClimaAvi.Dominio.Entidades
         {
         }
 
-        public Barometro(float altitude, float temperatura, float pressaoAtmosferica, float umidadeAr, DateTime leituraBarometro, string macHostBarometro)
+        public Barometro(Decimal altitude, Decimal temperatura, Decimal pressaoAtmosferica, Decimal umidadeAr, DateTime leituraBarometro, string macHostBarometro)
         {
             Altitude = altitude;
             Temperatura = temperatura;
