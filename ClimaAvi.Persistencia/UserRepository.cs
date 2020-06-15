@@ -16,7 +16,8 @@ namespace ClimaAvi.Persistencia
 
         public UserRepository()
         {
-            this.strConexao = "Server=localhost;Port=5432;Database=ClimaAVI;User Id=Ruan;Password=root";
+            this.strConexao = "Server =localhost; Port =5432; Database =Db_ClimaAvi; User Id =postgres; Password =81544744";
+            //this.strConexao = "Server=localhost;Port=5432;Database=ClimaAVI;User Id=Ruan;Password=root";
 
         }
 
@@ -33,12 +34,12 @@ namespace ClimaAvi.Persistencia
                         NpgsqlCommand comando = new NpgsqlCommand();
                         comando.Connection = con;
                         comando.Transaction = transacao;
-                        comando.CommandText = @"update usuarios set Codigo=@Codigo, Name=@Nome, LastName=@Sobrenome, Email@Email, Password=@Senha where id=@id";
-                        comando.Parameters.AddWithValue("Codigo", user.Codigo);
-                        comando.Parameters.AddWithValue("Nome", user.Name);
-                        comando.Parameters.AddWithValue("Sobrenome", user.LastName);
-                        comando.Parameters.AddWithValue("Email", user.Email);
-                        comando.Parameters.AddWithValue("Senha", user.Password);
+                        comando.CommandText = @"update usuarios set Codigo=@codigo, Name=@nome, LastName=@sobrenome, Email@email, password=@senha where id=@id";
+                        comando.Parameters.AddWithValue("codigo", user.Codigo);
+                        comando.Parameters.AddWithValue("nome", user.Name);
+                        comando.Parameters.AddWithValue("sobrenome", user.LastName);
+                        comando.Parameters.AddWithValue("email", user.Email);
+                        comando.Parameters.AddWithValue("senha", user.Password);
                         comando.Parameters.AddWithValue("id", user.Id);
                         comando.ExecuteNonQuery();
                         transacao.Commit();
@@ -93,12 +94,12 @@ namespace ClimaAvi.Persistencia
                         NpgsqlCommand comando = new NpgsqlCommand();
                         comando.Connection = con;
                         comando.Transaction = transacao;
-                        comando.CommandText = @"insert into usuarios (id, codigo, Nome, Sobrenome, Email, Senha) values (@id, @codigo, @Name, @LastName, @Email, @Password)";
-                        comando.Parameters.AddWithValue("Codigo", user.Codigo);
-                        comando.Parameters.AddWithValue("Nome", user.Name);
-                        comando.Parameters.AddWithValue("Sobrenome", user.LastName);
-                        comando.Parameters.AddWithValue("Email", user.Email);
-                        comando.Parameters.AddWithValue("Senha", user.Password);
+                        comando.CommandText = @"insert into usuarios (id, codigo, nome, sobrenome, email, senha) values (@id, @Codigo, @Name, @LastName, @Email, @Password)";
+                        comando.Parameters.AddWithValue("codigo", user.Codigo);
+                        comando.Parameters.AddWithValue("nome", user.Name);
+                        comando.Parameters.AddWithValue("sobrenome", user.LastName);
+                        comando.Parameters.AddWithValue("email", user.Email);
+                        comando.Parameters.AddWithValue("senha", user.Password);
                         comando.Parameters.AddWithValue("id", user.Id);
                         comando.ExecuteNonQuery();
                         transacao.Commit();

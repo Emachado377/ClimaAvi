@@ -15,6 +15,7 @@ namespace ClimaAvi.Persistencia
 
         public BarometroRepository()
         {
+            //this.strConexao = "Server =localhost; Port =5432; Database =Db_ClimaAvi; User Id =postgres; Password =81544744";
             this.strConexao = "Server=localhost;Port=5432;Database=ClimaAVI;User Id=Ruan;Password=root";
 
         }
