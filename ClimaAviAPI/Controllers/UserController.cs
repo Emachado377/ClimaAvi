@@ -41,17 +41,8 @@ namespace ClimaAviAPI.Controllers
         {
             try
             {
-                User user = new User()
-                {
-                    Id = Guid.NewGuid(),
-                    Codigo = 1,
-                    Name = "Nelson",
-                    LastName = "Machado",
-                    Email = "machado@gmail.com",
-                    Password = "11111"
-                };
-
-
+                var user = Procurar(id);
+               
                 if (user.Id == id)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, user);

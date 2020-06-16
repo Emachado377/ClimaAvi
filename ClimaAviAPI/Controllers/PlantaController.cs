@@ -44,8 +44,8 @@ namespace ClimaAviAPI.Controllers
 
             try
             {
-                var plt = plantaAplicacao.Selecionar(id);
-
+                var plt = Procurar(id);
+               
                 if (plt.Id == id)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, plt);
