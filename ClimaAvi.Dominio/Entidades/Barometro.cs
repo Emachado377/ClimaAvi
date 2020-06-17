@@ -10,10 +10,7 @@ namespace ClimaAvi.Dominio.Entidades
         public Decimal Altitude { get; set; }
         public Decimal Temperatura { get; set; }
         public Decimal PressaoAtmosferica { get; set; }
-        public Decimal UmidadeAr { get; set; }
-
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd hh:mm:ss}", ApplyFormatInEditMode = true)]
+        public Decimal UmidadeAr { get; set; }                    
         public DateTime LeituraBarometro { get; set; }
         public string MacHostBarometro { get; set; }
 

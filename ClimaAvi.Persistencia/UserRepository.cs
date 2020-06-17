@@ -16,7 +16,7 @@ namespace ClimaAvi.Persistencia
 
         public UserRepository()
         {
-            this.strConexao = "Server=localhost;Port=5432;Database=Db_ClimaAvi;User Id=postgres;Password=81544744";
+            this.strConexao = "Server=localhost;Port=5432;Database=ClimaAVI;User Id=postgres;Password=81544744";
             //this.strConexao = "Server=localhost;Port=5432;Database=ClimaAVI;User Id=Ruan;Password=root";
 
         }
@@ -95,12 +95,12 @@ namespace ClimaAvi.Persistencia
                         comando.Connection = con;
                         comando.Transaction = transacao;
                         comando.CommandText = @"insert into usuarios (id, codigo, nome, sobrenome, email, senha) values (@id, @Codigo, @Name, @LastName, @Email, @Password)";
+                        comando.Parameters.AddWithValue("id", user.Id);
                         comando.Parameters.AddWithValue("codigo", user.Codigo);
-                        comando.Parameters.AddWithValue("nome", user.Name);
+                        comando.Parameters.AddWithValue("name", user.Name);
                         comando.Parameters.AddWithValue("sobrenome", user.LastName);
                         comando.Parameters.AddWithValue("email", user.Email);
-                        comando.Parameters.AddWithValue("senha", user.Password);
-                        comando.Parameters.AddWithValue("id", user.Id);
+                        comando.Parameters.AddWithValue("senha", user.Password);                       
                         comando.ExecuteNonQuery();
                         transacao.Commit();
                         con.Close();
@@ -130,12 +130,13 @@ namespace ClimaAvi.Persistencia
                 while (leitor.Read())
                 {
                     user = new User();
+                    user.Id = Guid.Parse(leitor["id"].ToString());
                     user.Codigo = Convert.ToInt32(leitor["codigo"].ToString());
                     user.Name = leitor["nome"].ToString();
                     user.LastName = leitor["sobrenome"].ToString();
                     user.Email = leitor["email"].ToString();
                     user.Password = leitor["senha"].ToString();
-                    user.Id = Guid.Parse(leitor["id"].ToString());
+                   
                 }
             }
             return user;

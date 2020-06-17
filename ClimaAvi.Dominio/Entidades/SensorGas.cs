@@ -10,10 +10,7 @@ namespace ClimaAvi.Dominio.Entidades
         public Decimal Metano { get; set; }
         public Decimal Propeno { get; set; }
         public Decimal Hidrogenio { get; set; }
-        public Decimal Fumaca { get; set; }
-
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd hh:mm:ss}", ApplyFormatInEditMode = true)]
+        public Decimal Fumaca { get; set; }        
         public DateTime LeituraGas { get; set; }
         public string MacHostGas { get; set; }
 

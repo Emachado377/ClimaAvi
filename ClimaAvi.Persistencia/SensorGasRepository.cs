@@ -16,8 +16,9 @@ namespace ClimaAvi.Persistencia
 
         public SensorGasRepository()
         {
-            this.strConexao = "Server=localhost;Port=5432;Database=ClimaAVI;User Id=Ruan;Password=root";
-
+            this.strConexao = "Server=localhost;Port=5432;Database=ClimaAVI;User Id=postgres;Password=81544744";
+           // this.strConexao = "Server=localhost;Port=5432;Database=ClimaAVI;User Id=Ruan;Password=root";
+           
         }
         public Guid Alterar(SensorGas sensorGas)
         {

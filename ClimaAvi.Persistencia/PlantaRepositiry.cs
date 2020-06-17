@@ -16,7 +16,7 @@ namespace ClimaAvi.Persistencia
 
         public PlantaRepository()
         {
-            this.strConexao = "Server =localhost;Port =5432;Database=Db_ClimaAvi;User Id=postgres;Password =81544744";
+            this.strConexao = "Server=localhost;Port=5432;Database=ClimaAVI;User Id=postgres;Password=81544744";
             // this.strConexao = "Server=localhost;Port=5432;Database=ClimaAVI;User Id=Ruan;Password=root";
 
         }
@@ -33,10 +33,10 @@ namespace ClimaAvi.Persistencia
                         NpgsqlCommand comando = new NpgsqlCommand();
                         comando.Connection = con;
                         comando.Transaction = transacao;
-                        comando.CommandText = @"update plantas set codigoPlanta=@Codigoplanta, nomeplanta=@NomePlanta, localplanta=@LocalPlanta, machost@MacHost, where id=@id";
-                        comando.Parameters.AddWithValue("codigoplanta", planta.CodigoPlanta);
-                        comando.Parameters.AddWithValue("nomeplanta", planta.NomePlanta);
-                        comando.Parameters.AddWithValue("localplanta", planta.LocalPlanta);
+                        comando.CommandText = @"update plantas set codigo=@Codigoplanta, nome=@NomePlanta, local=@LocalPlanta, machost@MacHost, where id=@id";
+                        comando.Parameters.AddWithValue("codigo", planta.CodigoPlanta);
+                        comando.Parameters.AddWithValue("nome", planta.NomePlanta);
+                        comando.Parameters.AddWithValue("local", planta.LocalPlanta);
                         comando.Parameters.AddWithValue("machost", planta.MacHost);
                         comando.Parameters.AddWithValue("id", planta.Id);
                         comando.ExecuteNonQuery();
@@ -92,10 +92,10 @@ namespace ClimaAvi.Persistencia
                         NpgsqlCommand comando = new NpgsqlCommand();
                         comando.Connection = con;
                         comando.Transaction = transacao;
-                        comando.CommandText = @"insert into plantas (id, codigoplanta, nomeplanta, localplanta, machost) values (@id, @CodigoPlanta, @NomePlanta, @LocalPlanta, @MacHost)";
-                        comando.Parameters.AddWithValue("codigoplanta", planta.CodigoPlanta);
-                        comando.Parameters.AddWithValue("nomeplanta", planta.NomePlanta);
-                        comando.Parameters.AddWithValue("localplanta", planta.LocalPlanta);
+                        comando.CommandText = @"insert into plantas (id, codigo, nome, local, machost) values (@id, @CodigoPlanta, @NomePlanta, @LocalPlanta, @MacHost)";
+                        comando.Parameters.AddWithValue("codigo", planta.CodigoPlanta);
+                        comando.Parameters.AddWithValue("nome", planta.NomePlanta);
+                        comando.Parameters.AddWithValue("local", planta.LocalPlanta);
                         comando.Parameters.AddWithValue("machost", planta.MacHost);
                         comando.Parameters.AddWithValue("id", planta.Id);
                         comando.ExecuteNonQuery();
