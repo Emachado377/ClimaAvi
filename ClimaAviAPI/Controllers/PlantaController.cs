@@ -89,7 +89,7 @@ namespace ClimaAviAPI.Controllers
             //Adapter
             ClimaAvi.Dominio.Entidades.Planta plt_Dominio = new ClimaAvi.Dominio.Entidades.Planta()
             {
-                Id = planta.Id,
+                Id = Guid.Empty,
                 CodigoPlanta = planta.CodigoPlanta,
                 NomePlanta = planta.NomePlanta,
                 LocalPlanta = planta.LocalPlanta,

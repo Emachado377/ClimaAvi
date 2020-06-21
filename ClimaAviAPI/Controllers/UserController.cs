@@ -41,11 +41,11 @@ namespace ClimaAviAPI.Controllers
         {
             try
             {
-                var user = Procurar(id);
+                var urs = Procurar(id);
                
-                if (user.Id == id)
-                {
-                    return Request.CreateResponse(HttpStatusCode.OK, user);
+                if (urs.Id == id)
+                {                    
+                    return Request.CreateResponse(HttpStatusCode.OK, urs);
                 }
                 else
                 {
@@ -83,7 +83,7 @@ namespace ClimaAviAPI.Controllers
             UserAplicacao userAplicacao = new UserAplicacao(userRepository);
 
             //Adapter
-            ClimaAvi.Dominio.Entidades.User userDominio = new ClimaAvi.Dominio.Entidades.User()
+            ClimaAvi.Dominio.Entidades.User ursDominio = new ClimaAvi.Dominio.Entidades.User()
             {
                 Id = Guid.Empty,
                 Codigo = user.Codigo,
@@ -93,7 +93,7 @@ namespace ClimaAviAPI.Controllers
                 Password = user.Password
             };
 
-            var id = userAplicacao.CadastrarUser(userDominio);
+            var id = userAplicacao.CadastrarUser(ursDominio);
 
             return id;
 
@@ -127,9 +127,9 @@ namespace ClimaAviAPI.Controllers
             UserAplicacao userAplicacao = new UserAplicacao(userRepository);
 
             //Adapter
-            ClimaAvi.Dominio.Entidades.User userDominio = new ClimaAvi.Dominio.Entidades.User()
+            ClimaAvi.Dominio.Entidades.User ursDominio = new ClimaAvi.Dominio.Entidades.User()
             {
-                Id = Guid.Empty,
+                Id = user.Id,
                 Codigo = user.Codigo,
                 Name = user.Name,
                 LastName = user.LastName,
@@ -137,7 +137,7 @@ namespace ClimaAviAPI.Controllers
                 Password = user.Password,
             };
 
-            var id = userAplicacao.CadastrarUser(userDominio);
+            var id = userAplicacao.CadastrarUser(ursDominio);
 
             return id;
         }
@@ -147,16 +147,16 @@ namespace ClimaAviAPI.Controllers
             UserRepository userRepository = new UserRepository();
             UserAplicacao userAplicacao = new UserAplicacao(userRepository);
 
-            var user = userAplicacao.Selecionar(id_user);
+            var urs = userAplicacao.Selecionar(id_user);
              
             return new User()
             {
-                Id = Guid.Empty,
-                Codigo = user.Codigo,
-                Name = user.Name,
-                LastName = user.LastName,
-                Email = user.Email,
-                Password = user.Password,
+                Id = urs.Id,
+                Codigo = urs.Codigo,
+                Name = urs.Name,
+                LastName = urs.LastName,
+                Email = urs.Email,
+                Password = urs.Password,
             };
         }
 

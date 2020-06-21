@@ -33,10 +33,10 @@ namespace ClimaAvi.Persistencia
                         NpgsqlCommand comando = new NpgsqlCommand();
                         comando.Connection = con;
                         comando.Transaction = transacao;
-                        comando.CommandText = @"update plantas set codigo=@Codigoplanta, nome=@NomePlanta, local=@LocalPlanta, machost@MacHost, where id=@id";
-                        comando.Parameters.AddWithValue("codigo", planta.CodigoPlanta);
-                        comando.Parameters.AddWithValue("nome", planta.NomePlanta);
-                        comando.Parameters.AddWithValue("local", planta.LocalPlanta);
+                        comando.CommandText = @"update plantas set  codigo=@CodigoPlanta, nome=@NomePlanta, local=@LocalPlanta, machost=@MacHost where id=@id"; 
+                        comando.Parameters.AddWithValue("codigoPlanta", planta.CodigoPlanta);
+                        comando.Parameters.AddWithValue("nomePlanta", planta.NomePlanta);
+                        comando.Parameters.AddWithValue("localPlanta", planta.LocalPlanta);
                         comando.Parameters.AddWithValue("machost", planta.MacHost);
                         comando.Parameters.AddWithValue("id", planta.Id);
                         comando.ExecuteNonQuery();
@@ -92,10 +92,10 @@ namespace ClimaAvi.Persistencia
                         NpgsqlCommand comando = new NpgsqlCommand();
                         comando.Connection = con;
                         comando.Transaction = transacao;
-                        comando.CommandText = @"insert into plantas (id, codigo, nome, local, machost) values (@id, @CodigoPlanta, @NomePlanta, @LocalPlanta, @MacHost)";
-                        comando.Parameters.AddWithValue("codigo", planta.CodigoPlanta);
-                        comando.Parameters.AddWithValue("nome", planta.NomePlanta);
-                        comando.Parameters.AddWithValue("local", planta.LocalPlanta);
+                        comando.CommandText = @"insert into plantas(id, codigo, nome, local, machost) values (@id, @CodigoPlanta, @NomePlanta, @LocalPlanta, @MacHost)";
+                        comando.Parameters.AddWithValue("codigoPlanta", planta.CodigoPlanta);
+                        comando.Parameters.AddWithValue("nomePlanta", planta.NomePlanta);
+                        comando.Parameters.AddWithValue("localPlanta", planta.LocalPlanta);
                         comando.Parameters.AddWithValue("machost", planta.MacHost);
                         comando.Parameters.AddWithValue("id", planta.Id);
                         comando.ExecuteNonQuery();
@@ -127,9 +127,9 @@ namespace ClimaAvi.Persistencia
                 while (leitor.Read())
                 {
                     planta = new Planta();
-                    planta.CodigoPlanta = Convert.ToInt32(leitor["codigoplanta"].ToString());
-                    planta.NomePlanta = leitor["nomeplanta"].ToString();
-                    planta.LocalPlanta = leitor["localplanta"].ToString();
+                    planta.CodigoPlanta = Convert.ToInt32(leitor["codigo"].ToString());
+                    planta.NomePlanta = leitor["nome"].ToString();
+                    planta.LocalPlanta = leitor["local"].ToString();
                     planta.MacHost = leitor["machost"].ToString();
                     planta.Id = Guid.Parse(leitor["id"].ToString());
                 }
@@ -152,9 +152,9 @@ namespace ClimaAvi.Persistencia
                     plantas.Add(new Planta()
                     {
                         Id = Guid.Parse(leitor["id"].ToString()),
-                        CodigoPlanta = Convert.ToInt32(leitor["nomeplanta"].ToString()),
-                        NomePlanta = leitor["nomeplanta"].ToString(),
-                        LocalPlanta = leitor["localplanta"].ToString(),
+                        CodigoPlanta = Convert.ToInt32(leitor["codigo"].ToString()),
+                        NomePlanta = leitor["nome"].ToString(),
+                        LocalPlanta = leitor["local"].ToString(),
                         MacHost = leitor["machost"].ToString(),
                     });
                 }
