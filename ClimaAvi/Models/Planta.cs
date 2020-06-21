@@ -5,7 +5,7 @@ namespace ClimaAvi.Models
 {
     public class Planta
     {
-        public Guid Id { get; }
+        public Guid Id { get; set; }
 
         [Display(Name = "Codigo")]
         [Range(minimum: 1, maximum: 50, ErrorMessage = "Codigo deve ser entre 1 e 50")]
@@ -31,12 +31,12 @@ namespace ClimaAvi.Models
             Id = Guid.NewGuid();
         }
 
-        public Planta(int codigoPlanta, string nomePlanta, string localPlanta, string macPlanta)
+        public Planta(int codigoPlanta, string nomePlanta, string localPlanta, string macHost)
         {
             CodigoPlanta = codigoPlanta;
             NomePlanta = nomePlanta;
             LocalPlanta = localPlanta;
-            MacHost = macPlanta;
+            MacHost = macHost;
         }
     }
 }

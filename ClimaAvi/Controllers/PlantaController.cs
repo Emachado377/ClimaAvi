@@ -14,18 +14,15 @@ namespace ClimaAvi.Controllers
         public ActionResult Index()
         {
             List<Planta> listPlanta = new List<Planta>();
-            //listPlanta = (List<Planta>)Session["planta"];
-
             APIHttpClient client = new APIHttpClient("https://localhost:44313/api/");
             listPlanta = client.Get<List<Planta>>("planta");
-
             ViewBag.listPlanta = listPlanta;
             return View(listPlanta);
         }
+
         public ActionResult Adicionar()
         {
             Planta planta = new Planta();
-
             return View(planta);
         }
 
@@ -35,52 +32,48 @@ namespace ClimaAvi.Controllers
             if (ModelState.IsValid == false)
             {
                 return View("Adicionar", planta);
-
             }
             else
             {
-                List<Planta> listaPlanta = new List<Planta>();
-                //listaPlanta = (List<Planta>)Session["planta"];
-
                 APIHttpClient client = new APIHttpClient("https://localhost:44313/api/");
-                listaPlanta = client.Get<List<Planta>>("planta");
+                var plantas = client.Get<List<Planta>>("planta");
 
-                foreach (var busca in listaPlanta)
+                foreach (var busca in plantas)
                 {
                     if ((String.Equals(busca.CodigoPlanta, planta.CodigoPlanta) || (String.Equals(busca.NomePlanta, planta.NomePlanta))))
                     {
                         ModelState.AddModelError("planta.ok", "NOME OU CODIGO JÁ EXISTE!");
-                       
+
                         return View("Adicionar", planta);
                     }
                 }
-                listaPlanta.Add(planta);
-                Session["planta"] = listaPlanta;
+                var id = client.Post<Planta>("planta", planta);
 
                 return RedirectToAction("Index", "Home");
             }
         }
-        public ActionResult Alterar(Guid Id)
+        public ActionResult Alterar(Guid Id)// Editar
         {
-            Planta planta = null;
-            if (Session["planta"] != null)
+            List<Planta> plantas;
+            Planta plt = null;           
+            APIHttpClient client = new APIHttpClient("https://localhost:44313/api/");
+            plantas = client.Get<List<Planta>>("planta");
+
+           foreach (var busca in plantas)
             {
-                var itens = (List<Models.Planta>)Session["planta"];
-                planta = itens.Where(c => c.Id == Id).FirstOrDefault();
-                itens.Remove(planta);
+                if (busca.Id == Id)
+                {                           
+                  plt = busca;
+                }
             }
-            return View("Adicionar", planta);
+            return View("Adicionar", plt);
         }  
         
         public ActionResult Excluir(Guid Id)
-        {
-            Planta planta = null;
-            if (Session["planta"] != null)
-            {
-                var itens = (List<Models.Planta>)Session["planta"];
-                planta = itens.Where(c => c.Id == Id).FirstOrDefault();
-                itens.Remove(planta);
-            }
+        {           
+            APIHttpClient client = new APIHttpClient("https://localhost:44313/api/");
+            client.Delete<List<Planta>>("planta", Id);
+                       
             return RedirectToAction("Index", "Home");
 
         }

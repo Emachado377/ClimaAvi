@@ -38,8 +38,7 @@ namespace ClimaAvi.Controllers
         {
             
             List<User> users;
-            //users = (List<User>)Session["users"]; // atribuindo a sessão com um casting forçado
-
+            
             APIHttpClient client = new APIHttpClient("https://localhost:44313/api/");
             users = client.Get<List<User>>("User");
 
@@ -69,12 +68,9 @@ namespace ClimaAvi.Controllers
             }
             else
             {
-                List<User> users = new List<User>();
-
-                //users = (List<User>)Session["users"]; // atribuindo a sessão com um casting forçado
-
-                APIHttpClient client = new APIHttpClient("https://localhost:44313/api/");
-                users = client.Get<List<User>>("user");
+                
+               APIHttpClient client = new APIHttpClient("https://localhost:44313/api/");
+               var users = client.Get<List<User>>("user");
 
 
                 foreach (var busca in users)
@@ -86,12 +82,8 @@ namespace ClimaAvi.Controllers
                     }
 
                 }
-                users.Add(userTemp); // Adicionamos os dados informados do novo usuario na lista users
-
-                //Session["users"] = users;  // atribuimos a lista atualizada de usuários para a sessão, Global.asax 
-
-                APIHttpClient client_1 = new APIHttpClient("https://localhost:44313/api/");
-                var id = client_1.Post<User>("user", users);
+                
+                client.Post<User>("user", userTemp);
 
                 return RedirectToAction("Index", "Usuario");    // Como atualizar a lista de usuários na tela de Login?               
             }

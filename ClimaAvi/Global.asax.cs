@@ -21,7 +21,7 @@ namespace ClimaAvi
 
             User user1 = new User()
             {
-                Code = 1,
+                Codigo = 1,
                 Name = "Evandro",
                 Email = "evandro@gmail.com",
                 LastName = "Machado",
@@ -30,7 +30,7 @@ namespace ClimaAvi
 
             User user2 = new User()
             {
-                Code = 1,
+                Codigo = 1,
                 Name = "Ruan",
                 Email = "ruan@gmail.com",
                 LastName = "Ferreira",

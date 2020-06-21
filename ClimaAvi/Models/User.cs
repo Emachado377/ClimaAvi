@@ -5,10 +5,10 @@ namespace ClimaAvi.Models
 {
     public class User
     {
-        public Guid Id { get; }
+        public Guid Id { get; set; }
         [Display(Name = "Codigo")]
         [Range(minimum: 0, maximum: 50, ErrorMessage = "Codigo deve ser entre 0 e 50")]
-        public int Code { get; set; }
+        public int Codigo { get; set; }
 
         [Display(Name = "Nome")]
         [Required(ErrorMessage = "Campo Nome deve ser preenchido")]
@@ -34,9 +34,9 @@ namespace ClimaAvi.Models
             Id = Guid.NewGuid();
         }
 
-        public User(int code, string name, string lastName, string email, string password)
+        public User(int codigo, string name, string lastName, string email, string password)
         {
-            Code = code;
+            Codigo = codigo;
             Name = name;
             LastName = lastName;
             Email = email;
