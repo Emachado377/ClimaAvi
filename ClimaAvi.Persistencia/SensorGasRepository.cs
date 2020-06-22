@@ -16,8 +16,8 @@ namespace ClimaAvi.Persistencia
 
         public SensorGasRepository()
         {
-            this.strConexao = "Server=localhost;Port=5432;Database=ClimaAVI;User Id=postgres;Password=81544744";
-           // this.strConexao = "Server=localhost;Port=5432;Database=ClimaAVI;User Id=Ruan;Password=root";
+            //this.strConexao = "Server=localhost;Port=5432;Database=ClimaAVI;User Id=postgres;Password=81544744";
+            this.strConexao = "Server=localhost;Port=5432;Database=ClimaAVI;User Id=Ruan;Password=root";
            
         }
         public Guid Alterar(SensorGas sensorGas)
@@ -37,7 +37,7 @@ namespace ClimaAvi.Persistencia
                         NpgsqlCommand comando = new NpgsqlCommand();
                         comando.Connection = con;
                         comando.Transaction = transacao;
-                        comando.CommandText = @"delete from sensorgas where MacHostGas = (select MacHostGas from sensorgas where id = @id)";
+                        comando.CommandText = @"delete from sensorgas where MacHost = (select MacHost from sensorgas where id = @id)";
                         comando.Parameters.AddWithValue("@id", id);
                         comando.ExecuteNonQuery();
                         transacao.Commit();
@@ -64,7 +64,7 @@ namespace ClimaAvi.Persistencia
                         NpgsqlCommand comando = new NpgsqlCommand();
                         comando.Connection = con;
                         comando.Transaction = transacao;
-                        comando.CommandText = @"insert into sensorgas (id, Metano, Propeno, Hidrogenio, Fumaca, LeituraGas,MacHostGas) values (@id, @Metano, @Propeno, @Hidrogenio, @Fumaca, @LeituraGas,@MacHostGas)";
+                        comando.CommandText = @"insert into sensorgas (id, Metano, Propeno, Hidrogenio, Fumaca, Leitura,MacHost) values (@id, @Metano, @Propeno, @Hidrogenio, @Fumaca, @LeituraGas,@MacHostGas)";
                         comando.Parameters.AddWithValue("@Metano", sensorGas.Metano);
                         comando.Parameters.AddWithValue("@Propeno", sensorGas.Propeno);
                         comando.Parameters.AddWithValue("@Hidrogenio", sensorGas.Hidrogenio);
@@ -89,10 +89,32 @@ namespace ClimaAvi.Persistencia
 
         public SensorGas Selecionar(Guid id)
         {
-            throw new NotImplementedException();
+            SensorGas sensorGas = null;
+            using (NpgsqlConnection con = new NpgsqlConnection(this.strConexao))
+            {
+                con.Open();
+                NpgsqlCommand comando = new NpgsqlCommand();
+                comando.Connection = con;
+                comando.CommandText = "select * from sensorgas where machost = (select machost from plantas where id = @id) ORDER BY leitura DESC LIMIT 1";
+                comando.Parameters.AddWithValue("id", id);
+                NpgsqlDataReader leitor = comando.ExecuteReader();
+                while (leitor.Read())
+                {
+                    sensorGas = new SensorGas();
+                    sensorGas.Id = Guid.Parse(leitor["id"].ToString());
+                    sensorGas.Metano = Convert.ToDecimal(leitor["Metano"].ToString());
+                    sensorGas.Propeno = Convert.ToDecimal(leitor["Propeno"].ToString());
+                    sensorGas.Hidrogenio = Convert.ToDecimal(leitor["Hidrogenio"].ToString());
+                    sensorGas.Fumaca = Convert.ToDecimal(leitor["Fumaca"].ToString());
+                    sensorGas.LeituraGas = Convert.ToDateTime(leitor["Leitura"].ToString());
+                    sensorGas.MacHostGas = leitor["machost"].ToString();
+
+                }
+            }
+            return sensorGas;
         }
 
-        public List<SensorGas> SelecionarTodos()
+        public List<SensorGas> SelecionarTodos(Guid id)
         {
             List<SensorGas> dados = new List<SensorGas>();
             using (NpgsqlConnection con = new NpgsqlConnection(this.strConexao))
@@ -100,7 +122,9 @@ namespace ClimaAvi.Persistencia
                 con.Open();
                 NpgsqlCommand comando = new NpgsqlCommand();
                 comando.Connection = con;
-                comando.CommandText = "select * from sensorgas";
+                comando.CommandText = "select * from sensorgas where machost = (select machost from plantas where id = @id)";
+                comando.Parameters.AddWithValue("@id", id);
+                comando.ExecuteNonQuery();
                 NpgsqlDataReader leitor = comando.ExecuteReader();
                 while (leitor.Read())
                 {
@@ -111,8 +135,8 @@ namespace ClimaAvi.Persistencia
                         Propeno = Convert.ToDecimal(leitor["Propeno"].ToString()),
                         Hidrogenio = Convert.ToDecimal(leitor["Hidrogenio"].ToString()),
                         Fumaca = Convert.ToDecimal(leitor["Fumaca"].ToString()),
-                        LeituraGas = Convert.ToDateTime(leitor["LeituraGas"].ToString()),
-                        MacHostGas = leitor["MacHostGas"].ToString(),
+                        LeituraGas = Convert.ToDateTime(leitor["Leitura"].ToString()),
+                        MacHostGas = leitor["MacHost"].ToString(),
                     });
                 }
             }

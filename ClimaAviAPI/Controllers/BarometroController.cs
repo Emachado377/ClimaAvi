@@ -16,40 +16,49 @@ namespace ClimaAviAPI.Controllers
 {
     public class BarometroController : ApiController
     {
-
         // GET api/barometro
-        public HttpResponseMessage Get()
+        public HttpResponseMessage Get(Guid id, Boolean single)
         {
             BarometroRepository barometroRepository = new BarometroRepository();
             BarometroAplicacao barometroAplicacao = new BarometroAplicacao(barometroRepository);
             List<Barometro> dados = new List<Barometro>();
 
-            var urs = barometroAplicacao.SelecionarTodos();
+            if (single) {
+                var urs = barometroAplicacao.Selecionar(id);
 
-            foreach (var busca in urs)
-            {
-                dados.Add(new Barometro()
+                 var temp = new Barometro()
                 {
-                    Id = busca.Id,
-                    Altitude = busca.Altitude,
-                    Temperatura = busca.Temperatura,
-                    PressaoAtmosferica = busca.PressaoAtmosferica,
-                    UmidadeAr = busca.UmidadeAr,
-                    LeituraBarometro = busca.LeituraBarometro,
-                    MacHostBarometro = busca.MacHostBarometro,
-                });
+                     Id = urs.Id,
+                     Altitude = urs.Altitude,
+                     Temperatura = urs.Temperatura,
+                     PressaoAtmosferica = urs.PressaoAtmosferica,
+                     UmidadeAr = urs.UmidadeAr,
+                     LeituraBarometro = urs.LeituraBarometro,
+                     MacHostBarometro = urs.MacHostBarometro,
+                 };
+                return Request.CreateResponse(HttpStatusCode.OK, temp);
             }
-            return Request.CreateResponse(HttpStatusCode.OK, dados);
+            else {
+                var urs = barometroAplicacao.SelecionarTodos(id);
+
+                foreach (var busca in urs)
+                {
+                    dados.Add(new Barometro()
+                    {
+                        Id = busca.Id,
+                        Altitude = busca.Altitude,
+                        Temperatura = busca.Temperatura,
+                        PressaoAtmosferica = busca.PressaoAtmosferica,
+                        UmidadeAr = busca.UmidadeAr,
+                        LeituraBarometro = busca.LeituraBarometro,
+                        MacHostBarometro = busca.MacHostBarometro,
+                    });
+                }
+                return Request.CreateResponse(HttpStatusCode.OK, dados);
+            }
+            
         }
 
-        // GET api/barometro
-        public HttpResponseMessage Get(String id)
-        {
-
-            return Request.CreateResponse(HttpStatusCode.NotFound);
-
-
-        }
 
         // POST api/barometro
         public HttpResponseMessage Post([FromBody]Barometro barometro)

@@ -15,8 +15,8 @@ namespace ClimaAvi.Persistencia
 
         public BarometroRepository()
         {
-            this.strConexao = "Server=localhost;Port=5432;Database=ClimaAVI;User Id=postgres;Password=81544744";
-            //this.strConexao = "Server=localhost;Port=5432;Database=ClimaAVI;User Id=Ruan;Password=root";
+            //this.strConexao = "Server=localhost;Port=5432;Database=ClimaAVI;User Id=postgres;Password=81544744";
+            this.strConexao = "Server=localhost;Port=5432;Database=ClimaAVI;User Id=Ruan;Password=root";
 
         }
         public Guid Alterar(Barometro barometro)
@@ -36,7 +36,7 @@ namespace ClimaAvi.Persistencia
                         NpgsqlCommand comando = new NpgsqlCommand();
                         comando.Connection = con;
                         comando.Transaction = transacao;
-                        comando.CommandText = @"delete from barometro where machostbarometro = (select machostbarometro from barometro where id = @id)";
+                        comando.CommandText = @"delete from barometro where machost = (select machost from barometro where id = @id)";
                         comando.Parameters.AddWithValue("@id", id);
                         comando.ExecuteNonQuery();
                         transacao.Commit();
@@ -63,7 +63,7 @@ namespace ClimaAvi.Persistencia
                         NpgsqlCommand comando = new NpgsqlCommand();
                         comando.Connection = con;
                         comando.Transaction = transacao;
-                        comando.CommandText = @"insert into barometro (id, altitude, temperatura, pressaoatmosferica, umidadear, leiturabarometro,machostbarometro) values (@id, @altitude,@temperatura, @pressaoatmosferica, @umidadear, @leiturabarometro, @machostbarometro)";
+                        comando.CommandText = @"insert into barometro (id, altitude, temperatura, pressaoatmosferica, umidadear, leitura,machost) values (@id, @altitude,@temperatura, @pressaoatmosferica, @umidadear, @leiturabarometro, @machostbarometro)";
                         comando.Parameters.AddWithValue("@altitude", barometro.Altitude);
                         comando.Parameters.AddWithValue("@temperatura", barometro.Temperatura);
                         comando.Parameters.AddWithValue("@pressaoatmosferica", barometro.PressaoAtmosferica);
@@ -88,10 +88,32 @@ namespace ClimaAvi.Persistencia
 
         public Barometro Selecionar(Guid id)
         {
-            throw new NotImplementedException();
+            Barometro barometro = null;
+            using (NpgsqlConnection con = new NpgsqlConnection(this.strConexao))
+            {
+                con.Open();
+                NpgsqlCommand comando = new NpgsqlCommand();
+                comando.Connection = con;
+                comando.CommandText = "select * from barometro where machost = (select machost from plantas where id = @id) ORDER BY leitura DESC LIMIT 1";
+                comando.Parameters.AddWithValue("id", id);
+                NpgsqlDataReader leitor = comando.ExecuteReader();
+                while (leitor.Read())
+                {
+                    barometro = new Barometro();
+                    barometro.Id = Guid.Parse(leitor["id"].ToString());
+                    barometro.Altitude = Convert.ToDecimal(leitor["altitude"].ToString());
+                    barometro.Temperatura = Convert.ToDecimal(leitor["temperatura"].ToString());
+                    barometro.PressaoAtmosferica = Convert.ToDecimal(leitor["pressaoatmosferica"].ToString());
+                    barometro.UmidadeAr = Convert.ToDecimal(leitor["umidadear"].ToString());
+                    barometro.LeituraBarometro = Convert.ToDateTime(leitor["leitura"].ToString());
+                    barometro.MacHostBarometro = leitor["machost"].ToString();
+                    
+                }
+            }
+            return barometro;
         }
 
-        public List<Barometro> SelecionarTodos()
+        public List<Barometro> SelecionarTodos(Guid id)
         {
             List<Barometro> dados = new List<Barometro>();
             using (NpgsqlConnection con = new NpgsqlConnection(this.strConexao))
@@ -99,7 +121,9 @@ namespace ClimaAvi.Persistencia
                 con.Open();
                 NpgsqlCommand comando = new NpgsqlCommand();
                 comando.Connection = con;
-                comando.CommandText = "select * from barometro";
+                comando.CommandText = @"select * from barometro where machost = (select machost from plantas where id = @id)";
+                comando.Parameters.AddWithValue("@id", id);
+                comando.ExecuteNonQuery();
                 NpgsqlDataReader leitor = comando.ExecuteReader();
                 while (leitor.Read())
                 {
@@ -110,8 +134,8 @@ namespace ClimaAvi.Persistencia
                         Temperatura = Convert.ToDecimal(leitor["temperatura"].ToString()),
                         PressaoAtmosferica = Convert.ToDecimal(leitor["pressaoatmosferica"].ToString()),
                         UmidadeAr = Convert.ToDecimal(leitor["umidadear"].ToString()),
-                        LeituraBarometro = Convert.ToDateTime(leitor["leiturabarometro"].ToString()),
-                        MacHostBarometro = leitor["machostbarometro"].ToString(),
+                        LeituraBarometro = Convert.ToDateTime(leitor["leitura"].ToString()),
+                        MacHostBarometro = leitor["machost"].ToString(),
                     });
                 }
             }

@@ -14,38 +14,50 @@ namespace ClimaAviAPI.Controllers
     public class SensorGasController : ApiController
     {
 
-        public HttpResponseMessage Get()
+        public HttpResponseMessage Get(Guid id, Boolean single)
         {
             SensorGasRepository sensorGasRepository = new SensorGasRepository();
             SensorGasAplicacao sensorGasAplicacao = new SensorGasAplicacao(sensorGasRepository);
             List<SensorGas> dados = new List<SensorGas>();
 
-            var urs = sensorGasAplicacao.SelecionarTodos();
 
-            foreach (var busca in urs)
-            {
-                dados.Add(new SensorGas()
+            if (single) {
+                var urs = sensorGasAplicacao.Selecionar(id);
+
+                var temp = new SensorGas()
                 {
-                    Id = busca.Id,
-                    Metano = busca.Metano,
-                    Propeno = busca.Propeno,
-                    Hidrogenio = busca.Hidrogenio,
-                    Fumaca = busca.Fumaca,
-                    LeituraGas = busca.LeituraGas,
-                    MacHostGas = busca.MacHostGas,
-                });
+                    Id = urs.Id,
+                    Metano = urs.Metano,
+                    Propeno = urs.Propeno,
+                    Hidrogenio = urs.Hidrogenio,
+                    Fumaca = urs.Fumaca,
+                    LeituraGas = urs.LeituraGas,
+                    MacHostGas = urs.MacHostGas,
+                };
+                return Request.CreateResponse(HttpStatusCode.OK, temp);
             }
-            return Request.CreateResponse(HttpStatusCode.OK, dados);
+            else {
+                var urs = sensorGasAplicacao.SelecionarTodos(id);
+
+                foreach (var busca in urs)
+                {
+                    dados.Add(new SensorGas()
+                    {
+                        Id = busca.Id,
+                        Metano = busca.Metano,
+                        Propeno = busca.Propeno,
+                        Hidrogenio = busca.Hidrogenio,
+                        Fumaca = busca.Fumaca,
+                        LeituraGas = busca.LeituraGas,
+                        MacHostGas = busca.MacHostGas,
+                    });
+                }
+                return Request.CreateResponse(HttpStatusCode.OK, dados);
+            }
+            
         }
 
-        // GET api/barometro
-        public HttpResponseMessage Get(String id)
-        {
-
-            return Request.CreateResponse(HttpStatusCode.NotFound);
-
-        }
-
+      
         // POST api/barometro
         public HttpResponseMessage Post([FromBody]SensorGas sensorGas)
         {

@@ -36,9 +36,9 @@ namespace ClimaAvi.Aplicacao
             return this.barometroRepository.Selecionar(id);
         }
 
-        public List<Barometro> SelecionarTodos()
+        public List<Barometro> SelecionarTodos(Guid id)
         {
-            return this.barometroRepository.SelecionarTodos();
+            return this.barometroRepository.SelecionarTodos(id);
         }
 
     }

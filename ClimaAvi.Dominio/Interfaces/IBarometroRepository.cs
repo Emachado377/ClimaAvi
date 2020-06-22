@@ -10,7 +10,7 @@ namespace ClimaAvi.Dominio.Interfaces
     public interface IBarometroRepository
     {
         Barometro Selecionar(Guid id);
-        List<Barometro> SelecionarTodos();
+        List<Barometro> SelecionarTodos(Guid id);
         Guid Inserir(Barometro barometro);
         Guid Alterar(Barometro barometro);
         void Excluir(Guid id);
