@@ -57,7 +57,7 @@ namespace ClimaAvi.Controllers
             List<Planta> plantas;
             Planta plt = null;           
             APIHttpClient client = new APIHttpClient("https://localhost:44313/api/");
-            plantas = client.Get<List<Planta>>("planta");
+            plantas = client.Get<List<Planta>>("planta/");
 
            foreach (var busca in plantas)
             {
@@ -72,7 +72,7 @@ namespace ClimaAvi.Controllers
         public ActionResult Excluir(Guid Id)
         {           
             APIHttpClient client = new APIHttpClient("https://localhost:44313/api/");
-            client.Delete<List<Planta>>("planta", Id);
+            client.Delete<List<Planta>>("planta/", Id);
                        
             return RedirectToAction("Index", "Home");
 

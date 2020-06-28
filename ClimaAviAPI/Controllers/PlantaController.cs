@@ -110,6 +110,7 @@ namespace ClimaAviAPI.Controllers
                 var plt = Procurar(id);
                 if (plt != null)
                 {
+                    planta.Id = id;
                     Guid id_planta = Alterar(planta);
                     return Request.CreateResponse(HttpStatusCode.OK, id_planta);
                 }

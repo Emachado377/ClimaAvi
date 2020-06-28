@@ -20,6 +20,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CodigoPlanta, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
+                @Html.HiddenFor(model => model.Id);
                 @Html.EditorFor(model => model.CodigoPlanta, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.CodigoPlanta, "", new { @class = "text-danger" })
             </div>
