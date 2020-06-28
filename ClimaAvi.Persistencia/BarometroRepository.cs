@@ -15,8 +15,7 @@ namespace ClimaAvi.Persistencia
 
         public BarometroRepository()
         {
-            //this.strConexao = "Server=localhost;Port=5432;Database=ClimaAVI;User Id=postgres;Password=81544744";
-            this.strConexao = "Server=localhost;Port=5432;Database=ClimaAVI;User Id=Ruan;Password=root";
+            this.strConexao = "server=pgsql.jmenzen.com.br;database=jmenzen2;user id=jmenzen2;password=uHfNCGWO";
 
         }
         public Guid Alterar(Barometro barometro)
