@@ -80,12 +80,12 @@ namespace ClimaAvi.Controllers
         public ActionResult Abrir(Guid Id)
         {
             Planta planta = null;
-            if (Session["planta"] != null)
-            {
-                var itens = (List<Models.Planta>)Session["planta"];
-                planta = itens.Where(c => c.Id == Id).FirstOrDefault();
-             }
-            return View("DashBoard", planta);
+
+            APIHttpClient client = new APIHttpClient("https://localhost:44313/api/");
+            planta = client.Get<Planta>("planta/"+Id);
+
+            return View("Dashboard", planta);
+
         }
     }
 }

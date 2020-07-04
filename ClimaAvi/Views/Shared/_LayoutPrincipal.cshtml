@@ -37,7 +37,7 @@
                 <div class="sidebar-brand-text mx-3">ClimaAvi</div>
             </a>
 
-          
+
             <!-- Heading -->
             <div class="sidebar-heading">
                 Interface
@@ -98,7 +98,7 @@
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                
+
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -109,13 +109,13 @@
                     </ul>
                 </nav>
 
-         
-            
+
+
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
-                  @RenderBody()
+                    @RenderBody()
 
                 </div>
                 <!-- /.container-fluid -->
@@ -132,7 +132,7 @@
             </footer>
             <!-- End of Footer -->
 
-    </div>
+        </div>
         <!-- End of Content Wrapper -->
 
     </div>
@@ -179,6 +179,133 @@
     <script src="/js/demo/chart-pie-demo.js"></script>
 
     <script src="/js/requests.js"></script>
+    <script>
+        var barometroDados = [];
+        var sensorGasDados = [];
+
+        var IdPlanta, single, dataFinal, dataInicial;
+        IdPlanta = "66787af7-910c-4149-8284-a44d86ab7fdc";
+        single = false;
+        dataInicial = "2020-07-01T00:01:00";
+        dataFinal = "2020-07-01T23:59:00";
+
+        async function getAllBarometro() {
+            var jqxhr = await $.ajax({
+                method: "GET",
+                url: `https://localhost:44313/api/Barometro/?id=${IdPlanta}&single=${single}&dataInicial=${dataInicial}&dataFinal=${dataFinal}`,
+            })
+                .done(function (dados) {
+                    barometroDados = dados;
+                    callAreaChart();
+                })
+                .fail(function () {
+                    //alert("error");
+                })
+                .always(function () {
+                    // alert("complete");
+                });
+        }
+        async function getAllSensorGas() {
+            var jqxhr = await $.ajax({
+                method: "GET",
+                url: `https://localhost:44313/api/SensorGas/?id=${IdPlanta}&single=${single}&dataInicial=${dataInicial}&dataFinal=${dataFinal}`,
+            })
+                .done(function (dados) {
+                    sensorGasDados = dados;
+                })
+                .fail(function () {
+                    //alert("error");
+                })
+                .always(function () {
+                    //alert("complete");
+                });
+        }
+
+        function callAreaChart() {
+            var arrayTemp = [];
+            var arrayHora = [];
+            var x = barometroDados.forEach((obj) => {
+                arrayTemp.push(parseInt(obj.Temperatura));
+                arrayHora.push(obj.LeituraBarometro.split("T")[1].slice(0, 5));
+            });
+
+            var tempData = {
+                labels: arrayHora,
+                datasets: [
+                    {
+                        label: "Temperatura",
+                        lineTension: 0.3,
+                        backgroundColor: "rgba(78, 115, 223, 0.05)",
+                        borderColor: "rgba(78, 115, 223, 1)",
+                        pointRadius: 3,
+                        pointBackgroundColor: "rgba(78, 115, 223, 1)",
+                        pointBorderColor: "rgba(78, 115, 223, 1)",
+                        pointHoverRadius: 3,
+                        pointHoverBackgroundColor: "rgba(78, 115, 223, 1)",
+                        pointHoverBorderColor: "rgba(78, 115, 223, 1)",
+                        pointHitRadius: 10,
+                        pointBorderWidth: 2,
+                        data: arrayTemp,
+                    },
+                ],
+            };
+
+            buildChart(tempData);
+        }
+        async function getDatas() {
+            await $.ajax({
+                method: "GET",
+                url: `https://localhost:44313/api/Barometro/?id=${IdPlanta}&single=true&dataInicial=${dataInicial}&dataFinal=${dataFinal}`,
+            })
+                .done(function (dados) {
+                    console.log(dados);
+                    document.getElementById("temperatura").innerText = parseInt(
+                        dados.Temperatura
+                    );
+                    document.getElementById("Umidade").innerText = parseInt(
+                        dados.UmidadeAr
+                    );
+                })
+                .fail(function () {
+                    alert("error");
+                })
+                .always(function () {
+                    // alert("complete");
+                });
+
+            await $.ajax({
+                method: "GET",
+                url: `https://localhost:44313/api/SensorGas/?id=${IdPlanta}&single=true&dataInicial=${dataInicial}&dataFinal=${dataFinal}`,
+            })
+                .done(function (dados) {
+                    console.log(dados);
+                    document.getElementById("Metano").innerText = dados.Metano;
+                    document.getElementById("Propano").innerText = dados.Propeno;
+                })
+                .fail(function () {
+                    alert("error");
+                })
+                .always(function () {
+                    //alert("complete");
+                });
+        }
+
+        async function initDatas() {
+
+            getAllBarometro();
+            getAllSensorGas();
+            getDatas();
+            setInterval(async () => {
+                getDatas();
+            }, 60000);
+        }
+        window.onload = function () {
+            if (window.location.href.indexOf("Abrir") > 0 && window.location.href.indexOf("planta") > 0 ) {
+                console.log("Entro");
+                initDatas();
+            }
+        }
+    </script>
 
 </body>
 

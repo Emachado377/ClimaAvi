@@ -1,6 +1,4 @@
 ﻿@model ClimaAvi.Models.Planta
-    
-
 
     <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -25,7 +23,7 @@
                             Temperatura
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
-                            28 C°
+                            <span id="temperatura"></span> C°
                         </div>
                     </div>
                     <div class="col-auto">
@@ -46,7 +44,7 @@
                             Umidade do ar
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
-                            33%
+                            <span id="Umidade"></span>%
                         </div>
                     </div>
                     <div class="col-auto">
@@ -67,7 +65,7 @@
                             Metano(CH4)
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
-                            4%
+                            <span id="Metano"></span>%
                         </div>
                     </div>
                 </div>
@@ -85,7 +83,7 @@
                             Propano(C3H8)
                         </div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">
-                            6%
+                            <span id="Propano"></span>%
                         </div>
                     </div>
                 </div>
@@ -98,7 +96,7 @@
 
 <div class="row">
     <!-- Area Chart -->
-    <div class="col-xl-8 col-lg-7">
+    <div class="col-xl-8 col-lg-7" >
         <div class="card shadow mb-4">
             <!-- Card Header - Dropdown -->
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
@@ -164,3 +162,7 @@
         </div>
     </div>
 </div>
+
+<script>
+    window.onload = initDatas();
+</script>
