@@ -10,7 +10,7 @@ namespace ClimaAvi.Dominio.Interfaces
     public interface ISensorGasRepository
     {
         SensorGas Selecionar(Guid id);
-        List<SensorGas> SelecionarTodos(Guid id);
+        List<SensorGas> SelecionarTodos(Guid id, DateTime dataInicial, DateTime dataFinal);
         Guid Inserir(SensorGas sensorGas);
         Guid Alterar(SensorGas sensorGas);
         void Excluir(Guid id);

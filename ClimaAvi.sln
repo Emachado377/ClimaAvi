@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClimaAvi", "ClimaAvi\ClimaAvi.csproj", "{19FB329A-1E4D-4EB7-825B-7D9FD91E33C8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A9CB6286-88C5-4360-B89A-8793D10C95B1} = {A9CB6286-88C5-4360-B89A-8793D10C95B1}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClimaAviAPI", "ClimaAviAPI\ClimaAviAPI.csproj", "{8881A311-10DD-466D-85CB-B1E6F67C2BB3}"
 EndProject

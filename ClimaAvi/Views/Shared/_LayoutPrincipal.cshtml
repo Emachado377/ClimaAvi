@@ -184,10 +184,6 @@
         var sensorGasDados = [];
 
         var IdPlanta, single, dataFinal, dataInicial;
-        IdPlanta = "66787af7-910c-4149-8284-a44d86ab7fdc";
-        single = false;
-        dataInicial = "2020-07-01T00:01:00";
-        dataFinal = "2020-07-01T23:59:00";
 
         async function getAllBarometro() {
             var jqxhr = await $.ajax({
@@ -291,7 +287,10 @@
         }
 
         async function initDatas() {
-
+            IdPlanta = getElementById("IdPlanta").value;
+            single = false;
+            dataInicial = "2020-07-01T00:01:00";
+            dataFinal = new Date().toISOString();
             getAllBarometro();
             getAllSensorGas();
             getDatas();
@@ -300,7 +299,7 @@
             }, 60000);
         }
         window.onload = function () {
-            if (window.location.href.indexOf("Abrir") > 0 && window.location.href.indexOf("planta") > 0 ) {
+            if (window.location.href.indexOf("Abrir") > 0 && window.location.href.indexOf("planta") > 0) {
                 console.log("Entro");
                 initDatas();
             }

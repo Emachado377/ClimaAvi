@@ -112,7 +112,7 @@ namespace ClimaAvi.Persistencia
             return barometro;
         }
 
-        public List<Barometro> SelecionarTodos(Guid id)
+        public List<Barometro> SelecionarTodos(Guid id, DateTime dataInicial, DateTime dataFinal)
         {
             List<Barometro> dados = new List<Barometro>();
             using (NpgsqlConnection con = new NpgsqlConnection(this.strConexao))
@@ -120,8 +120,10 @@ namespace ClimaAvi.Persistencia
                 con.Open();
                 NpgsqlCommand comando = new NpgsqlCommand();
                 comando.Connection = con;
-                comando.CommandText = @"select * from barometro where machost = (select machost from plantas where id = @id)";
+                comando.CommandText = @"select * from barometro where machost = (select machost from plantas where id = @id) and leitura BETWEEN @dataInicial and @dataFinal ORDER BY leitura DESC LIMIT 30";
                 comando.Parameters.AddWithValue("@id", id);
+                comando.Parameters.AddWithValue("@dataInicial", dataInicial);
+                comando.Parameters.AddWithValue("@dataFinal", dataFinal);
                 comando.ExecuteNonQuery();
                 NpgsqlDataReader leitor = comando.ExecuteReader();
                 while (leitor.Read())

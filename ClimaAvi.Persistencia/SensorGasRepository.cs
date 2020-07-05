@@ -113,7 +113,7 @@ namespace ClimaAvi.Persistencia
             return sensorGas;
         }
 
-        public List<SensorGas> SelecionarTodos(Guid id)
+        public List<SensorGas> SelecionarTodos(Guid id, DateTime dataInicial, DateTime dataFinal)
         {
             List<SensorGas> dados = new List<SensorGas>();
             using (NpgsqlConnection con = new NpgsqlConnection(this.strConexao))
@@ -121,8 +121,10 @@ namespace ClimaAvi.Persistencia
                 con.Open();
                 NpgsqlCommand comando = new NpgsqlCommand();
                 comando.Connection = con;
-                comando.CommandText = "select * from sensorgas where machost = (select machost from plantas where id = @id)";
+                comando.CommandText = "select * from sensorgas where machost = (select machost from plantas where id = @id) and leitura BETWEEN @dataInicial and @dataFinal ORDER BY leitura DESC LIMIT 30";
                 comando.Parameters.AddWithValue("@id", id);
+                comando.Parameters.AddWithValue("@dataInicial", dataInicial);
+                comando.Parameters.AddWithValue("@dataFinal", dataFinal);
                 comando.ExecuteNonQuery();
                 NpgsqlDataReader leitor = comando.ExecuteReader();
                 while (leitor.Read())

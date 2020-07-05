@@ -36,9 +36,9 @@ namespace ClimaAvi.Aplicacao
             return this.sensorGasRepository.Selecionar(id);
         }
 
-        public List<SensorGas> SelecionarTodos(Guid id)
+        public List<SensorGas> SelecionarTodos(Guid id, DateTime dataInicial, DateTime dataFinal)
         {
-            return this.sensorGasRepository.SelecionarTodos(id);
+            return this.sensorGasRepository.SelecionarTodos(id, dataInicial, dataFinal);
         }
 
     }

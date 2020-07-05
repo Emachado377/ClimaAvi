@@ -14,7 +14,7 @@ namespace ClimaAviAPI.Controllers
     public class SensorGasController : ApiController
     {
 
-        public HttpResponseMessage Get(Guid id, Boolean single)
+        public HttpResponseMessage Get(Guid id, Boolean single, DateTime dataInicial, DateTime dataFinal)
         {
             SensorGasRepository sensorGasRepository = new SensorGasRepository();
             SensorGasAplicacao sensorGasAplicacao = new SensorGasAplicacao(sensorGasRepository);
@@ -37,7 +37,7 @@ namespace ClimaAviAPI.Controllers
                 return Request.CreateResponse(HttpStatusCode.OK, temp);
             }
             else {
-                var urs = sensorGasAplicacao.SelecionarTodos(id);
+                var urs = sensorGasAplicacao.SelecionarTodos(id, dataInicial, dataFinal);
 
                 foreach (var busca in urs)
                 {
