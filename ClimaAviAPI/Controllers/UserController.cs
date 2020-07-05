@@ -4,6 +4,7 @@ using ClimaAvi.Dominio.Entidades;
 using ClimaAvi.Persistencia;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -15,7 +16,8 @@ namespace ClimaAviAPI.Controllers
     {
         public HttpResponseMessage Get()
         {
-            UserRepository userRepository = new UserRepository();
+            string connectionString = ConfigurationManager.ConnectionStrings["conexao"].ToString();
+            UserRepository userRepository = new UserRepository(connectionString);
             UserAplicacao userAplicacao = new UserAplicacao(userRepository);
             List<User> users = new List<User>();
 
@@ -79,7 +81,8 @@ namespace ClimaAviAPI.Controllers
 
         private Guid Inserir(User user)
         {
-            UserRepository userRepository = new UserRepository();
+            string connectionString = ConfigurationManager.ConnectionStrings["conexao"].ToString();
+            UserRepository userRepository = new UserRepository(connectionString);
             UserAplicacao userAplicacao = new UserAplicacao(userRepository);
 
             //Adapter
@@ -123,7 +126,8 @@ namespace ClimaAviAPI.Controllers
 
         private Guid Alterar(User user)
         {
-            UserRepository userRepository = new UserRepository();
+            string connectionString = ConfigurationManager.ConnectionStrings["conexao"].ToString();
+            UserRepository userRepository = new UserRepository(connectionString);
             UserAplicacao userAplicacao = new UserAplicacao(userRepository);
 
             //Adapter
@@ -144,7 +148,8 @@ namespace ClimaAviAPI.Controllers
 
         private User Procurar(Guid id_user)
         {
-            UserRepository userRepository = new UserRepository();
+            string connectionString = ConfigurationManager.ConnectionStrings["conexao"].ToString();
+            UserRepository userRepository = new UserRepository(connectionString);
             UserAplicacao userAplicacao = new UserAplicacao(userRepository);
 
             var urs = userAplicacao.Selecionar(id_user);
@@ -176,7 +181,8 @@ namespace ClimaAviAPI.Controllers
 
         private void Excluir(Guid id_user)
         {
-            UserRepository userRepository = new UserRepository();
+            string connectionString = ConfigurationManager.ConnectionStrings["conexao"].ToString();
+            UserRepository userRepository = new UserRepository(connectionString);
             UserAplicacao userAplicacao = new UserAplicacao(userRepository);
             userAplicacao.Excluir(id_user);
         }

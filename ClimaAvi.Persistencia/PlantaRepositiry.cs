@@ -14,12 +14,12 @@ namespace ClimaAvi.Persistencia
     {
         private string strConexao;
 
-        public PlantaRepository()
+        public PlantaRepository(string connectionString)
         {
-            this.strConexao = "server=pgsql.jmenzen.com.br;database=jmenzen2;user id=jmenzen2;password=uHfNCGWO";
+            this.strConexao = connectionString;
 
         }
-
+        
         public Guid Alterar(Planta planta)
         {
             using (NpgsqlConnection con = new NpgsqlConnection(this.strConexao))

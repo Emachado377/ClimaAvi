@@ -13,13 +13,12 @@ namespace ClimaAvi.Persistencia
     {
 
         private string strConexao;
-
-        public UserRepository()
+      
+        public UserRepository(string connectionString)
         {
-            this.strConexao = "server=pgsql.jmenzen.com.br;database=jmenzen2;user id=jmenzen2;password=uHfNCGWO";
+            this.strConexao = connectionString;
 
         }
-
 
         public Guid Alterar(User user)
         {

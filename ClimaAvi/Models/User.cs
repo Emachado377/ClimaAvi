@@ -28,19 +28,21 @@ namespace ClimaAvi.Models
         [Required(ErrorMessage = "Senha deve ser preenchida!")]
         [StringLength(15, MinimumLength = 4, ErrorMessage = "Senha deve ter entre 4 e 15 caracteres")]
         public string Password { get; set; }
+        public string Token { get; set; }
 
         public User()
         {
             Id = Guid.NewGuid();
         }
 
-        public User(int codigo, string name, string lastName, string email, string password)
+        public User(int codigo, string name, string lastName, string email, string password, string token)
         {
             Codigo = codigo;
             Name = name;
             LastName = lastName;
             Email = email;
             Password = password;
+            Token = token;
         }
     }
 }

@@ -50,5 +50,9 @@ namespace ClimaAvi.Aplicacao
             return this.userRepository.SelecionarTodos();
         }
 
+        public bool Autenticar(string userName, string password)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
