@@ -50,8 +50,17 @@ namespace ClimaAvi.Aplicacao
             return this.userRepository.SelecionarTodos();
         }
 
-        public bool Autenticar(string userName, string password)
+        public bool Autenticar(string email, string password)
         {
+            var usuario = SelecionarTodos();
+            foreach (var busca in usuario)
+            {
+               if (String.Equals(busca.Email, email) && (String.Equals(busca.Password, password)))
+                {
+                    throw new NotImplementedException();
+                }
+                 
+            }
             throw new NotImplementedException();
         }
     }
