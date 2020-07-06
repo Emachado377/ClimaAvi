@@ -55,13 +55,12 @@ namespace ClimaAvi.Aplicacao
             var usuario = SelecionarTodos();
             foreach (var busca in usuario)
             {
-               if (String.Equals(busca.Email, email) && (String.Equals(busca.Password, password)))
+                if (String.Equals(busca.Email, email) && (String.Equals(busca.Password, password)))
                 {
                     throw new NotImplementedException();
-                }
-                 
+                }                            
             }
-            throw new NotImplementedException();
+            throw new ApplicationException();
         }
     }
 }
