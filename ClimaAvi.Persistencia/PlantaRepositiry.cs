@@ -12,17 +12,17 @@ namespace ClimaAvi.Persistencia
 {
     public class PlantaRepository : IPlantaRepository
     {
-        private string strConexao;
+        private string connectionString;
 
         public PlantaRepository(string connectionString)
         {
-            this.strConexao = connectionString;
+            this.connectionString = connectionString;
 
         }
         
         public Guid Alterar(Planta planta)
         {
-            using (NpgsqlConnection con = new NpgsqlConnection(this.strConexao))
+            using (NpgsqlConnection con = new NpgsqlConnection(connectionString))
             {
                 con.Open();
                 using (var transacao = con.BeginTransaction())
@@ -54,7 +54,7 @@ namespace ClimaAvi.Persistencia
 
         public void Excluir(Guid id)
         {
-            using (NpgsqlConnection con = new NpgsqlConnection(this.strConexao))
+            using (NpgsqlConnection con = new NpgsqlConnection(connectionString))
             {
                 con.Open();
                 using (var transacao = con.BeginTransaction())
@@ -81,7 +81,7 @@ namespace ClimaAvi.Persistencia
 
         public Guid Inserir(Planta planta)
         {
-            using (NpgsqlConnection con = new NpgsqlConnection(this.strConexao))
+            using (NpgsqlConnection con = new NpgsqlConnection(connectionString))
             {
                 con.Open();
                 using (var transacao = con.BeginTransaction())
@@ -115,7 +115,7 @@ namespace ClimaAvi.Persistencia
         public Planta Selecionar(Guid id)
         {
             Planta planta = null;
-            using (NpgsqlConnection con = new NpgsqlConnection(this.strConexao))
+            using (NpgsqlConnection con = new NpgsqlConnection(connectionString))
             {
                 con.Open();
                 NpgsqlCommand comando = new NpgsqlCommand();
@@ -139,7 +139,7 @@ namespace ClimaAvi.Persistencia
         public List<Planta> SelecionarTodos()
         {
             List<Planta> plantas = new List<Planta>();
-            using (NpgsqlConnection con = new NpgsqlConnection(this.strConexao))
+            using (NpgsqlConnection con = new NpgsqlConnection(connectionString))
             {
                 con.Open();
                 NpgsqlCommand comando = new NpgsqlCommand();
