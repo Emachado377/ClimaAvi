@@ -220,9 +220,25 @@
         function callAreaChart() {
             var arrayTemp = [];
             var arrayHora = [];
+            var i = 0, barLength;
+            barLength = barometroDados.length;
+            console.log(barLength);
             var x = barometroDados.forEach((obj) => {
-                arrayTemp.push(parseInt(obj.Temperatura));
-                arrayHora.push(obj.LeituraBarometro.split("T")[1].slice(0, 5));
+                i++;
+                if (i == 1) {
+                    arrayTemp.push(parseInt(obj.Temperatura));
+                    let data = obj.LeituraBarometro.split("T")[0].split("-")[2] +"/"+obj.LeituraBarometro.split("T")[0].split("-")[1] 
+                    arrayHora.push(obj.LeituraBarometro.split("T")[1].slice(0, 5) + " "+ data);
+                }
+                
+                if (i >= 50 && barLength < 5000) {
+                    i = 0;
+                } else {
+                    if (i >= 500) {
+                        i = 0;
+                    }
+                }
+                
             });
 
             var tempData = {
@@ -276,7 +292,6 @@
                 .done(function (dados) {
                     console.log(dados);
                     document.getElementById("Metano").innerText = dados.Metano;
-                    document.getElementById("Propano").innerText = dados.Propeno;
                 })
                 .fail(function () {
                     alert("error");
@@ -287,7 +302,7 @@
         }
 
         async function initDatas() {
-            IdPlanta = getElementById("IdPlanta").value;
+            IdPlanta = document.getElementById("IdPlanta").value;
             single = false;
             dataInicial = "2020-07-01T00:01:00";
             dataFinal = new Date().toISOString();
