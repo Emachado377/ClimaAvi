@@ -278,8 +278,9 @@
                         dados.UmidadeAr
                     );
                 })
-                .fail(function () {
+                .fail(function (e) {
                     alert("error");
+                    console.log(e);
                 })
                 .always(function () {
                     // alert("complete");
@@ -293,8 +294,9 @@
                     console.log(dados);
                     document.getElementById("Metano").innerText = dados.Metano;
                 })
-                .fail(function () {
+                .fail(function (e) {
                     alert("error");
+                    console.log(e);
                 })
                 .always(function () {
                     //alert("complete");

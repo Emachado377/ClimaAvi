@@ -39,7 +39,7 @@ namespace ClimaAvi.Controllers
             
             List<User> users;
             
-            APIHttpClient client = new APIHttpClient("http://localhost:44313/api/");
+            APIHttpClient client = new APIHttpClient("https://localhost:44313/api/");
             users = client.Get<List<User>>("User");
 
             foreach (var valid in users)
@@ -69,7 +69,7 @@ namespace ClimaAvi.Controllers
             else
             {
                 
-               APIHttpClient client = new APIHttpClient("http://localhost:44313/api/");
+               APIHttpClient client = new APIHttpClient("https://localhost:44313/api/");
                var users = client.Get<List<User>>("user");
 
 

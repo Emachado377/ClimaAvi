@@ -12,7 +12,7 @@ namespace ClimaAvi
 
     public class APIHttpClient
     {
-        private string baseAPI = "http://localhost:44313/api/";
+        private string baseAPI = "https://localhost:44313/api/";
         public APIHttpClient(string baseAPI)
         {
             this.baseAPI = baseAPI;

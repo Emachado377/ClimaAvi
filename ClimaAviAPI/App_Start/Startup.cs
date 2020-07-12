@@ -1,10 +1,14 @@
 ﻿using System;
 using System.Web.Http;
+using Owin;
+
 using Microsoft.Owin;
 using Microsoft.Owin.Cors;
 using Microsoft.Owin.Security.OAuth;
-using Owin;
+using System.Web.Cors;
+using System.Threading.Tasks;
 
+[assembly: OwinStartup(typeof(ClimaAviAPI.App_Start.Startup))]
 namespace ClimaAviAPI.App_Start
 {
     public class Startup
@@ -12,7 +16,19 @@ namespace ClimaAviAPI.App_Start
         public void Configuration(IAppBuilder app)
         {
             var config = new HttpConfiguration();
-
+            var corsPolicy = new CorsPolicy
+            {
+                AllowAnyMethod = true,
+                AllowAnyHeader = true
+            };
+            corsPolicy.AllowAnyOrigin = true;
+            var corsOptions = new CorsOptions
+            {
+                PolicyProvider = new CorsPolicyProvider
+                {
+                    PolicyResolver = context => Task.FromResult(corsPolicy)
+                }
+            };
             config.MapHttpAttributeRoutes();
             config.Routes.MapHttpRoute(
                   name: "DefaultApi",
@@ -20,7 +36,7 @@ namespace ClimaAviAPI.App_Start
                   defaults: new { id = RouteParameter.Optional }
              );
 
-            app.UseCors(CorsOptions.AllowAll);
+            app.UseCors(corsOptions);
 
             ActivateTokenGenerator(app);
 

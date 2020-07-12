@@ -17,7 +17,7 @@ namespace ClimaAvi.Persistencia
 
         public UserRepository(string connectionString)
         {
-            this.connectionString = connectionString;
+            this.connectionString = "server=pgsql.jmenzen.com.br;database=jmenzen2;user id=jmenzen2;password=uHfNCGWO";
 
         }
 

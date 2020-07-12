@@ -14,8 +14,8 @@ namespace ClimaAvi.Controllers
         public ActionResult Index()
         {
             List<Planta> listPlanta = new List<Planta>();
-            APIHttpClient client = new APIHttpClient("http://localhost:44313/api/");
-            listPlanta = client.Get<List<Planta>>("planta");
+            APIHttpClient client = new APIHttpClient("https://localhost:44313/api/");
+            listPlanta = client.Get<List<Planta>>("Planta");
             ViewBag.listPlanta = listPlanta;
             return View(listPlanta);
         }
@@ -35,8 +35,8 @@ namespace ClimaAvi.Controllers
             }
             else
             {
-                APIHttpClient client = new APIHttpClient("http://localhost:44313/api/");
-                var plantas = client.Get<List<Planta>>("planta");
+                APIHttpClient client = new APIHttpClient("https://localhost:44313/api/");
+                var plantas = client.Get<List<Planta>>("Planta");
 
                 foreach (var busca in plantas)
                 {
@@ -56,8 +56,8 @@ namespace ClimaAvi.Controllers
         {
             List<Planta> plantas;
             Planta plt = null;           
-            APIHttpClient client = new APIHttpClient("http://localhost:44313/api/");
-            plantas = client.Get<List<Planta>>("planta/");
+            APIHttpClient client = new APIHttpClient("https://localhost:44313/api/");
+            plantas = client.Get<List<Planta>>("Planta/");
 
            foreach (var busca in plantas)
             {
@@ -71,8 +71,8 @@ namespace ClimaAvi.Controllers
         
         public ActionResult Excluir(Guid Id)
         {           
-            APIHttpClient client = new APIHttpClient("http://localhost:44313/api/");
-            client.Delete<List<Planta>>("planta/", Id);
+            APIHttpClient client = new APIHttpClient("https://localhost:44313/api/");
+            client.Delete<List<Planta>>("Planta/", Id);
                        
             return RedirectToAction("Index", "Home");
 
@@ -81,8 +81,8 @@ namespace ClimaAvi.Controllers
         {
             Planta planta = null;
 
-            APIHttpClient client = new APIHttpClient("http://localhost:44313/api/");
-            planta = client.Get<Planta>("planta/"+Id);
+            APIHttpClient client = new APIHttpClient("https://localhost:44313/api/");
+            planta = client.Get<Planta>("Planta/"+Id);
 
             return View("Dashboard", planta);
 
