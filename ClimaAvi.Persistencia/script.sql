@@ -35,11 +35,11 @@ leitura date not null,
 machost varchar (50) not null
 )
 
-insert into usuarios (codigo,nome,sobrenome,email,senha)
+insert into usuario (codigo,nome,sobrenome,email,senha)
 values (10,'ruan','ferreira','ruan@gamil.com','11111');
 
-insert into usuarios (codigo,nome,sobrenome,email,senha)
+insert into usuario (codigo,nome,sobrenome,email,senha)
 values (10,'evandro','machado','evandro@gamil.com','11111');
 
-insert into usuarios (codigo,nome,sobrenome,email,senha)
+insert into usuario (codigo,nome,sobrenome,email,senha)
 values (10,'parateste','teste1','para@gamil.com','11111');

@@ -14,11 +14,11 @@ namespace ClimaAviAPI.Controllers
 {
     public class UserController : ApiController
     {
-        //[Authorize]
+        [Authorize]
         public HttpResponseMessage Get()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["conexao"].ToString();
-            UserRepository userRepository = new UserRepository(connectionString);
+            //string connectionString = ConfigurationManager.ConnectionStrings["conexao"].ToString();
+            UserRepository userRepository = new UserRepository();
             UserAplicacao userAplicacao = new UserAplicacao(userRepository);
             List<User> users = new List<User>();
 
@@ -40,7 +40,7 @@ namespace ClimaAviAPI.Controllers
         }
 
         // GET api/values/5
-       // [Authorize]
+       [Authorize]
         public HttpResponseMessage Get(Guid id)
         {
             try
@@ -64,7 +64,7 @@ namespace ClimaAviAPI.Controllers
         }
 
         // POST api/values
-       // [Authorize]
+     [Authorize]
         public HttpResponseMessage Post([FromBody] User user)
         {
             try
@@ -84,8 +84,8 @@ namespace ClimaAviAPI.Controllers
 
         private Guid Inserir(User user)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["conexao"].ToString();
-            UserRepository userRepository = new UserRepository(connectionString);
+            //string connectionString = ConfigurationManager.ConnectionStrings["conexao"].ToString();
+            UserRepository userRepository = new UserRepository();
             UserAplicacao userAplicacao = new UserAplicacao(userRepository);
 
             //Adapter
@@ -106,7 +106,8 @@ namespace ClimaAviAPI.Controllers
         }
 
         // PUT api/values/5
-        //[Authorize]
+             
+        [Authorize]
         public HttpResponseMessage Put(Guid id, [FromBody] User user)
         {
             try
@@ -130,8 +131,8 @@ namespace ClimaAviAPI.Controllers
 
         private Guid Alterar(User user)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["conexao"].ToString();
-            UserRepository userRepository = new UserRepository(connectionString);
+           //string connectionString = ConfigurationManager.ConnectionStrings["conexao"].ToString();
+            UserRepository userRepository = new UserRepository();
             UserAplicacao userAplicacao = new UserAplicacao(userRepository);
 
             //Adapter
@@ -152,8 +153,8 @@ namespace ClimaAviAPI.Controllers
 
         private User Procurar(Guid id_user)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["conexao"].ToString();
-            UserRepository userRepository = new UserRepository(connectionString);
+            //string connectionString = ConfigurationManager.ConnectionStrings["conexao"].ToString();
+            UserRepository userRepository = new UserRepository();
             UserAplicacao userAplicacao = new UserAplicacao(userRepository);
 
             var urs = userAplicacao.Selecionar(id_user);
@@ -170,7 +171,7 @@ namespace ClimaAviAPI.Controllers
         }
 
         // DELETE api/values/5
-       // [Authorize]
+       [Authorize]
         public HttpResponseMessage Delete(Guid id)
         {
             try
@@ -186,8 +187,8 @@ namespace ClimaAviAPI.Controllers
 
         private void Excluir(Guid id_user)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["conexao"].ToString();
-            UserRepository userRepository = new UserRepository(connectionString);
+           // string connectionString = ConfigurationManager.ConnectionStrings["conexao"].ToString();
+            UserRepository userRepository = new UserRepository();
             UserAplicacao userAplicacao = new UserAplicacao(userRepository);
             userAplicacao.Excluir(id_user);
         }

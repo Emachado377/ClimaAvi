@@ -17,8 +17,8 @@ namespace ClimaAviAPI.Controllers
 
         public HttpResponseMessage Get()
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["conexao"].ToString();
-            PlantaRepository plantaRepository = new PlantaRepository(connectionString);
+            //string connectionString = ConfigurationManager.ConnectionStrings["conexao"].ToString();
+            PlantaRepository plantaRepository = new PlantaRepository();
             PlantaAplicacao plantaAplicacao = new PlantaAplicacao(plantaRepository);
             List<Planta> plantas = new List<Planta>();
 
@@ -41,8 +41,8 @@ namespace ClimaAviAPI.Controllers
         // GET api/values/5
         public HttpResponseMessage Get(Guid id)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["conexao"].ToString();
-            PlantaRepository plantaRepository = new PlantaRepository(connectionString);
+            //string connectionString = ConfigurationManager.ConnectionStrings["conexao"].ToString();
+            PlantaRepository plantaRepository = new PlantaRepository();
             PlantaAplicacao plantaAplicacao = new PlantaAplicacao(plantaRepository);                            
 
             try
@@ -86,8 +86,8 @@ namespace ClimaAviAPI.Controllers
 
         private Guid Inserir(Planta planta)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["conexao"].ToString();
-            PlantaRepository plantaRepository = new PlantaRepository(connectionString);
+            //string connectionString = ConfigurationManager.ConnectionStrings["conexao"].ToString();
+            PlantaRepository plantaRepository = new PlantaRepository();
             PlantaAplicacao plantaAplicacao = new PlantaAplicacao(plantaRepository);
 
             //Adapter
@@ -131,8 +131,8 @@ namespace ClimaAviAPI.Controllers
 
         private Guid Alterar(Planta planta)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["conexao"].ToString();
-            PlantaRepository plantaRepository = new PlantaRepository(connectionString);
+           // string connectionString = ConfigurationManager.ConnectionStrings["conexao"].ToString();
+            PlantaRepository plantaRepository = new PlantaRepository();
             PlantaAplicacao plantaAplicacao = new PlantaAplicacao(plantaRepository);
 
             //Adapter
@@ -152,8 +152,8 @@ namespace ClimaAviAPI.Controllers
 
         private Planta Procurar(Guid id_Planta)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["conexao"].ToString();
-            PlantaRepository plantaRepository = new PlantaRepository(connectionString);
+           // string connectionString = ConfigurationManager.ConnectionStrings["conexao"].ToString();
+            PlantaRepository plantaRepository = new PlantaRepository();
             PlantaAplicacao plantaAplicacao = new PlantaAplicacao(plantaRepository);
 
             var plt = plantaAplicacao.Selecionar(id_Planta);
@@ -184,8 +184,8 @@ namespace ClimaAviAPI.Controllers
 
         private void Excluir(Guid id_Planta)
         {
-            string connectionString = ConfigurationManager.ConnectionStrings["conexao"].ToString();
-            PlantaRepository plantaRepository = new PlantaRepository(connectionString);
+           // string connectionString = ConfigurationManager.ConnectionStrings["conexao"].ToString();
+            PlantaRepository plantaRepository = new PlantaRepository();
             PlantaAplicacao plantaAplicacao = new PlantaAplicacao(plantaRepository);
             plantaAplicacao.Excluir(id_Planta);
         }

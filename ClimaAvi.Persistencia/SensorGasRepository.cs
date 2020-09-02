@@ -16,8 +16,8 @@ namespace ClimaAvi.Persistencia
 
         public SensorGasRepository()
         {
-            this.strConexao = "server=pgsql.jmenzen.com.br;database=jmenzen2;user id=jmenzen2;password=uHfNCGWO";
-
+            this.strConexao = "Server=localhost;Port=44313; Database=ClimaAVI; User Id=postgres; Password=81544744";
+           
         }
         public Guid Alterar(SensorGas sensorGas)
         {

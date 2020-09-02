@@ -15,9 +15,10 @@ namespace ClimaAvi.Persistencia
         private string connectionString;
            
 
-        public UserRepository(string connectionString)
+        public UserRepository()
         {
-            this.connectionString = "server=pgsql.jmenzen.com.br;database=jmenzen2;user id=jmenzen2;password=uHfNCGWO";
+            //Academico  //////////////////////////////////////////
+            connectionString = "Server=localhost;Port=44313; Database=ClimaAVI; User Id=postgres; Password=81544744";
 
         }
 

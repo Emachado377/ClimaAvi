@@ -14,9 +14,9 @@ namespace ClimaAvi.Persistencia
     {
         private string connectionString;
 
-        public PlantaRepository(string connectionString)
+        public PlantaRepository()
         {
-            this.connectionString = connectionString;
+            this.connectionString = "Server=localhost;Port=44313; Database=ClimaAVI; User Id=postgres; Password=81544744";
 
         }
         
