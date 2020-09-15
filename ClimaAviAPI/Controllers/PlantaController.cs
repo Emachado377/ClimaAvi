@@ -17,7 +17,6 @@ namespace ClimaAviAPI.Controllers
 
         public HttpResponseMessage Get()
         {
-            //string connectionString = ConfigurationManager.ConnectionStrings["conexao"].ToString();
             PlantaRepository plantaRepository = new PlantaRepository();
             PlantaAplicacao plantaAplicacao = new PlantaAplicacao(plantaRepository);
             List<Planta> plantas = new List<Planta>();
@@ -41,7 +40,6 @@ namespace ClimaAviAPI.Controllers
         // GET api/values/5
         public HttpResponseMessage Get(Guid id)
         {
-            //string connectionString = ConfigurationManager.ConnectionStrings["conexao"].ToString();
             PlantaRepository plantaRepository = new PlantaRepository();
             PlantaAplicacao plantaAplicacao = new PlantaAplicacao(plantaRepository);                            
 

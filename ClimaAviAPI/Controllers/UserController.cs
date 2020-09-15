@@ -14,7 +14,7 @@ namespace ClimaAviAPI.Controllers
 {
     public class UserController : ApiController
     {
-        [Authorize]
+        //[Authorize]
         public HttpResponseMessage Get()
         {
             //string connectionString = ConfigurationManager.ConnectionStrings["conexao"].ToString();
@@ -40,7 +40,7 @@ namespace ClimaAviAPI.Controllers
         }
 
         // GET api/values/5
-       [Authorize]
+      // [Authorize]
         public HttpResponseMessage Get(Guid id)
         {
             try
@@ -64,7 +64,7 @@ namespace ClimaAviAPI.Controllers
         }
 
         // POST api/values
-     [Authorize]
+     //[Authorize]
         public HttpResponseMessage Post([FromBody] User user)
         {
             try
@@ -107,7 +107,7 @@ namespace ClimaAviAPI.Controllers
 
         // PUT api/values/5
              
-        [Authorize]
+       //[Authorize]
         public HttpResponseMessage Put(Guid id, [FromBody] User user)
         {
             try
@@ -171,7 +171,7 @@ namespace ClimaAviAPI.Controllers
         }
 
         // DELETE api/values/5
-       [Authorize]
+      // [Authorize]
         public HttpResponseMessage Delete(Guid id)
         {
             try

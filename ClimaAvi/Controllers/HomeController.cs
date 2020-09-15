@@ -14,7 +14,7 @@ namespace ClimaAvi.Controllers
         public ActionResult Index()
         {
             //List<Planta> listPlanta;
-            APIHttpClient client = new APIHttpClient("https://localhost:44313/api/");
+            APIHttpClient client = new APIHttpClient("http://localhost:52198/api/");
             var listPlanta = client.Get<List<Planta>>("planta");
             ViewBag.listPlanta = listPlanta;
 

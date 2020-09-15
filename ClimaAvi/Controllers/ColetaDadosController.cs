@@ -13,7 +13,7 @@ namespace ClimaAvi.Controllers
         public ActionResult DadosBarometro(String mach)
         {
             List<Barometro> barometros = new List<Barometro>();
-            APIHttpClient client = new APIHttpClient("https://localhost:44313/api/");
+            APIHttpClient client = new APIHttpClient("http://localhost:52198/api/");
            var listaBarometro = client.Get<List<Barometro>>("barometro");
 
             foreach (var busca in listaBarometro)
@@ -27,7 +27,7 @@ namespace ClimaAvi.Controllers
         public ActionResult DadosGas(String mach)
         {
             List<SensorGas> listaGas = new List<SensorGas>();
-            APIHttpClient client = new APIHttpClient("https://localhost:44313/api/");
+            APIHttpClient client = new APIHttpClient("http://localhost:52198/api/");
             var sensorGas = client.Get<List<SensorGas>>("SensorGas");
             foreach (var busca in listaGas)
             {

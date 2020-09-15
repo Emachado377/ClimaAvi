@@ -16,8 +16,8 @@ namespace ClimaAvi.Controllers
         public ActionResult Validation(User userTemp)
         {
            
-            APIHttpClient client = new APIHttpClient("https://localhost:44313/api/");
-            var users = client.Get<List<User>>("User");
+            APIHttpClient client = new APIHttpClient("http://localhost:52198/api/");
+            var users = client.Get<List<User>>("User/");
 
             foreach (var valid in users)
             {

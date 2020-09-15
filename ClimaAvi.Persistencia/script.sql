@@ -25,14 +25,15 @@ leitura date not null,
 machost varchar (50) not null
 )
 
+
 create table sensorgas(
 id uuid primary Key,
 metano numeric not null,
 propeno numeric not null,
 hidrogenio numeric not null,
 fumaca numeric not null,
-leitura date not null,
-machost varchar (50) not null
+leituraGas date not null,
+machostGas varchar (50) not null
 )
 
 insert into usuario (codigo,nome,sobrenome,email,senha)

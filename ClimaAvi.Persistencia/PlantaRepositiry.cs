@@ -12,17 +12,19 @@ namespace ClimaAvi.Persistencia
 {
     public class PlantaRepository : IPlantaRepository
     {
-        private string connectionString;
+        private string strConexao;
 
         public PlantaRepository()
         {
-            this.connectionString = "Server=localhost;Port=44313; Database=ClimaAVI; User Id=postgres; Password=81544744";
+           // this.strConexao = "Server=localhost;Port=44313; Database=ClimaAVI; User Id=postgres; Password=81544744;";
+            this.strConexao = "Server=localhost;Port=5432; Database=ClimaAVI; User Id=postgres; Password=81544744;";
+
 
         }
         
         public Guid Alterar(Planta planta)
         {
-            using (NpgsqlConnection con = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection con = new NpgsqlConnection(this.strConexao))
             {
                 con.Open();
                 using (var transacao = con.BeginTransaction())
@@ -54,7 +56,7 @@ namespace ClimaAvi.Persistencia
 
         public void Excluir(Guid id)
         {
-            using (NpgsqlConnection con = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection con = new NpgsqlConnection(this.strConexao))
             {
                 con.Open();
                 using (var transacao = con.BeginTransaction())
@@ -81,7 +83,7 @@ namespace ClimaAvi.Persistencia
 
         public Guid Inserir(Planta planta)
         {
-            using (NpgsqlConnection con = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection con = new NpgsqlConnection(this.strConexao))
             {
                 con.Open();
                 using (var transacao = con.BeginTransaction())
@@ -115,7 +117,7 @@ namespace ClimaAvi.Persistencia
         public Planta Selecionar(Guid id)
         {
             Planta planta = null;
-            using (NpgsqlConnection con = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection con = new NpgsqlConnection(this.strConexao))
             {
                 con.Open();
                 NpgsqlCommand comando = new NpgsqlCommand();
@@ -139,7 +141,7 @@ namespace ClimaAvi.Persistencia
         public List<Planta> SelecionarTodos()
         {
             List<Planta> plantas = new List<Planta>();
-            using (NpgsqlConnection con = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection con = new NpgsqlConnection(this.strConexao))
             {
                 con.Open();
                 NpgsqlCommand comando = new NpgsqlCommand();

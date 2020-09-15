@@ -18,13 +18,13 @@ namespace ClimaAvi.Persistencia
         public UserRepository()
         {
             //Academico  //////////////////////////////////////////
-            connectionString = "Server=localhost;Port=44313; Database=ClimaAVI; User Id=postgres; Password=81544744";
+            this.connectionString = "Server=localhost;Port=5432; Database=ClimaAVI; User Id=postgres; Password=81544744";
 
         }
 
         public Guid Alterar(User user)
         {
-            using (NpgsqlConnection con = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection con = new NpgsqlConnection(this.connectionString))
             {
                 con.Open();
                 using (var transacao = con.BeginTransaction())
@@ -57,7 +57,7 @@ namespace ClimaAvi.Persistencia
 
         public void Excluir(Guid id)
         {
-            using (NpgsqlConnection con = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection con = new NpgsqlConnection(this.connectionString))
             {
                 con.Open();
                 using (var transacao = con.BeginTransaction())
@@ -84,7 +84,7 @@ namespace ClimaAvi.Persistencia
 
         public Guid Inserir(User user)
         {
-            using (NpgsqlConnection con = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection con = new NpgsqlConnection(this.connectionString))
             {
                 con.Open();
                 using (var transacao = con.BeginTransaction())
@@ -119,7 +119,7 @@ namespace ClimaAvi.Persistencia
         public User Selecionar(Guid id)
         {
             User user = null;
-            using (NpgsqlConnection con = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection con = new NpgsqlConnection(this.connectionString))
             {
                 con.Open();
                 NpgsqlCommand comando = new NpgsqlCommand();
@@ -145,7 +145,7 @@ namespace ClimaAvi.Persistencia
         public List<User> SelecionarTodos()
         {
             List<User> users = new List<User>();
-            using (NpgsqlConnection con = new NpgsqlConnection(connectionString))
+            using (NpgsqlConnection con = new NpgsqlConnection(this.connectionString))
             {
                 con.Open();
                 NpgsqlCommand comando = new NpgsqlCommand();
