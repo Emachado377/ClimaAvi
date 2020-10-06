@@ -80,7 +80,7 @@ namespace ClimaAvi
                 Propeno = 4,
                 Hidrogenio = 78,
                 Fumaca = 1,
-                MacHostGas = "2CC",
+                MachostGas = "2CC",
         };
             List<SensorGas> listaSensorGas = new List<SensorGas>();            
             listaSensorGas.Add(sensorGas);

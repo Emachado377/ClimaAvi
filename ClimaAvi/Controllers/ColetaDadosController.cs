@@ -31,7 +31,7 @@ namespace ClimaAvi.Controllers
             var sensorGas = client.Get<List<SensorGas>>("SensorGas");
             foreach (var busca in listaGas)
             {
-                busca.MacHostGas = mach;
+                busca.MachostGas = mach;
                 listaGas.Add(busca);
             }
             return View("Dashbord", listaGas);

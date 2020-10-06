@@ -63,13 +63,13 @@ namespace ClimaAvi.Persistencia
                         NpgsqlCommand comando = new NpgsqlCommand();
                         comando.Connection = con;
                         comando.Transaction = transacao;
-                        comando.CommandText = @"insert into sensorgas (id, Metano, Propeno, Hidrogenio, Fumaca, Leitura,MacHost) values (@id, @Metano, @Propeno, @Hidrogenio, @Fumaca, @LeituraGas,@MacHostGas)";
-                        comando.Parameters.AddWithValue("@Metano", sensorGas.Metano);
-                        comando.Parameters.AddWithValue("@Propeno", sensorGas.Propeno);
-                        comando.Parameters.AddWithValue("@Hidrogenio", sensorGas.Hidrogenio);
-                        comando.Parameters.AddWithValue("@Fumaca", sensorGas.Fumaca);
-                        comando.Parameters.AddWithValue("@LeituraGas", sensorGas.LeituraGas);
-                        comando.Parameters.AddWithValue("@MacHostGas", sensorGas.MacHostGas);
+                        comando.CommandText = @"insert into sensorgas (id, metano, propeno, hidrogenio, fumaca, leituraGas,machostGas) values (@id, @metano, @propeno, @hidrogenio, @fumaca, @leituraGas,@machostGas)";
+                        comando.Parameters.AddWithValue("@metano", sensorGas.Metano);
+                        comando.Parameters.AddWithValue("@propeno", sensorGas.Propeno);
+                        comando.Parameters.AddWithValue("@hidrogenio", sensorGas.Hidrogenio);
+                        comando.Parameters.AddWithValue("@fumaca", sensorGas.Fumaca);
+                        comando.Parameters.AddWithValue("@leituraGas", sensorGas.LeituraGas);
+                        comando.Parameters.AddWithValue("@machostGas", sensorGas.MachostGas);
                         comando.Parameters.AddWithValue("@id", sensorGas.Id);
                         comando.ExecuteNonQuery();
                         transacao.Commit();
@@ -101,12 +101,12 @@ namespace ClimaAvi.Persistencia
                 {
                     sensorGas = new SensorGas();
                     sensorGas.Id = Guid.Parse(leitor["id"].ToString());
-                    sensorGas.Metano = Convert.ToDecimal(leitor["Metano"].ToString());
-                    sensorGas.Propeno = Convert.ToDecimal(leitor["Propeno"].ToString());
-                    sensorGas.Hidrogenio = Convert.ToDecimal(leitor["Hidrogenio"].ToString());
-                    sensorGas.Fumaca = Convert.ToDecimal(leitor["Fumaca"].ToString());
-                    sensorGas.LeituraGas = Convert.ToDateTime(leitor["Leitura"].ToString());
-                    sensorGas.MacHostGas = leitor["machost"].ToString();
+                    sensorGas.Metano = Convert.ToDecimal(leitor["metano"].ToString());
+                    sensorGas.Propeno = Convert.ToDecimal(leitor["propeno"].ToString());
+                    sensorGas.Hidrogenio = Convert.ToDecimal(leitor["hidrogenio"].ToString());
+                    sensorGas.Fumaca = Convert.ToDecimal(leitor["fumaca"].ToString());
+                    sensorGas.LeituraGas = Convert.ToDateTime(leitor["leituraGas"].ToString());
+                    sensorGas.MachostGas = leitor["machostGas"].ToString();
 
                 }
             }
@@ -121,7 +121,7 @@ namespace ClimaAvi.Persistencia
                 con.Open();
                 NpgsqlCommand comando = new NpgsqlCommand();
                 comando.Connection = con;
-                comando.CommandText = "select * from sensorgas where machost = (select machost from plantas where id = @id) and leitura BETWEEN @dataInicial and @dataFinal ORDER BY leitura DESC LIMIT 30";
+                comando.CommandText = "select * from sensorgas where machostGas = (select machost from plantas where id = @id) and leitura BETWEEN @dataInicial and @dataFinal ORDER BY leitura DESC LIMIT 30";
                 comando.Parameters.AddWithValue("@id", id);
                 comando.Parameters.AddWithValue("@dataInicial", dataInicial);
                 comando.Parameters.AddWithValue("@dataFinal", dataFinal);
@@ -132,12 +132,12 @@ namespace ClimaAvi.Persistencia
                     dados.Add(new SensorGas()
                     {
                         Id = Guid.Parse(leitor["id"].ToString()),
-                        Metano = Convert.ToDecimal(leitor["Metano"].ToString()),
-                        Propeno = Convert.ToDecimal(leitor["Propeno"].ToString()),
-                        Hidrogenio = Convert.ToDecimal(leitor["Hidrogenio"].ToString()),
-                        Fumaca = Convert.ToDecimal(leitor["Fumaca"].ToString()),
-                        LeituraGas = Convert.ToDateTime(leitor["Leitura"].ToString()),
-                        MacHostGas = leitor["MacHost"].ToString(),
+                        Metano = Convert.ToDecimal(leitor["metano"].ToString()),
+                        Propeno = Convert.ToDecimal(leitor["propeno"].ToString()),
+                        Hidrogenio = Convert.ToDecimal(leitor["hidrogenio"].ToString()),
+                        Fumaca = Convert.ToDecimal(leitor["fumaca"].ToString()),
+                        LeituraGas = Convert.ToDateTime(leitor["eituraGas"].ToString()),
+                        MachostGas = leitor["MachostGas"].ToString(),
                     });
                 }
             }

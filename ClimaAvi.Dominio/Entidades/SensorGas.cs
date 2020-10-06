@@ -12,20 +12,20 @@ namespace ClimaAvi.Dominio.Entidades
         public Decimal Hidrogenio { get; set; }
         public Decimal Fumaca { get; set; }        
         public DateTime LeituraGas { get; set; }
-        public string MacHostGas { get; set; }
+        public string MachostGas { get; set; }
 
         public SensorGas()
         {
         }
 
-        public SensorGas(Decimal metano, Decimal propeno, Decimal hidrogenio, Decimal fumaca, DateTime leituraGas, string macHostGas)
+        public SensorGas(Decimal metano, Decimal propeno, Decimal hidrogenio, Decimal fumaca, DateTime leituraGas, string machostGas)
         {
             Metano = metano;
             Propeno = propeno;
             Hidrogenio = hidrogenio;
             Fumaca = fumaca;
             LeituraGas = leituraGas;
-            MacHostGas = macHostGas;
+            MachostGas = machostGas;
         }
     }
 }

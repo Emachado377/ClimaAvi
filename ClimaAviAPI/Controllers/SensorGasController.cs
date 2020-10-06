@@ -32,7 +32,7 @@ namespace ClimaAviAPI.Controllers
                     Hidrogenio = urs.Hidrogenio,
                     Fumaca = urs.Fumaca,
                     LeituraGas = urs.LeituraGas,
-                    MacHostGas = urs.MacHostGas,
+                    MachostGas = urs.MachostGas,
                 };
                 return Request.CreateResponse(HttpStatusCode.OK, temp);
             }
@@ -49,7 +49,7 @@ namespace ClimaAviAPI.Controllers
                         Hidrogenio = busca.Hidrogenio,
                         Fumaca = busca.Fumaca,
                         LeituraGas = busca.LeituraGas,
-                        MacHostGas = busca.MacHostGas,
+                        MachostGas = busca.MachostGas,
                     });
                 }
                 return Request.CreateResponse(HttpStatusCode.OK, dados);
@@ -91,7 +91,7 @@ namespace ClimaAviAPI.Controllers
                 Hidrogenio = sensorGas.Hidrogenio,
                 Fumaca = sensorGas.Fumaca,
                 LeituraGas = sensorGas.LeituraGas,
-                MacHostGas = sensorGas.MacHostGas,
+                MachostGas = sensorGas.MachostGas,
             };
 
             var id = sensorGasAplicacao.CadastrarSensorGas(sensorGasDominio);
